@@ -1,26 +1,547 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #38bdf8;
+  --primary-light: #7dd3fc;
+  --primary-dark: #0284c7;
+  --bg: #020617;
+  --bg-alt: #0c1929;
+  --card: #0f172a;
+  --foreground: #f5f5f5;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background: var(--bg);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-alt);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-light);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 50%, var(--primary-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(var(--primary), 0.1);
+}
+
+/* Water ripple animation */
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.ripple {
+  animation: ripple 2s ease-out infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Shimmer effect */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(var(--primary), 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 3s infinite linear;
+}
+
+/* Wave animation */
+@keyframes wave {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(-25%) translateY(10px);
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.wave {
+  animation: wave 15s ease-in-out infinite;
+}
+
+/* Glow pulse animation */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--primary), 0 0 40px transparent;
+  }
+  50% {
+    box-shadow: 0 0 40px var(--primary), 0 0 80px var(--primary);
+  }
+}
+
+.glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Text reveal animation */
+@keyframes text-reveal {
+  0% {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+.text-reveal {
+  animation: text-reveal 1s ease-out forwards;
+}
+
+/* Gradient border animation */
+@keyframes gradient-rotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-border-animated {
+  background: linear-gradient(90deg, var(--primary-light), var(--primary), var(--primary-dark), var(--primary), var(--primary-light));
+  background-size: 300% 100%;
+  animation: gradient-rotate 4s ease infinite;
+}
+
+/* Particle float */
+@keyframes particle-float {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(20px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Magnetic hover effect */
+.magnetic {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 3D Card tilt */
+.card-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card-3d-inner {
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Noise texture overlay */
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+/* Spotlight effect */
+.spotlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight::before {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.spotlight:hover::before {
+  opacity: 0.15;
+}
+
+/* Underline animation */
+.underline-animation {
+  position: relative;
+}
+
+.underline-animation::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-light), var(--primary-dark));
+  transition: width 0.3s ease;
+}
+
+.underline-animation:hover::after {
+  width: 100%;
+}
+
+/* Blur in animation */
+@keyframes blur-in {
+  0% {
+    filter: blur(20px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.blur-in {
+  animation: blur-in 0.8s ease-out forwards;
+}
+
+/* Scale bounce */
+@keyframes scale-bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.scale-bounce {
+  animation: scale-bounce 2s ease-in-out infinite;
+}
+
+/* Morphing blob */
+@keyframes morph {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  50% {
+    border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%;
+  }
+  75% {
+    border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%;
+  }
+}
+
+.morph-blob {
+  animation: morph 8s ease-in-out infinite;
+}
+
+/* Stagger children animation helper */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.stagger-children.animate > *:nth-child(1) { animation: fade-up 0.5s ease forwards 0.1s; }
+.stagger-children.animate > *:nth-child(2) { animation: fade-up 0.5s ease forwards 0.2s; }
+.stagger-children.animate > *:nth-child(3) { animation: fade-up 0.5s ease forwards 0.3s; }
+.stagger-children.animate > *:nth-child(4) { animation: fade-up 0.5s ease forwards 0.4s; }
+.stagger-children.animate > *:nth-child(5) { animation: fade-up 0.5s ease forwards 0.5s; }
+
+@keyframes fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== WATER ANIMATIONS ===== */
+
+/* Water caustics - light patterns underwater */
+@keyframes caustics {
+  0% {
+    background-position: 0% 0%, 0% 0%;
+  }
+  100% {
+    background-position: 300% 300%, -300% -300%;
+  }
+}
+
+.water-caustics {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  background:
+    radial-gradient(ellipse at 20% 30%, var(--primary) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, var(--primary-light) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, var(--primary-dark) 0%, transparent 60%);
+  background-size: 200% 200%;
+  animation: caustics 20s linear infinite;
+  pointer-events: none;
+}
+
+/* Water surface ripple */
+@keyframes water-surface {
+  0%, 100% {
+    transform: translateY(0) scaleY(1);
+  }
+  25% {
+    transform: translateY(-5px) scaleY(1.02);
+  }
+  50% {
+    transform: translateY(0) scaleY(0.98);
+  }
+  75% {
+    transform: translateY(5px) scaleY(1.01);
+  }
+}
+
+.water-surface {
+  animation: water-surface 4s ease-in-out infinite;
+}
+
+/* Bubble rise animation */
+@keyframes bubble-rise {
+  0% {
+    transform: translateY(100%) translateX(0) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+    transform: translateY(90%) translateX(5px) scale(1);
+  }
+  50% {
+    transform: translateY(50%) translateX(-5px) scale(1.1);
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-20%) translateX(10px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+.bubble {
+  animation: bubble-rise 8s ease-in-out infinite;
+}
+
+/* Underwater light rays */
+@keyframes light-ray {
+  0%, 100% {
+    opacity: 0.1;
+    transform: translateY(0) scaleY(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translateY(-20px) scaleY(1.1);
+  }
+}
+
+.light-ray {
+  animation: light-ray 6s ease-in-out infinite;
+}
+
+/* Pool water reflection */
+@keyframes pool-reflection {
+  0% {
+    background-position: 0% 0%;
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    background-position: 100% 100%;
+    filter: hue-rotate(10deg);
+  }
+  100% {
+    background-position: 0% 0%;
+    filter: hue-rotate(0deg);
+  }
+}
+
+.pool-reflection {
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    var(--primary-light) 25%,
+    var(--primary-dark) 50%,
+    var(--primary-light) 75%,
+    var(--primary) 100%
+  );
+  background-size: 400% 400%;
+  animation: pool-reflection 15s ease infinite;
+}
+
+/* Swimming lane lines */
+@keyframes lane-shimmer {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.lane-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: lane-shimmer 3s ease-in-out infinite;
+}
+
+/* Water droplet splash */
+@keyframes droplet {
+  0% {
+    transform: scale(0) translateY(-50px);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1) translateY(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2) translateY(10px);
+    opacity: 0;
+  }
+}
+
+.droplet {
+  animation: droplet 2s ease-out infinite;
+}
+
+/* Gentle ocean sway */
+@keyframes ocean-sway {
+  0%, 100% {
+    transform: rotate(-2deg) translateX(-10px);
+  }
+  50% {
+    transform: rotate(2deg) translateX(10px);
+  }
+}
+
+.ocean-sway {
+  animation: ocean-sway 8s ease-in-out infinite;
+}
+
+/* Deep water gradient pulse */
+@keyframes deep-water {
+  0%, 100% {
+    background-position: 0% 50%;
+    opacity: 0.8;
+  }
+  50% {
+    background-position: 100% 50%;
+    opacity: 1;
+  }
+}
+
+.deep-water {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--primary-dark) 30%,
+    var(--primary) 60%,
+    var(--primary-light) 100%
+  );
+  background-size: 100% 200%;
+  animation: deep-water 10s ease infinite;
+}
+
+/* Chlorine sparkle effect */
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.sparkle {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Underwater blur/distortion effect */
+.underwater-blur {
+  backdrop-filter: blur(2px);
+  filter: saturate(1.2) brightness(1.1);
 }

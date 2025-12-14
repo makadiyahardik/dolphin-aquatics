@@ -1,0 +1,6 @@
+# Dolphin Aquatics - robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://dolphinaquatics.in/sitemap.xml
