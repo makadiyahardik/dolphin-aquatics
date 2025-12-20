@@ -5,13 +5,31 @@ import { useSearchParams } from "next/navigation";
 
 const themes = {
   1: {
-    name: "Sky Blue",
+    // Original Dark Theme
+    name: "Sky Blue Dark",
     primary: "#38bdf8",
     primaryLight: "#7dd3fc",
     primaryDark: "#0284c7",
     background: "#020617",
     backgroundAlt: "#0c1929",
     card: "#0f172a",
+    foreground: "#f5f5f5",
+    foregroundMuted: "#cbd5e1",
+    isLight: false,
+    layout: "default",
+  },
+  2: {
+    // New Light Pool Water Theme
+    name: "Pool Water Light",
+    primary: "#0284c7",
+    primaryLight: "#0ea5e9",
+    primaryDark: "#075985",
+    background: "#f0f9ff",
+    backgroundAlt: "#e0f2fe",
+    card: "#ffffff",
+    foreground: "#0f172a",
+    foregroundMuted: "#475569",
+    isLight: true,
     layout: "default",
   },
 };
@@ -40,7 +58,10 @@ export default function ThemeProvider({ children }) {
     document.documentElement.style.setProperty("--bg", selectedTheme.background);
     document.documentElement.style.setProperty("--bg-alt", selectedTheme.backgroundAlt);
     document.documentElement.style.setProperty("--card", selectedTheme.card);
+    document.documentElement.style.setProperty("--foreground", selectedTheme.foreground);
+    document.documentElement.style.setProperty("--foreground-muted", selectedTheme.foregroundMuted);
     document.body.style.backgroundColor = selectedTheme.background;
+    document.body.style.color = selectedTheme.foreground;
   }, [searchParams]);
 
   if (!mounted) {

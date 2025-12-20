@@ -6,10 +6,10 @@ import Image from "next/image";
 import { useTheme } from "./ThemeProvider";
 
 const facilities = [
-  { title: "Olympic-Size Pool", description: "World-class swimming pool meeting international standards at PDCSE", icon: "pool", features: ["50m Competition Pool", "Temperature Controlled", "Electronic Timing"], image: "/media/optimized/image15.webp" },
-  { title: "Fitness Centre", description: "State-of-the-art gym equipment for comprehensive strength and conditioning", icon: "gym", features: ["Modern Equipment", "Personal Training", "Cardio Zone"], image: "/media/optimized/image30.webp" },
-  { title: "Physiotherapy & Rehab", description: "Professional injury rehabilitation and sports physiotherapy services", icon: "health", features: ["Sports Medicine", "Recovery Programs", "Injury Prevention"], image: "/media/optimized/image19.webp" },
-  { title: "Expert Coaching Team", description: "Internationally certified coaches dedicated to your swimming excellence", icon: "team", features: ["ASCA Certified", "AUSTSWIM Accredited", "NIS Qualified"], image: "/media/optimized/image39.webp" },
+  { title: "Olympic-Size Pool", description: "World-class swimming pool meeting international standards at CSE", icon: "pool", features: ["50m Competition Pool", "Temperature Controlled", "Electronic Timing"], image: "/media/image32.png" },
+  { title: "Fitness Centre", description: "State-of-the-art gym equipment for comprehensive strength and conditioning", icon: "gym", features: ["Modern Equipment", "Personal Training", "Cardio Zone"], image: "/media/image33.png" },
+  { title: "Physiotherapy & Rehab", description: "Professional injury rehabilitation and sports physiotherapy services", icon: "health", features: ["Sports Medicine", "Recovery Programs", "Injury Prevention"], image: "/media/image33.png" },
+  { title: "Expert Coaching Team", description: "Internationally certified coaches dedicated to your swimming excellence", icon: "team", features: ["ASCA Certified", "AUSTSWIM Accredited", "Khelo India"], image: "/media/image37.png" },
 ];
 
 const programs = [
@@ -43,7 +43,7 @@ export default function Facilities() {
             Our <span style={{ background: `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primaryDark})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Facilities</span>
           </h2>
           <div className="mt-4 w-24 h-1 mx-auto" style={{ background: `linear-gradient(90deg, transparent, ${theme.primary}, transparent)` }} />
-          <p className="mt-6 text-gray-400 max-w-2xl mx-auto">Train at the prestigious Padukone David Centre for Sports Excellence with state-of-the-art amenities designed for champions.</p>
+          <p className="mt-6 max-w-2xl mx-auto" style={{ color: theme.foregroundMuted }}>Train at the prestigious Centre for Sports Excellence with state-of-the-art amenities designed for champions.</p>
         </motion.div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
@@ -69,11 +69,11 @@ export default function Facilities() {
                     </div>
                   </div>
                   <div className="flex-1 flex flex-col mt-auto">
-                    <h3 className="text-lg font-semibold text-white mb-2">{facility.title}</h3>
-                    <p className="text-gray-300 text-xs mb-4 flex-1">{facility.description}</p>
+                    <h3 className="text-lg font-semibold mb-2" style={{ color: theme.foreground }}>{facility.title}</h3>
+                    <p className="text-xs mb-4 flex-1" style={{ color: theme.foregroundMuted }}>{facility.description}</p>
                     <div className="flex flex-wrap gap-1.5">
                       {facility.features.map((feature, fIndex) => (
-                        <span key={fIndex} className="px-2 py-0.5 text-[10px] rounded-full" style={{ background: `${theme.primary}25`, color: theme.primaryLight, border: `1px solid ${theme.primary}40` }}>{feature}</span>
+                        <span key={fIndex} className="px-2 py-0.5 text-[10px] rounded-full" style={{ background: `${theme.primary}30`, color: theme.primaryDark, border: `1px solid ${theme.primary}50` }}>{feature}</span>
                       ))}
                     </div>
                   </div>
@@ -95,8 +95,8 @@ export default function Facilities() {
               className="relative p-6 rounded-2xl transition-all duration-300"
               style={{ border: `1px solid ${activeProgram === index ? theme.primary : theme.primary + '20'}`, background: activeProgram === index ? `${theme.primary}15` : `${theme.card}50` }}>
               <div className="w-3 h-3 rounded-full mx-auto mb-3" style={{ background: `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primaryDark})` }} />
-              <h4 className="font-semibold text-white mb-1">{program.name}</h4>
-              <p className="text-xs text-gray-400">{program.level}</p>
+              <h4 className="font-semibold mb-1" style={{ color: theme.foreground }}>{program.name}</h4>
+              <p className="text-xs" style={{ color: theme.foregroundMuted }}>{program.level}</p>
             </motion.button>
           ))}
         </motion.div>
@@ -105,12 +105,12 @@ export default function Facilities() {
           className="mt-20 p-8 rounded-3xl" style={{ background: `linear-gradient(90deg, ${theme.card}80, ${theme.primary}15, ${theme.card}80)`, border: `1px solid ${theme.primary}30` }}>
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-center md:text-left">
-              <h3 className="text-2xl font-bold text-white mb-2 font-[family-name:var(--font-playfair)]">Dolphin Aquatics Academy</h3>
-              <p style={{ color: theme.primary }} className="font-medium">@ Padukone David Centre for Sports Excellence</p>
-              <p className="text-gray-400 text-sm mt-2">Bengaluru, Karnataka, India</p>
+              <h3 className="text-2xl font-bold mb-2 font-[family-name:var(--font-playfair)]" style={{ color: theme.foreground }}>Dolphin Aquatics Academy</h3>
+              <p style={{ color: theme.primary }} className="font-medium">@ Centre for Sports Excellence</p>
+              <p className="text-sm mt-2" style={{ color: theme.foregroundMuted }}>Bengaluru, Karnataka, India</p>
             </div>
             <motion.a
-              href="https://maps.google.com/?q=Padukone+David+Centre+for+Sports+Excellence+Bangalore"
+              href="https://maps.google.com/?q=Centre+for+Sports+Excellence+Bangalore"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}

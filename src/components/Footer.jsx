@@ -2,14 +2,15 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { useTheme } from "./ThemeProvider";
 
 const contactInfo = {
-  address: "Padukone David Centre for Sports Excellence (PDCSE), Tavarekere, Bengaluru, Karnataka 560029",
+  address: "Centre for Sports Excellence (CSE), Tavarekere, Bengaluru, Karnataka 560029",
   phone: "+91 80 2634 5678",
   email: "info@dolphinaquatics.in",
-  mapUrl: "https://maps.google.com/?q=Padukone+David+Centre+for+Sports+Excellence+Bangalore",
+  mapUrl: "https://maps.google.com/?q=Centre+for+Sports+Excellence+Bangalore",
 };
 
 const footerLinks = {
@@ -51,7 +52,7 @@ export default function Footer() {
           <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-playfair)] mb-4">
             Ready to Make <span style={{ background: `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primaryDark})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Waves</span>?
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto mb-8">Join India&apos;s #1 swimming academy and start your journey towards excellence today.</p>
+          <p className="max-w-xl mx-auto mb-8" style={{ color: theme.foregroundMuted }}>Join India&apos;s #1 swimming academy and start your journey towards excellence today.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <motion.button
               onClick={() => setShowContactForm(true)}
@@ -65,8 +66,8 @@ export default function Footer() {
               href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 text-white font-semibold rounded-full transition-all text-center"
-              style={{ border: `2px solid ${theme.primary}80` }}>
+              className="px-8 py-4 font-semibold rounded-full transition-all text-center"
+              style={{ border: `2px solid ${theme.primary}`, color: theme.foreground }}>
               Call Us Now
             </motion.a>
           </div>
@@ -107,13 +108,13 @@ export default function Footer() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </motion.div>
-                  <h3 className="text-xl font-bold text-white mb-2">Thank You!</h3>
-                  <p className="text-gray-400">We&apos;ll get back to you soon.</p>
+                  <h3 className="text-xl font-bold mb-2" style={{ color: theme.foreground }}>Thank You!</h3>
+                  <p style={{ color: theme.foregroundMuted }}>We&apos;ll get back to you soon.</p>
                 </div>
               ) : (
                 <>
-                  <h3 className="text-2xl font-bold text-white mb-2 font-[family-name:var(--font-playfair)]">Join Dolphin Aquatics</h3>
-                  <p className="text-gray-400 text-sm mb-6">Fill out the form and we&apos;ll contact you shortly.</p>
+                  <h3 className="text-2xl font-bold mb-2 font-[family-name:var(--font-playfair)]" style={{ color: theme.foreground }}>Join Dolphin Aquatics</h3>
+                  <p className="text-sm mb-6" style={{ color: theme.foregroundMuted }}>Fill out the form and we&apos;ll contact you shortly.</p>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <input
@@ -122,8 +123,8 @@ export default function Footer() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border text-white placeholder-gray-500 focus:outline-none transition-colors"
-                      style={{ borderColor: `${theme.primary}30` }}
+                      className="w-full px-4 py-3 rounded-xl border focus:outline-none transition-colors"
+                      style={{ borderColor: `${theme.primary}50`, background: `${theme.background}`, color: theme.foreground }}
                     />
                     <input
                       type="email"
@@ -131,8 +132,8 @@ export default function Footer() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border text-white placeholder-gray-500 focus:outline-none transition-colors"
-                      style={{ borderColor: `${theme.primary}30` }}
+                      className="w-full px-4 py-3 rounded-xl border focus:outline-none transition-colors"
+                      style={{ borderColor: `${theme.primary}50`, background: `${theme.background}`, color: theme.foreground }}
                     />
                     <input
                       type="tel"
@@ -140,16 +141,16 @@ export default function Footer() {
                       required
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border text-white placeholder-gray-500 focus:outline-none transition-colors"
-                      style={{ borderColor: `${theme.primary}30` }}
+                      className="w-full px-4 py-3 rounded-xl border focus:outline-none transition-colors"
+                      style={{ borderColor: `${theme.primary}50`, background: `${theme.background}`, color: theme.foreground }}
                     />
                     <textarea
                       placeholder="Tell us about your swimming goals..."
                       rows={3}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border text-white placeholder-gray-500 focus:outline-none transition-colors resize-none"
-                      style={{ borderColor: `${theme.primary}30` }}
+                      className="w-full px-4 py-3 rounded-xl border focus:outline-none transition-colors resize-none"
+                      style={{ borderColor: `${theme.primary}50`, background: `${theme.background}`, color: theme.foreground }}
                     />
                     <motion.button
                       type="submit"
@@ -188,8 +189,8 @@ export default function Footer() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
             </div>
-            <h4 className="text-white font-semibold mb-2">Location</h4>
-            <p className="text-gray-400 text-sm">{contactInfo.address}</p>
+            <h4 className="font-semibold mb-2" style={{ color: theme.foreground }}>Location</h4>
+            <p className="text-sm" style={{ color: theme.foregroundMuted }}>{contactInfo.address}</p>
           </a>
 
           <a
@@ -202,8 +203,8 @@ export default function Footer() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
             </div>
-            <h4 className="text-white font-semibold mb-2">Phone</h4>
-            <p className="text-gray-400 text-sm">{contactInfo.phone}</p>
+            <h4 className="font-semibold mb-2" style={{ color: theme.foreground }}>Phone</h4>
+            <p className="text-sm" style={{ color: theme.foregroundMuted }}>{contactInfo.phone}</p>
           </a>
 
           <a
@@ -216,39 +217,38 @@ export default function Footer() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </div>
-            <h4 className="text-white font-semibold mb-2">Email</h4>
-            <p className="text-gray-400 text-sm">{contactInfo.email}</p>
+            <h4 className="font-semibold mb-2" style={{ color: theme.foreground }}>Email</h4>
+            <p className="text-sm" style={{ color: theme.foregroundMuted }}>{contactInfo.email}</p>
           </a>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
           <div className="col-span-2 md:col-span-1">
-            <Link href="#home" className="flex items-center gap-3 mb-6">
-              <svg viewBox="0 0 60 40" className="w-10 h-7" style={{ color: theme.primary }} fill="currentColor">
-                <path d="M55 20c-5 0-8-3-12-3s-7 3-12 3-8-3-12-3-7 3-12 3c-2 0-3.5-.5-5-1 1.5 8 10 14 24 14s22.5-6 24-14c-1.5.5-3 1-5 1z" />
-                <ellipse cx="50" cy="15" rx="3" ry="2" />
-                <path d="M5 18c3-2 6-4 10-4s8 2 12 2 8-2 12-2 8 2 12 2 7-2 10-4c-2-8-12-12-27-12S7 10 5 18z" />
-              </svg>
-              <div className="flex flex-col">
-                <span className="text-xl font-bold tracking-tight font-[family-name:var(--font-playfair)]">Dolphin</span>
-                <span className="text-[9px] tracking-[0.25em] uppercase" style={{ color: theme.primary }}>Aquatics</span>
+            <Link href="#home" className="flex items-center mb-6">
+              <div className="relative w-36 h-10">
+                <Image
+                  src="/media/image7.png"
+                  alt="Dolphin Aquatics Logo"
+                  fill
+                  className="object-contain"
+                />
               </div>
             </Link>
-            <p className="text-gray-400 text-sm mb-6">In Pursuit of Excellence. India&apos;s premier swimming academy since 1992.</p>
+            <p className="text-sm mb-6" style={{ color: theme.foregroundMuted }}>In Pursuit of Excellence. India&apos;s premier swimming academy since 1992.</p>
             <div className="flex gap-4">
               {socialLinks.map((social, index) => (
-                <motion.a key={index} href="#" whileHover={{ scale: 1.1 }} className="w-10 h-10 rounded-full flex items-center justify-center text-gray-400 transition-colors"
-                  style={{ background: `${theme.card}80` }}>{social.icon}</motion.a>
+                <motion.a key={index} href="#" whileHover={{ scale: 1.1 }} className="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+                  style={{ background: `${theme.card}80`, color: theme.foregroundMuted }}>{social.icon}</motion.a>
               ))}
             </div>
           </div>
 
           {Object.entries({ Programs: footerLinks.programs, About: footerLinks.about }).map(([title, links]) => (
             <div key={title}>
-              <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">{title}</h4>
+              <h4 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: theme.foreground }}>{title}</h4>
               <ul className="space-y-3">
                 {links.map((link, index) => (
-                  <li key={index}><Link href={link.href} className="text-gray-400 text-sm hover:text-white transition-colors">{link.name}</Link></li>
+                  <li key={index}><Link href={link.href} className="text-sm transition-colors" style={{ color: theme.foregroundMuted }}>{link.name}</Link></li>
                 ))}
               </ul>
             </div>
@@ -257,10 +257,10 @@ export default function Footer() {
 
         <div className="pt-8" style={{ borderTop: `1px solid ${theme.primary}20` }}>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Dolphin Aquatics. All rights reserved.</p>
+            <p className="text-sm" style={{ color: theme.foregroundMuted }}>© {new Date().getFullYear()} Dolphin Aquatics. All rights reserved.</p>
             <div className="flex gap-6">
-              <Link href="#" className="text-gray-500 text-sm hover:text-white transition-colors">Privacy Policy</Link>
-              <Link href="#" className="text-gray-500 text-sm hover:text-white transition-colors">Terms of Service</Link>
+              <Link href="#" className="text-sm transition-colors" style={{ color: theme.foregroundMuted }}>Privacy Policy</Link>
+              <Link href="#" className="text-sm transition-colors" style={{ color: theme.foregroundMuted }}>Terms of Service</Link>
             </div>
           </div>
         </div>

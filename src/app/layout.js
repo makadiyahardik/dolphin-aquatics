@@ -15,8 +15,8 @@ const playfair = Playfair_Display({
 
 export const metadata = {
   title: "Dolphin Aquatics | India's Premier Swimming Academy",
-  description: "India's #1 Swimming Team since 2010. Led by Dronacharya Award winner Nihar Ameen. World-class swim teaching and coaching programs at Padukone David Centre for Sports Excellence, Bangalore.",
-  keywords: ["swimming", "Dolphin Aquatics", "Nihar Ameen", "swimming academy", "Bangalore", "PDCSE", "India swimming", "competitive swimming", "learn to swim"],
+  description: "India's #1 Swimming Team since 2010. Led by Dronacharya Award winner Nihar Ameen. World-class swim teaching and coaching programs at Centre for Sports Excellence, Bangalore.",
+  keywords: ["swimming", "Dolphin Aquatics", "Nihar Ameen", "swimming academy", "Bangalore", "CSE", "India swimming", "competitive swimming", "learn to swim", "Khelo India"],
   authors: [{ name: "Dolphin Aquatics" }],
   creator: "Dolphin Aquatics",
   publisher: "Dolphin Aquatics",
@@ -26,7 +26,7 @@ export const metadata = {
   },
   openGraph: {
     title: "Dolphin Aquatics | India's Premier Swimming Academy",
-    description: "India's #1 Swimming Team since 2010. Led by Dronacharya Award winner Nihar Ameen at PDCSE Bangalore.",
+    description: "India's #1 Swimming Team since 2010. Led by Dronacharya Award winner Nihar Ameen at Centre for Sports Excellence Bangalore.",
     url: "https://dolphinaquatics.in",
     siteName: "Dolphin Aquatics",
     locale: "en_IN",
@@ -61,7 +61,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body
-        className={`${inter.variable} ${playfair.variable} antialiased bg-[#0a0a0f] text-white`}
+        className={`${inter.variable} ${playfair.variable} antialiased`}
       >
         {children}
       </body>

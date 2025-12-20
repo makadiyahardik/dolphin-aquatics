@@ -30,8 +30,8 @@ const achievements = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
       </svg>
     ),
-    title: "NIS Certified",
-    description: "Accredited by National Institute of Sports, Govt. of India",
+    title: "Khelo India Centre",
+    description: "Recognized Khelo India Centre for Sports Excellence",
   },
   {
     icon: (
@@ -118,8 +118,8 @@ export default function About() {
                 transition={{ duration: 0.3 }}
               >
                 <Image
-                  src="/media/optimized/image2.webp"
-                  alt="Underwater swimming"
+                  src="/media/image37.png"
+                  alt="Dolphin Aquatics Team with Trophy"
                   fill
                   className="object-cover"
                   loading="lazy"
@@ -132,8 +132,8 @@ export default function About() {
                 transition={{ duration: 0.3 }}
               >
                 <Image
-                  src="/media/optimized/image9.webp"
-                  alt="Swimmer in action"
+                  src="/media/image32.png"
+                  alt="Olympic Swimming Pool"
                   fill
                   className="object-cover"
                   loading="lazy"
@@ -160,19 +160,19 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="space-y-6"
           >
-            <p className="text-xl md:text-2xl text-gray-300 leading-relaxed font-light">
+            <p className="text-xl md:text-2xl leading-relaxed font-light" style={{ color: theme.foreground }}>
               Consistently{" "}
               <span style={{ color: theme.primary }} className="font-semibold">
                 India&apos;s top swim team since 2010
               </span>
               , under the visionary leadership of Coach Nihar Ameen.
             </p>
-            <p className="text-gray-400 leading-relaxed">
+            <p className="leading-relaxed" style={{ color: theme.foregroundMuted }}>
               Dolphin Aquatics has established itself as a beacon of excellence in Indian swimming.
               Our world-class swim teaching and coaching programs have produced champions who have
               represented India at the highest levels of international competition.
             </p>
-            <p className="text-gray-400 leading-relaxed">
+            <p className="leading-relaxed" style={{ color: theme.foregroundMuted }}>
               As the first AUSTSWIM Recognised swim centre in India, we maintain international
               standards of excellence. Our majority of coaches are certified by the American Swim
               Coaches Association and the National Institute of Sports, ensuring every swimmer
@@ -187,7 +187,7 @@ export default function About() {
               className="mt-8 pl-6"
               style={{ borderLeft: `2px solid ${theme.primary}` }}
             >
-              <p className="text-lg italic text-gray-300">
+              <p className="text-lg italic" style={{ color: theme.foreground }}>
                 &quot;If you fail to prepare, you&apos;re preparing to fail.&quot;
               </p>
               <cite className="mt-2 block text-sm not-italic" style={{ color: theme.primary }}>
@@ -225,8 +225,8 @@ export default function About() {
                 <div style={{ color: theme.primary }} className="mb-4">
                   {achievement.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">{achievement.title}</h3>
-                <p className="text-sm text-gray-400">{achievement.description}</p>
+                <h3 className="text-lg font-semibold mb-2" style={{ color: theme.foreground }}>{achievement.title}</h3>
+                <p className="text-sm" style={{ color: theme.foregroundMuted }}>{achievement.description}</p>
               </div>
             </motion.div>
           ))}
@@ -249,7 +249,7 @@ export default function About() {
             <svg style={{ color: theme.primary }} className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
             </svg>
-            <span className="text-lg font-medium text-white">
+            <span className="text-lg font-medium" style={{ color: theme.foreground }}>
               In Pursuit of{" "}
               <span
                 style={{

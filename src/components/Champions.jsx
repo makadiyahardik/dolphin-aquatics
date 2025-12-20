@@ -6,14 +6,15 @@ import Image from "next/image";
 import { useTheme } from "./ThemeProvider";
 
 const champions = [
-  { name: "Virdhawal Khade", achievement: "Asian Games Bronze", event: "Men's 50m Butterfly", highlight: "First medal since 1986", initials: "VK", image: "/media/optimized/image12.webp" },
-  { name: "Sandeep Sejwal", achievement: "Asian Games Bronze", event: "Men's 50m Breaststroke", highlight: "Incheon 2014", initials: "SS", image: "/media/optimized/image27.webp" },
-  { name: "Srihari Natraj", achievement: "National Record Holder", event: "Backstroke Events", highlight: "Multiple Medals", initials: "SN", image: "/media/optimized/image42.webp" },
-  { name: "Nisha Millet", achievement: "Olympian", event: "Multiple Events", highlight: "Swimming Legend", initials: "NM", image: "/media/optimized/image9.webp" },
-  { name: "Shikha Tandon", achievement: "Arjuna Award Winner", event: "Multiple Events", highlight: "International Medalist", initials: "ST", image: "/media/optimized/image5.webp" },
-  { name: "Maana Patel", achievement: "Olympian", event: "Backstroke Events", highlight: "Tokyo 2020", initials: "MP", image: "/media/optimized/image2.webp" },
-  { name: "Dhinidhi Desinghu", achievement: "Rising Star", event: "Multiple Events", highlight: "Future Champion", initials: "DD", image: "/media/optimized/image15.webp" },
-  { name: "Rehan Poncha", achievement: "International Medalist", event: "Multiple Events", highlight: "Asian Games", initials: "RP", image: "/media/optimized/image35.webp" },
+  { name: "Nisha Millet", achievement: "Olympian", event: "Sydney 2000", highlight: "Double Olympian", initials: "NM", image: "/media/image21.png" },
+  { name: "Virdhawal Khade", achievement: "Asian Games Bronze", event: "Men's 50m Butterfly", highlight: "First medal since 1986", initials: "VK", image: "/media/image23.png" },
+  { name: "Sandeep Sejwal", achievement: "Asian Games Bronze", event: "Men's 50m Breaststroke", highlight: "Incheon 2014", initials: "SS", image: "/media/image23.png" },
+  { name: "Shikha Tandon", achievement: "Arjuna Award Winner", event: "Multiple Events", highlight: "Olympian", initials: "ST", image: "/media/image21.png" },
+  { name: "Rehan Poncha", achievement: "International Medalist", event: "Multiple Events", highlight: "Asian Games", initials: "RP", image: "/media/image21.png" },
+  { name: "Srihari Natraj", achievement: "National Record Holder", event: "Backstroke Events", highlight: "Olympian", initials: "SN", image: "/media/image21.png" },
+  { name: "Maana Patel", achievement: "Olympian", event: "Backstroke Events", highlight: "Tokyo 2020", initials: "MP", image: "/media/image21.png" },
+  { name: "Dhinidhi Desinghu", achievement: "Olympian", event: "Paris 2024", highlight: "Youngest Swimmer", initials: "DD", image: "/media/image21.png" },
+  { name: "Hakimuddin Habibulla", achievement: "International Swimmer", event: "Multiple Events", highlight: "Team Coach", initials: "HH", image: "/media/image21.png" },
 ];
 
 export default function Champions() {
@@ -36,7 +37,7 @@ export default function Champions() {
           <div className="mt-4 w-24 h-1 mx-auto" style={{ background: `linear-gradient(90deg, transparent, ${theme.primary}, transparent)` }} />
         </motion.div>
 
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }} className="text-center text-gray-400 max-w-3xl mx-auto mb-16">
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }} className="text-center max-w-3xl mx-auto mb-16" style={{ color: theme.foregroundMuted }}>
           In international competitions, the highest honours achieved by Indian swimmers are from Dolphin.
         </motion.p>
 
@@ -55,9 +56,9 @@ export default function Champions() {
                 />
                 <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${theme.background}, ${theme.background}90, transparent)` }} />
                 <div className="absolute inset-x-0 bottom-0 p-4">
-                  <h3 className="text-lg font-semibold text-white mb-1">{champion.name}</h3>
+                  <h3 className="text-lg font-semibold mb-1" style={{ color: theme.foreground }}>{champion.name}</h3>
                   <p className="text-xs font-medium mb-1" style={{ color: theme.primary }}>{champion.achievement}</p>
-                  <p className="text-xs text-gray-400">{champion.event}</p>
+                  <p className="text-xs" style={{ color: theme.foregroundMuted }}>{champion.event}</p>
                 </div>
                 {hoveredIndex === index && (
                   <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="absolute top-4 right-4 px-3 py-1 rounded-full text-black text-xs font-bold"

@@ -1,9 +1,53 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { useTheme } from "./ThemeProvider";
+
+// Animated Counter Component
+function AnimatedCounter({ value, suffix = "", duration = 2000 }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const numericValue = parseInt(value.replace(/\D/g, "")) || 0;
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let startTime;
+    let animationFrame;
+
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+
+      // Easing function for smoother animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentCount = Math.floor(easeOutQuart * numericValue);
+
+      setCount(currentCount);
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, [isInView, numericValue, duration]);
+
+  return (
+    <span ref={ref}>
+      {value.startsWith("#") ? "#" : ""}{count}{suffix}
+    </span>
+  );
+}
 
 export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -252,7 +296,7 @@ export default function Hero() {
               transition={{ delay: 0.4, duration: 0.8, ease: [0.6, 0.01, 0.05, 0.95] }}
               className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 font-[family-name:var(--font-playfair)]"
             >
-              <span className="block text-white drop-shadow-lg">Dive Into</span>
+              <span className="block drop-shadow-lg" style={{ color: theme.foreground }}>Dive Into</span>
               <motion.span
                 className="block"
                 style={{
@@ -272,9 +316,9 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10"
+            className="text-lg md:text-xl max-w-2xl mx-auto mb-10" style={{ color: theme.foregroundMuted }}
           >
-            World-class swim coaching at Padukone David Centre for Sports Excellence.
+            World-class swim coaching at Centre for Sports Excellence.
             Led by Dronacharya Award winner Coach Nihar Ameen.
           </motion.p>
 
@@ -308,8 +352,8 @@ export default function Hero() {
               href="#facilities"
               whileHover={{ scale: 1.05, borderColor: theme.primary }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 text-white font-semibold rounded-full text-lg transition-all backdrop-blur-sm text-center"
-              style={{ border: `2px solid ${theme.primary}60` }}
+              className="px-8 py-4 font-semibold rounded-full text-lg transition-all backdrop-blur-sm text-center"
+              style={{ border: `2px solid ${theme.primary}`, color: theme.foreground, background: `${theme.card}90` }}
             >
               View Programs
             </motion.a>
@@ -324,10 +368,10 @@ export default function Hero() {
           className="mt-20 mb-16 grid grid-cols-2 md:grid-cols-4 gap-6"
         >
           {[
-            { value: "30+", label: "Years Experience" },
-            { value: "500+", label: "Champions Trained" },
-            { value: "50+", label: "International Medals" },
-            { value: "#1", label: "Team in India" },
+            { value: "30", suffix: "+", label: "Years Experience" },
+            { value: "500", suffix: "+", label: "Champions Trained" },
+            { value: "50", suffix: "+", label: "International Medals" },
+            { value: "#1", suffix: "", label: "Team in India" },
           ].map((stat, index) => (
             <motion.div
               key={index}
@@ -349,9 +393,9 @@ export default function Hero() {
                   WebkitTextFillColor: "transparent",
                 }}
               >
-                {stat.value}
+                <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={2000} />
               </motion.div>
-              <div className="text-xs mt-2 uppercase tracking-widest text-white/70">
+              <div className="text-xs mt-2 uppercase tracking-widest" style={{ color: theme.foregroundMuted }}>
                 {stat.label}
               </div>
             </motion.div>

@@ -7,7 +7,7 @@ import { useTheme } from "./ThemeProvider";
 
 const careerHighlights = [
   { year: "2015", title: "Dronacharya Award", description: "First swimming coach to receive this prestigious lifetime achievement award" },
-  { year: "2010+", title: "Dolphin Aquatics @ PDCSE", description: "Program Director at Padukone David Centre for Sports Excellence" },
+  { year: "2010+", title: "Dolphin Aquatics @ CSE", description: "Program Director at Centre for Sports Excellence" },
   { year: "1994-2010", title: "K.C. Reddy Swim Team", description: "Program Director at Sadashiva Nagar" },
   { year: "1992-94", title: "Basavangudi Aquatic Centre", description: "Program Director in Bengaluru" },
   { year: "1990-92", title: "Fort Lauderdale Swim Team", description: "Assistant National Coach & Head Coach Jack Nelson Swim Camp, Florida USA" },
@@ -57,7 +57,7 @@ export default function Coach() {
                   />
                   <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${theme.background}95, ${theme.background}50, transparent)` }} />
                   <div className="absolute inset-x-0 bottom-0 p-8 text-center">
-                    <h3 className="text-3xl font-bold text-white mb-2 font-[family-name:var(--font-playfair)]">Nihar Ameen</h3>
+                    <h3 className="text-3xl font-bold mb-2 font-[family-name:var(--font-playfair)]" style={{ color: theme.foreground }}>Nihar Ameen</h3>
                     <p style={{ color: theme.primary }} className="font-medium">Founder & Program Director</p>
                   </div>
                 </div>
@@ -69,7 +69,7 @@ export default function Coach() {
                         <svg style={{ color: theme.primary }} className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
-                        <span className="text-gray-300 text-sm">{credential}</span>
+                        <span className="text-sm" style={{ color: theme.foregroundMuted }}>{credential}</span>
                       </motion.div>
                     ))}
                   </div>
@@ -89,7 +89,7 @@ export default function Coach() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 50 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.4 }}>
-            <h3 className="text-2xl font-bold text-white mb-8 font-[family-name:var(--font-playfair)]">
+            <h3 className="text-2xl font-bold mb-8 font-[family-name:var(--font-playfair)]" style={{ color: theme.foreground }}>
               Career <span style={{ background: `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primaryDark})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Journey</span>
             </h3>
             <div className="relative">
@@ -99,15 +99,15 @@ export default function Coach() {
                   <motion.div key={index} initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }} className="relative pl-20">
                     <div className="absolute left-6 top-1 w-4 h-4 rounded-full" style={{ background: theme.primary, border: `4px solid ${theme.background}` }} />
                     <span className="inline-block px-3 py-1 text-xs font-bold rounded-full mb-2" style={{ color: theme.primary, background: `${theme.primary}15` }}>{item.year}</span>
-                    <h4 className="text-lg font-semibold text-white mb-1">{item.title}</h4>
-                    <p className="text-gray-400 text-sm">{item.description}</p>
+                    <h4 className="text-lg font-semibold mb-1" style={{ color: theme.foreground }}>{item.title}</h4>
+                    <p className="text-sm" style={{ color: theme.foregroundMuted }}>{item.description}</p>
                   </motion.div>
                 ))}
               </div>
             </div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.8 }}
               className="mt-12 p-6 rounded-2xl" style={{ background: `linear-gradient(135deg, ${theme.primary}15, transparent)`, border: `1px solid ${theme.primary}30` }}>
-              <p className="text-gray-300 italic">&quot;Coach Nihar Ameen has produced India&apos;s best swimmers who have won medals at the Asian Games, Commonwealth Games, Asian Indoor Games, Asian Swimming Championships and Asian Para Games.&quot;</p>
+              <p className="italic" style={{ color: theme.foregroundMuted }}>&quot;Coach Nihar Ameen has produced India&apos;s best swimmers who have won medals at the Asian Games, Commonwealth Games, Asian Indoor Games, Asian Swimming Championships and Asian Para Games.&quot;</p>
             </motion.div>
           </motion.div>
         </div>

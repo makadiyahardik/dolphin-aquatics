@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  /* Default Dark Theme (v=1) */
   --primary: #38bdf8;
   --primary-light: #7dd3fc;
   --primary-dark: #0284c7;
@@ -8,6 +9,7 @@
   --bg-alt: #0c1929;
   --card: #0f172a;
   --foreground: #f5f5f5;
+  --foreground-muted: #cbd5e1;
 }
 
 * {
