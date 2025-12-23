@@ -58,8 +58,8 @@ export default function Footer() {
               onClick={() => setShowContactForm(true)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 text-black font-bold rounded-full transition-all"
-              style={{ background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`, boxShadow: `0 4px 30px ${theme.primary}40` }}>
+              className="px-8 py-4 font-bold rounded-full transition-all"
+              style={{ color: theme.buttonText, background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`, boxShadow: `0 4px 30px ${theme.primary}40` }}>
               Enroll Now
             </motion.button>
             <motion.a
@@ -85,11 +85,12 @@ export default function Footer() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               className="w-full max-w-md p-8 rounded-3xl relative"
-              style={{ background: theme.card, border: `1px solid ${theme.primary}30` }}
+              style={{ background: theme.card, border: `1px solid ${theme.backgroundAlt}` }}
             >
               <button
                 onClick={() => setShowContactForm(false)}
-                className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+                className="absolute top-4 right-4 transition-colors"
+                style={{ color: theme.foregroundMuted }}
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -156,8 +157,8 @@ export default function Footer() {
                       type="submit"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full py-4 text-black font-bold rounded-xl transition-all"
-                      style={{ background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})` }}
+                      className="w-full py-4 font-bold rounded-xl transition-all"
+                      style={{ color: theme.buttonText, background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})` }}
                     >
                       Submit Enquiry
                     </motion.button>
@@ -181,7 +182,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             className="p-6 rounded-2xl transition-all hover:scale-[1.02]"
-            style={{ background: `${theme.card}80`, border: `1px solid ${theme.primary}20` }}
+            style={{ background: theme.card, border: `1px solid ${theme.backgroundAlt}` }}
           >
             <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `${theme.primary}20` }}>
               <svg className="w-6 h-6" style={{ color: theme.primary }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -196,7 +197,7 @@ export default function Footer() {
           <a
             href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
             className="p-6 rounded-2xl transition-all hover:scale-[1.02]"
-            style={{ background: `${theme.card}80`, border: `1px solid ${theme.primary}20` }}
+            style={{ background: theme.card, border: `1px solid ${theme.backgroundAlt}` }}
           >
             <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `${theme.primary}20` }}>
               <svg className="w-6 h-6" style={{ color: theme.primary }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -210,7 +211,7 @@ export default function Footer() {
           <a
             href={`mailto:${contactInfo.email}`}
             className="p-6 rounded-2xl transition-all hover:scale-[1.02]"
-            style={{ background: `${theme.card}80`, border: `1px solid ${theme.primary}20` }}
+            style={{ background: theme.card, border: `1px solid ${theme.backgroundAlt}` }}
           >
             <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `${theme.primary}20` }}>
               <svg className="w-6 h-6" style={{ color: theme.primary }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -255,7 +256,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="pt-8" style={{ borderTop: `1px solid ${theme.primary}20` }}>
+        <div className="pt-8" style={{ borderTop: `1px solid ${theme.backgroundAlt}` }}>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm" style={{ color: theme.foregroundMuted }}>© {new Date().getFullYear()} Dolphin Aquatics. All rights reserved.</p>
             <div className="flex gap-6">

@@ -46,39 +46,41 @@ export default function Coach() {
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <motion.div initial={{ opacity: 0, x: -50 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }}>
             <div className="relative">
-              <div className="relative rounded-3xl overflow-hidden" style={{ background: `linear-gradient(135deg, ${theme.card}, ${theme.backgroundAlt})`, border: `1px solid ${theme.primary}30` }}>
-                <div className="relative aspect-[4/3]">
+              <div className="rounded-2xl overflow-hidden" style={{ border: `1px solid ${theme.primary}40` }}>
+                {/* Image at top - no padding, cropped to remove white frame */}
+                <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     src="/media/optimized/image17.webp"
                     alt="Coach Nihar Ameen receiving Dronacharya Award"
                     fill
                     className="object-cover"
+                    style={{ objectPosition: '50% 30%', transform: 'scale(1.25)' }}
                     loading="lazy"
                   />
-                  <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${theme.background}95, ${theme.background}50, transparent)` }} />
-                  <div className="absolute inset-x-0 bottom-0 p-8 text-center">
-                    <h3 className="text-3xl font-bold mb-2 font-[family-name:var(--font-playfair)]" style={{ color: theme.foreground }}>Nihar Ameen</h3>
-                    <p style={{ color: theme.primary }} className="font-medium">Founder & Program Director</p>
-                  </div>
                 </div>
-                <div className="p-8" style={{ borderTop: `1px solid ${theme.primary}20` }}>
-                  <h4 className="text-sm uppercase tracking-widest mb-4" style={{ color: theme.primary }}>Credentials</h4>
-                  <div className="space-y-3">
-                    {credentials.map((credential, index) => (
-                      <motion.div key={index} initial={{ opacity: 0, x: -20 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }} className="flex items-center gap-3">
-                        <svg style={{ color: theme.primary }} className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        <span className="text-sm" style={{ color: theme.foregroundMuted }}>{credential}</span>
-                      </motion.div>
-                    ))}
+                {/* Text content below with padding */}
+                <div className="p-6" style={{ background: theme.card }}>
+                  <h3 className="text-2xl font-bold mb-1 font-[family-name:var(--font-playfair)]" style={{ color: theme.foreground }}>Nihar Ameen</h3>
+                  <p style={{ color: theme.primary }} className="font-medium text-sm mb-4">Founder & Program Director</p>
+                  <div style={{ borderTop: `1px solid ${theme.backgroundAlt}` }} className="pt-4">
+                    <h4 className="text-sm uppercase tracking-widest mb-4" style={{ color: theme.primary }}>Credentials</h4>
+                    <div className="space-y-3">
+                      {credentials.map((credential, index) => (
+                        <motion.div key={index} initial={{ opacity: 0, x: -20 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }} className="flex items-center gap-3">
+                          <svg style={{ color: theme.primary }} className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                          <span className="text-sm" style={{ color: theme.foregroundMuted }}>{credential}</span>
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
               <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={isInView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.6, delay: 0.6 }}
                 className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full flex items-center justify-center shadow-2xl"
                 style={{ background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`, boxShadow: `0 0 40px ${theme.primary}50` }}>
-                <div className="text-center text-black">
+                <div className="text-center" style={{ color: theme.buttonText }}>
                   <svg className="w-8 h-8 mx-auto mb-1" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
                   </svg>
@@ -106,7 +108,7 @@ export default function Coach() {
               </div>
             </div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.8 }}
-              className="mt-12 p-6 rounded-2xl" style={{ background: `linear-gradient(135deg, ${theme.primary}15, transparent)`, border: `1px solid ${theme.primary}30` }}>
+              className="mt-12 p-6 rounded-2xl" style={{ background: theme.card, border: `1px solid ${theme.backgroundAlt}` }}>
               <p className="italic" style={{ color: theme.foregroundMuted }}>&quot;Coach Nihar Ameen has produced India&apos;s best swimmers who have won medals at the Asian Games, Commonwealth Games, Asian Indoor Games, Asian Swimming Championships and Asian Para Games.&quot;</p>
             </motion.div>
           </motion.div>

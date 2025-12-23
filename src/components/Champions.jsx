@@ -6,15 +6,15 @@ import Image from "next/image";
 import { useTheme } from "./ThemeProvider";
 
 const champions = [
-  { name: "Nisha Millet", achievement: "Olympian", event: "Sydney 2000", highlight: "Double Olympian", initials: "NM", image: "/media/image21.png" },
-  { name: "Virdhawal Khade", achievement: "Asian Games Bronze", event: "Men's 50m Butterfly", highlight: "First medal since 1986", initials: "VK", image: "/media/image23.png" },
-  { name: "Sandeep Sejwal", achievement: "Asian Games Bronze", event: "Men's 50m Breaststroke", highlight: "Incheon 2014", initials: "SS", image: "/media/image23.png" },
-  { name: "Shikha Tandon", achievement: "Arjuna Award Winner", event: "Multiple Events", highlight: "Olympian", initials: "ST", image: "/media/image21.png" },
-  { name: "Rehan Poncha", achievement: "International Medalist", event: "Multiple Events", highlight: "Asian Games", initials: "RP", image: "/media/image21.png" },
-  { name: "Srihari Natraj", achievement: "National Record Holder", event: "Backstroke Events", highlight: "Olympian", initials: "SN", image: "/media/image21.png" },
-  { name: "Maana Patel", achievement: "Olympian", event: "Backstroke Events", highlight: "Tokyo 2020", initials: "MP", image: "/media/image21.png" },
-  { name: "Dhinidhi Desinghu", achievement: "Olympian", event: "Paris 2024", highlight: "Youngest Swimmer", initials: "DD", image: "/media/image21.png" },
-  { name: "Hakimuddin Habibulla", achievement: "International Swimmer", event: "Multiple Events", highlight: "Team Coach", initials: "HH", image: "/media/image21.png" },
+  { name: "Nisha Millet", achievement: "Olympian", event: "Sydney 2000", highlight: "Double Olympian", initials: "NM", image: "/media/nisha-millet.jpg" },
+  { name: "Virdhawal Khade", achievement: "Asian Games Bronze", event: "Men's 50m Butterfly", highlight: "First medal since 1986", initials: "VK", image: "/media/virdhawal-khade.jpg" },
+  { name: "Sandeep Sejwal", achievement: "Asian Games Bronze", event: "Men's 50m Breaststroke", highlight: "Incheon 2014", initials: "SS", image: "/media/sandeep-sejwal.jpg" },
+  { name: "Shikha Tandon", achievement: "Arjuna Award Winner", event: "Multiple Events", highlight: "Olympian", initials: "ST", image: "/media/shikha-tandon.jpg" },
+  { name: "Rehan Poncha", achievement: "International Medalist", event: "Multiple Events", highlight: "Asian Games", initials: "RP", image: "/media/rehan-poncha.jpg" },
+  { name: "Srihari Nataraj", achievement: "National Record Holder", event: "Backstroke Events", highlight: "Olympian", initials: "SN", image: "/media/srihari-nataraj.jpg" },
+  { name: "Maana Patel", achievement: "Olympian", event: "Backstroke Events", highlight: "Tokyo 2020", initials: "MP", image: "/media/maana-patel.jpg" },
+  { name: "Dhinidhi Desinghu", achievement: "Olympian", event: "Paris 2024", highlight: "Youngest Swimmer", initials: "DD", image: "/media/dhinidhi-desinghu.jpg" },
+  { name: "Hakimuddin Habibulla", achievement: "International Swimmer", event: "Multiple Events", highlight: "Team Coach", initials: "HH", image: "/media/hakimuddin-habibulla.jpg" },
 ];
 
 export default function Champions() {
@@ -46,7 +46,7 @@ export default function Champions() {
             <motion.div key={index} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
               onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)} className="group relative">
               <motion.div animate={{ scale: hoveredIndex === index ? 1.05 : 1 }} transition={{ duration: 0.3 }}
-                className="relative aspect-square rounded-2xl overflow-hidden" style={{ border: `1px solid ${theme.primary}20` }}>
+                className="relative aspect-square rounded-2xl overflow-hidden" style={{ border: `1px solid ${theme.backgroundAlt}` }}>
                 <Image
                   src={champion.image}
                   alt={champion.name}
@@ -54,15 +54,15 @@ export default function Champions() {
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                   loading="lazy"
                 />
-                <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${theme.background}, ${theme.background}90, transparent)` }} />
+                <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${theme.background}, ${theme.background}${theme.isLight ? 'dd' : '90'}, ${theme.background}${theme.isLight ? '80' : '00'})` }} />
                 <div className="absolute inset-x-0 bottom-0 p-4">
                   <h3 className="text-lg font-semibold mb-1" style={{ color: theme.foreground }}>{champion.name}</h3>
                   <p className="text-xs font-medium mb-1" style={{ color: theme.primary }}>{champion.achievement}</p>
                   <p className="text-xs" style={{ color: theme.foregroundMuted }}>{champion.event}</p>
                 </div>
                 {hoveredIndex === index && (
-                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="absolute top-4 right-4 px-3 py-1 rounded-full text-black text-xs font-bold"
-                    style={{ background: theme.primary }}>{champion.highlight}</motion.div>
+                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold"
+                    style={{ color: theme.buttonText, background: theme.primary }}>{champion.highlight}</motion.div>
                 )}
               </motion.div>
             </motion.div>
@@ -70,8 +70,8 @@ export default function Champions() {
         </div>
 
         <motion.div initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 1 }} className="mt-16 text-center">
-          <motion.a href="#contact" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block px-8 py-4 text-black font-bold rounded-full transition-all"
-            style={{ background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`, boxShadow: `0 4px 30px ${theme.primary}40` }}>
+          <motion.a href="#contact" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block px-8 py-4 font-bold rounded-full transition-all"
+            style={{ color: theme.buttonText, background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`, boxShadow: `0 4px 30px ${theme.primary}40` }}>
             Start Training Today
           </motion.a>
         </motion.div>

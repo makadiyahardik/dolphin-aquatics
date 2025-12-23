@@ -6,10 +6,10 @@ import Image from "next/image";
 import { useTheme } from "./ThemeProvider";
 
 const facilities = [
-  { title: "Olympic-Size Pool", description: "World-class swimming pool meeting international standards at CSE", icon: "pool", features: ["50m Competition Pool", "Temperature Controlled", "Electronic Timing"], image: "/media/image32.png" },
-  { title: "Fitness Centre", description: "State-of-the-art gym equipment for comprehensive strength and conditioning", icon: "gym", features: ["Modern Equipment", "Personal Training", "Cardio Zone"], image: "/media/image33.png" },
-  { title: "Physiotherapy & Rehab", description: "Professional injury rehabilitation and sports physiotherapy services", icon: "health", features: ["Sports Medicine", "Recovery Programs", "Injury Prevention"], image: "/media/image33.png" },
-  { title: "Expert Coaching Team", description: "Internationally certified coaches dedicated to your swimming excellence", icon: "team", features: ["ASCA Certified", "AUSTSWIM Accredited", "Khelo India"], image: "/media/image37.png" },
+  { title: "Olympic-Size Pool", description: "World-class swimming pool meeting international standards at CSE", icon: "pool", features: ["50m Competition Pool", "Temperature Controlled", "Electronic Timing"], image: "/media/pool-main.jpg" },
+  { title: "Fitness Centre", description: "State-of-the-art gym equipment for comprehensive strength and conditioning", icon: "gym", features: ["Modern Equipment", "Personal Training", "Cardio Zone"], image: "/media/pool-alternate.jpg" },
+  { title: "Physiotherapy & Rehab", description: "Professional injury rehabilitation and sports physiotherapy services", icon: "health", features: ["Sports Medicine", "Recovery Programs", "Injury Prevention"], image: "/media/pool-alternate.jpg" },
+  { title: "Expert Coaching Team", description: "Internationally certified coaches dedicated to your swimming excellence", icon: "team", features: ["ASCA Certified", "AUSTSWIM Accredited", "Khelo India"], image: "/media/pool-main.jpg" },
 ];
 
 const programs = [
@@ -51,7 +51,7 @@ export default function Facilities() {
             <motion.div key={index} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
               whileHover={{ y: -8, scale: 1.02 }} className="group relative">
               <div className="relative aspect-square rounded-3xl flex flex-col transition-all duration-500 overflow-hidden"
-                style={{ border: `1px solid ${theme.primary}15` }}>
+                style={{ border: `1px solid ${theme.backgroundAlt}` }}>
                 {/* Background Image */}
                 <Image
                   src={facility.image}
@@ -60,7 +60,7 @@ export default function Facilities() {
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                   loading="lazy"
                 />
-                <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${theme.background}, ${theme.background}95, ${theme.background}60)` }} />
+                <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${theme.background}, ${theme.background}${theme.isLight ? 'ee' : '95'}, ${theme.background}${theme.isLight ? 'cc' : '60'})` }} />
 
                 <div className="relative flex flex-col h-full p-6">
                   <div className="mb-4">
@@ -73,7 +73,7 @@ export default function Facilities() {
                     <p className="text-xs mb-4 flex-1" style={{ color: theme.foregroundMuted }}>{facility.description}</p>
                     <div className="flex flex-wrap gap-1.5">
                       {facility.features.map((feature, fIndex) => (
-                        <span key={fIndex} className="px-2 py-0.5 text-[10px] rounded-full" style={{ background: `${theme.primary}30`, color: theme.primaryDark, border: `1px solid ${theme.primary}50` }}>{feature}</span>
+                        <span key={fIndex} className="px-2 py-0.5 text-[10px] rounded-full font-medium" style={{ background: theme.backgroundAlt, color: theme.foreground, border: `1px solid ${theme.card}` }}>{feature}</span>
                       ))}
                     </div>
                   </div>
@@ -93,7 +93,7 @@ export default function Facilities() {
           {programs.map((program, index) => (
             <motion.button key={index} onClick={() => setActiveProgram(index)} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
               className="relative p-6 rounded-2xl transition-all duration-300"
-              style={{ border: `1px solid ${activeProgram === index ? theme.primary : theme.primary + '20'}`, background: activeProgram === index ? `${theme.primary}15` : `${theme.card}50` }}>
+              style={{ border: `1px solid ${activeProgram === index ? theme.primary : theme.backgroundAlt}`, background: activeProgram === index ? theme.card : `${theme.backgroundAlt}80` }}>
               <div className="w-3 h-3 rounded-full mx-auto mb-3" style={{ background: `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primaryDark})` }} />
               <h4 className="font-semibold mb-1" style={{ color: theme.foreground }}>{program.name}</h4>
               <p className="text-xs" style={{ color: theme.foregroundMuted }}>{program.level}</p>
@@ -102,7 +102,7 @@ export default function Facilities() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.9 }}
-          className="mt-20 p-8 rounded-3xl" style={{ background: `linear-gradient(90deg, ${theme.card}80, ${theme.primary}15, ${theme.card}80)`, border: `1px solid ${theme.primary}30` }}>
+          className="mt-20 p-8 rounded-3xl" style={{ background: theme.card, border: `1px solid ${theme.backgroundAlt}` }}>
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-center md:text-left">
               <h3 className="text-2xl font-bold mb-2 font-[family-name:var(--font-playfair)]" style={{ color: theme.foreground }}>Dolphin Aquatics Academy</h3>
@@ -115,8 +115,8 @@ export default function Facilities() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 text-black font-bold rounded-full transition-all flex items-center gap-2"
-              style={{ background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`, boxShadow: `0 4px 30px ${theme.primary}40` }}>
+              className="px-8 py-4 font-bold rounded-full transition-all flex items-center gap-2"
+              style={{ color: theme.buttonText, background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`, boxShadow: `0 4px 30px ${theme.primary}40` }}>
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
               Get Directions
             </motion.a>

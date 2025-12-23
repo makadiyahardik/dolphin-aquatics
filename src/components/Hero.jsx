@@ -79,7 +79,7 @@ export default function Hero() {
       ref={containerRef}
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24"
-      style={{ background: `linear-gradient(180deg, ${theme.background} 0%, #041525 50%, ${theme.background} 100%)` }}
+      style={{ background: `linear-gradient(180deg, ${theme.background} 0%, ${theme.backgroundAlt} 50%, ${theme.background} 100%)` }}
     >
       {/* Background Image with underwater feel */}
       <div className="absolute inset-0 z-0">
@@ -87,7 +87,7 @@ export default function Hero() {
           src="/media/optimized/image35.webp"
           alt="Swimmer performing butterfly stroke"
           fill
-          className="object-cover opacity-25"
+          className={`object-cover ${theme.isLight ? 'opacity-15' : 'opacity-25'}`}
           priority
         />
         <div className="absolute inset-0" style={{
@@ -336,8 +336,9 @@ export default function Hero() {
                 boxShadow: `0 0 50px ${theme.primary}60`,
               }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 text-black font-bold rounded-full text-lg transition-all relative overflow-hidden group text-center"
+              className="px-8 py-4 font-bold rounded-full text-lg transition-all relative overflow-hidden group text-center"
               style={{
+                color: theme.buttonText,
                 background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`,
                 boxShadow: `0 0 30px ${theme.primary}40`,
               }}

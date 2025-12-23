@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /s /b \"C:\\\\Users\\\\Therton_F\\\\Desktop\\\\dolphin-website\\\\public\\\\media\")",
+      "Bash(dir /b \"C:\\\\Users\\\\Therton_F\\\\Desktop\\\\dolphin-website\\\\public\\\\media\\\\optimized\")",
+      "Bash(npm run dev:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: Add dual theme support and fix text readability\n\n- Add light theme variant accessible via ?v=2 URL parameter\n- Keep original dark theme as default \\(v=1\\)\n- Fix text contrast across all components for both themes\n- Replace hardcoded fallback colors with theme.foreground/foregroundMuted\n- Add animated number counters in Hero section\n- Update components: About, Champions, Coach, Facilities, Footer, Hero, Navigation\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push)"
+    ]
+  }
+}

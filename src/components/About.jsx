@@ -149,7 +149,7 @@ export default function About() {
               className="absolute -bottom-4 -right-4 md:right-8 px-6 py-3 rounded-full"
               style={{ background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`, boxShadow: `0 0 30px ${theme.primary}50` }}
             >
-              <span className="text-black font-bold">Since 1992</span>
+              <span className="font-bold" style={{ color: theme.buttonText }}>Since 1992</span>
             </motion.div>
           </motion.div>
 
@@ -214,7 +214,7 @@ export default function About() {
               className="group relative p-6 rounded-2xl transition-all duration-300"
               style={{
                 background: `linear-gradient(135deg, ${theme.card}80, ${theme.backgroundAlt}80)`,
-                border: `1px solid ${theme.primary}20`,
+                border: `1px solid ${theme.backgroundAlt}`,
               }}
             >
               <motion.div
@@ -242,8 +242,8 @@ export default function About() {
           <div
             className="inline-flex items-center gap-4 px-8 py-4 rounded-full"
             style={{
-              background: `linear-gradient(90deg, ${theme.primary}15, ${theme.primary}25, ${theme.primary}15)`,
-              border: `1px solid ${theme.primary}30`,
+              background: theme.card,
+              border: `1px solid ${theme.backgroundAlt}`,
             }}
           >
             <svg style={{ color: theme.primary }} className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">

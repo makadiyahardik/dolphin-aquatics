@@ -4,37 +4,84 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 const themes = {
-  1: {
-    // Original Dark Theme
-    name: "Sky Blue Dark",
-    primary: "#38bdf8",
-    primaryLight: "#7dd3fc",
-    primaryDark: "#0284c7",
-    background: "#020617",
-    backgroundAlt: "#0c1929",
-    card: "#0f172a",
-    foreground: "#f5f5f5",
-    foregroundMuted: "#cbd5e1",
+  "1": {
+    // Midnight Black - Pure black, ocean blue accents, premium dark
+    name: "Midnight Black",
+    primary: "#2E86AB",
+    primaryLight: "#5BA4C4",
+    primaryDark: "#1D5A75",
+    background: "#000000",
+    backgroundAlt: "#0D0D0D",
+    card: "#141414",
+    foreground: "#FFFFFF",
+    foregroundMuted: "#A0A0A0",
+    buttonText: "#FFFFFF",
     isLight: false,
     layout: "default",
   },
-  2: {
-    // New Light Pool Water Theme
-    name: "Pool Water Light",
-    primary: "#0284c7",
-    primaryLight: "#0ea5e9",
-    primaryDark: "#075985",
-    background: "#f0f9ff",
-    backgroundAlt: "#e0f2fe",
-    card: "#ffffff",
-    foreground: "#0f172a",
-    foregroundMuted: "#475569",
+  "2": {
+    // Pure White - Clean white, ocean blue accents
+    name: "Pure White",
+    primary: "#2E86AB",
+    primaryLight: "#5BA4C4",
+    primaryDark: "#1D5A75",
+    background: "#FFFFFF",
+    backgroundAlt: "#F7F7F7",
+    card: "#FFFFFF",
+    foreground: "#000000",
+    foregroundMuted: "#555555",
+    buttonText: "#FFFFFF",
     isLight: true,
+    layout: "default",
+  },
+  "3": {
+    // Ocean Blue - Blue AS the background (bold statement)
+    name: "Ocean Blue",
+    primary: "#FFFFFF",
+    primaryLight: "#FFFFFF",
+    primaryDark: "#D0E8F0",
+    background: "#1A6B8C",
+    backgroundAlt: "#155A77",
+    card: "#0D4A64",
+    foreground: "#FFFFFF",
+    foregroundMuted: "#B8DCE9",
+    buttonText: "#1A6B8C",
+    isLight: false,
+    layout: "default",
+  },
+  "4": {
+    // Azure Sky - Light vibrant blue, fresh & energetic
+    name: "Azure Sky",
+    primary: "#0D4A64",
+    primaryLight: "#1A6B8C",
+    primaryDark: "#083344",
+    background: "#5BAACC",
+    backgroundAlt: "#4A99BB",
+    card: "#3D8AAD",
+    foreground: "#FFFFFF",
+    foregroundMuted: "#E0F4FC",
+    buttonText: "#FFFFFF",
+    isLight: false,
+    layout: "default",
+  },
+  "5": {
+    // Deep Sea - Very dark navy, luxurious depth
+    name: "Deep Sea",
+    primary: "#5BAACC",
+    primaryLight: "#7BC0DC",
+    primaryDark: "#3D8AAD",
+    background: "#061820",
+    backgroundAlt: "#0A2533",
+    card: "#0D3347",
+    foreground: "#FFFFFF",
+    foregroundMuted: "#8CBDD4",
+    buttonText: "#061820",
+    isLight: false,
     layout: "default",
   },
 };
 
-const ThemeContext = createContext(themes[1]);
+const ThemeContext = createContext(themes["1"]);
 
 export function useTheme() {
   return useContext(ThemeContext);
@@ -42,14 +89,14 @@ export function useTheme() {
 
 export default function ThemeProvider({ children }) {
   const searchParams = useSearchParams();
-  const [theme, setTheme] = useState(themes[1]);
+  const [theme, setTheme] = useState(themes["1"]);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const v = searchParams.get("v");
-    const themeNum = parseInt(v) || 1;
-    const selectedTheme = themes[themeNum] || themes[1];
+    const themeKey = v || "1";
+    const selectedTheme = themes[themeKey] || themes["1"];
     setTheme(selectedTheme);
 
     document.documentElement.style.setProperty("--primary", selectedTheme.primary);
@@ -65,7 +112,7 @@ export default function ThemeProvider({ children }) {
   }, [searchParams]);
 
   if (!mounted) {
-    return <div style={{ background: "#0a0a0f", minHeight: "100vh" }} />;
+    return <div style={{ background: "#000000", minHeight: "100vh" }} />;
   }
 
   return (

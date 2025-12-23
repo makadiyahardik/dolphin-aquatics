@@ -10,6 +10,7 @@ import Coach from "@/components/Coach";
 import Champions from "@/components/Champions";
 import Facilities from "@/components/Facilities";
 import Footer from "@/components/Footer";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 function HomeContent() {
   return (
@@ -22,6 +23,7 @@ function HomeContent() {
         <Champions />
         <Facilities />
         <Footer />
+        <ThemeSwitcher />
       </main>
     </ThemeProvider>
   );
@@ -29,7 +31,7 @@ function HomeContent() {
 
 export default function Home() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#020617]" />}>
+    <Suspense fallback={<div className="min-h-screen bg-black" />}>
       <HomeContent />
     </Suspense>
   );

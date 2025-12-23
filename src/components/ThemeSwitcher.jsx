@@ -9,7 +9,7 @@ export default function ThemeSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const currentV = parseInt(searchParams.get("v")) || 1;
+  const currentV = searchParams.get("v") || "1";
 
   const handleThemeChange = (v) => {
     router.push(`?v=${v}`);
@@ -28,7 +28,7 @@ export default function ThemeSwitcher() {
           boxShadow: `0 0 30px var(--primary)`
         }}
       >
-        <svg className="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
         </svg>
       </motion.button>
@@ -55,7 +55,7 @@ export default function ThemeSwitcher() {
                   whileHover={{ x: 5 }}
                   onClick={() => handleThemeChange(key)}
                   className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all ${
-                    currentV === parseInt(key)
+                    currentV === key
                       ? "bg-white/10"
                       : "hover:bg-white/5"
                   }`}
@@ -64,11 +64,11 @@ export default function ThemeSwitcher() {
                     className="w-8 h-8 rounded-full"
                     style={{
                       background: `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primaryDark})`,
-                      boxShadow: currentV === parseInt(key) ? `0 0 15px ${theme.primary}` : "none"
+                      boxShadow: currentV === key ? `0 0 15px ${theme.primary}` : "none"
                     }}
                   />
                   <span className="text-sm font-medium">{theme.name}</span>
-                  {currentV === parseInt(key) && (
+                  {currentV === key && (
                     <motion.svg
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}

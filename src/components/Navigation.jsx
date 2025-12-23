@@ -83,8 +83,9 @@ export default function Navigation() {
                 transition={{ delay: 0.8 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 py-2.5 text-black font-semibold text-sm rounded-full transition-all"
+                className="px-6 py-2.5 font-semibold text-sm rounded-full transition-all"
                 style={{
+                  color: theme.buttonText,
                   background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`,
                   boxShadow: `0 4px 20px ${theme.primary}40`,
                 }}
@@ -171,8 +172,9 @@ export default function Navigation() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  className="mt-4 px-6 py-3 text-black font-semibold rounded-full text-center block"
+                  className="mt-4 px-6 py-3 font-semibold rounded-full text-center block"
                   style={{
+                    color: theme.buttonText,
                     background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`,
                   }}
                 >
