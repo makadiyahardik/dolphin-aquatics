@@ -10,7 +10,6 @@ import Coach from "@/components/Coach";
 import Champions from "@/components/Champions";
 import Facilities from "@/components/Facilities";
 import Footer from "@/components/Footer";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 function HomeContent() {
   return (
@@ -23,7 +22,6 @@ function HomeContent() {
         <Champions />
         <Facilities />
         <Footer />
-        <ThemeSwitcher />
       </main>
     </ThemeProvider>
   );
