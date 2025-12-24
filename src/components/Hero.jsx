@@ -307,8 +307,8 @@ export default function Hero() {
                 }}
               />
               <div
-                className="relative inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm"
-                style={{ background: theme.background }}
+                className="relative inline-flex items-center gap-2 px-5 py-3 rounded-full backdrop-blur-sm"
+                style={{ background: theme.background, border: '3px solid #FFFFFF', boxShadow: '0 4px 20px rgba(0,0,0,0.2)' }}
               >
                 <motion.span
                   className="w-2 h-2 rounded-full"
