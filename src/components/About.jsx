@@ -27,6 +27,15 @@ const achievements = [
   {
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    ),
+    title: "NCOE Centre",
+    description: "Recognised by SAI as the National Centre of Excellence for Swimming",
+  },
+  {
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
       </svg>
     ),
@@ -153,12 +162,12 @@ export default function About() {
             </motion.div>
           </motion.div>
 
-          {/* Right side - Text content */}
+          {/* Right side - Text content (Centre aligned) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-6"
+            className="space-y-6 text-center lg:text-center"
           >
             <p className="text-xl md:text-2xl leading-relaxed font-light" style={{ color: theme.foreground }}>
               Consistently{" "}
@@ -178,22 +187,6 @@ export default function About() {
               Coaches Association and the National Institute of Sports, ensuring every swimmer
               receives world-class training.
             </p>
-
-            {/* Quote */}
-            <motion.blockquote
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mt-8 pl-6"
-              style={{ borderLeft: `2px solid ${theme.primary}` }}
-            >
-              <p className="text-lg italic" style={{ color: theme.foreground }}>
-                &quot;If you fail to prepare, you&apos;re preparing to fail.&quot;
-              </p>
-              <cite className="mt-2 block text-sm not-italic" style={{ color: theme.primary }}>
-                — Mark Spitz
-              </cite>
-            </motion.blockquote>
           </motion.div>
         </div>
 
@@ -202,7 +195,7 @@ export default function About() {
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-20"
+          className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-20"
         >
           {achievements.map((achievement, index) => (
             <motion.div

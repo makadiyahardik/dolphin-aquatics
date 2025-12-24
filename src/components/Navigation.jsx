@@ -70,7 +70,7 @@ export default function Navigation() {
                 >
                   <Link
                     href={item.href}
-                    className="relative text-sm font-medium transition-colors group underline-animation" style={{ color: theme.foregroundMuted }}
+                    className="relative text-base font-semibold transition-colors group underline-animation" style={{ color: theme.foreground }}
                   >
                     {item.name}
                   </Link>
@@ -83,7 +83,7 @@ export default function Navigation() {
                 transition={{ delay: 0.8 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 py-2.5 font-semibold text-sm rounded-full transition-all"
+                className="px-6 py-2.5 font-bold text-base rounded-full transition-all"
                 style={{
                   color: theme.buttonText,
                   background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`,

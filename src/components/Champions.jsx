@@ -7,14 +7,14 @@ import { useTheme } from "./ThemeProvider";
 
 const champions = [
   { name: "Nisha Millet", achievement: "Olympian", event: "Sydney 2000", highlight: "Double Olympian", initials: "NM", image: "/media/nisha-millet.jpg" },
-  { name: "Virdhawal Khade", achievement: "Asian Games Bronze", event: "Men's 50m Butterfly", highlight: "First medal since 1986", initials: "VK", image: "/media/virdhawal-khade.jpg" },
-  { name: "Sandeep Sejwal", achievement: "Asian Games Bronze", event: "Men's 50m Breaststroke", highlight: "Incheon 2014", initials: "SS", image: "/media/sandeep-sejwal.jpg" },
+  { name: "Hakimuddin Habibulla", achievement: "International Swimmer", event: "Multiple Events", highlight: "Team Coach", initials: "HH", image: "/media/hakimuddin-habibulla.jpg" },
   { name: "Shikha Tandon", achievement: "Arjuna Award Winner", event: "Multiple Events", highlight: "Olympian", initials: "ST", image: "/media/shikha-tandon.jpg" },
   { name: "Rehan Poncha", achievement: "International Medalist", event: "Multiple Events", highlight: "Asian Games", initials: "RP", image: "/media/rehan-poncha.jpg" },
-  { name: "Srihari Nataraj", achievement: "National Record Holder", event: "Backstroke Events", highlight: "Olympian", initials: "SN", image: "/media/srihari-nataraj.jpg" },
+  { name: "Virdhawal Khade", achievement: "Asian Games Bronze", event: "Men's 50m Butterfly", highlight: "First medal since 1986", initials: "VK", image: "/media/virdhawal-khade.jpg" },
+  { name: "Sandeep Sejwal", achievement: "Asian Games Bronze", event: "Men's 50m Breaststroke", highlight: "Incheon 2014", initials: "SS", image: "/media/sandeep-sejwal.jpg" },
   { name: "Maana Patel", achievement: "Olympian", event: "Backstroke Events", highlight: "Tokyo 2020", initials: "MP", image: "/media/maana-patel.jpg" },
+  { name: "Srihari Nataraj", achievement: "National Record Holder", event: "Backstroke Events", highlight: "Olympian", initials: "SN", image: "/media/srihari-nataraj.jpg" },
   { name: "Dhinidhi Desinghu", achievement: "Olympian", event: "Paris 2024", highlight: "Youngest Swimmer", initials: "DD", image: "/media/dhinidhi-desinghu.jpg" },
-  { name: "Hakimuddin Habibulla", achievement: "International Swimmer", event: "Multiple Events", highlight: "Team Coach", initials: "HH", image: "/media/hakimuddin-habibulla.jpg" },
 ];
 
 export default function Champions() {

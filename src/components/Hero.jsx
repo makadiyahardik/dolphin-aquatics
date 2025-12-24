@@ -249,124 +249,210 @@ export default function Hero() {
         }}
       />
 
-      {/* Content */}
-      <motion.div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          {/* Badge with animated border */}
+      {/* Content - 3 Column Layout */}
+      <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid lg:grid-cols-[280px_1fr_280px] gap-6 items-center min-h-[70vh]">
+
+          {/* LEFT Panel - National Games Winners */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="relative inline-flex mb-8 group"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="hidden lg:block"
           >
-            {/* Animated gradient border */}
             <div
-              className="absolute -inset-[2px] rounded-full opacity-75 blur-[1px]"
-              style={{
-                background: `linear-gradient(90deg, ${theme.primary}, ${theme.primaryLight}, ${theme.primaryDark}, ${theme.primary})`,
-                backgroundSize: '300% 100%',
-                animation: 'gradient-rotate 3s linear infinite',
-              }}
-            />
-            <div
-              className="relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full backdrop-blur-sm"
-              style={{ background: theme.background }}
+              className="rounded-3xl p-6 backdrop-blur-sm"
+              style={{ background: `${theme.foreground}f0`, boxShadow: `0 20px 60px ${theme.primary}30` }}
             >
-              <motion.span
-                className="w-2 h-2 rounded-full"
-                style={{ background: theme.primary, boxShadow: `0 0 10px ${theme.primary}` }}
-                animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-              <span className="text-sm font-medium" style={{ color: theme.primary }}>
-                India&apos;s #1 Swimming Team Since 2010
-              </span>
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4">
+                <Image
+                  src="/media/srihari-dhinidhi-national-games.jpg"
+                  alt="Srihari Nataraj and Dhinidhi Desinghu - National Games Winners"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <h3 className="text-lg font-bold mb-1" style={{ color: theme.primary }}>
+                Srihari &amp; Dhinidhi
+              </h3>
+              <p className="text-sm font-medium" style={{ color: theme.primaryDark }}>
+                National Games 2023
+              </p>
+              <p className="text-xs mt-2" style={{ color: `${theme.primary}cc` }}>
+                Best Male &amp; Female Swimmer
+              </p>
             </div>
           </motion.div>
 
-          {/* Main heading */}
-          <div className="overflow-hidden">
-            <motion.h1
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8, ease: [0.6, 0.01, 0.05, 0.95] }}
-              className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 font-[family-name:var(--font-playfair)]"
+          {/* CENTER Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="text-center"
+          >
+            {/* Small badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="relative inline-flex mb-4 group"
             >
-              <span className="block drop-shadow-lg" style={{ color: theme.foreground }}>Dive Into</span>
-              <motion.span
-                className="block"
+              <div
+                className="absolute -inset-[2px] rounded-full opacity-75 blur-[1px]"
                 style={{
-                  background: `linear-gradient(135deg, ${theme.primaryLight} 0%, ${theme.primary} 50%, ${theme.primaryDark} 100%)`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  filter: `drop-shadow(0 0 30px ${theme.primary}50)`,
+                  background: `linear-gradient(90deg, ${theme.primary}, ${theme.primaryLight}, ${theme.primaryDark}, ${theme.primary})`,
+                  backgroundSize: '300% 100%',
+                  animation: 'gradient-rotate 3s linear infinite',
+                }}
+              />
+              <div
+                className="relative inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm"
+                style={{ background: theme.background }}
+              >
+                <motion.span
+                  className="w-2 h-2 rounded-full"
+                  style={{ background: theme.primary, boxShadow: `0 0 10px ${theme.primary}` }}
+                  animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+                <span className="text-xs font-medium" style={{ color: theme.primary }}>
+                  India&apos;s #1 Swimming Team Since 2010
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Highlighted "India's #1 Swimming Team" Box */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="mb-6"
+            >
+              <div
+                className="inline-block px-8 py-3 rounded-xl"
+                style={{ background: `${theme.foreground}f5`, boxShadow: `0 10px 40px ${theme.primary}25` }}
+              >
+                <span className="text-xl md:text-2xl font-bold" style={{ color: theme.primary }}>
+                  India&apos;s #1 Swimming Team
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Main heading */}
+            <div className="overflow-hidden">
+              <motion.h1
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.8, ease: [0.6, 0.01, 0.05, 0.95] }}
+                className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 font-[family-name:var(--font-playfair)]"
+              >
+                <span className="block drop-shadow-lg" style={{ color: theme.foreground }}>Dive Into</span>
+                <motion.span
+                  className="block"
+                  style={{
+                    background: `linear-gradient(135deg, ${theme.primaryLight} 0%, ${theme.primary} 50%, ${theme.primaryDark} 100%)`,
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    filter: `drop-shadow(0 0 30px ${theme.primary}50)`,
+                  }}
+                >
+                  Excellence
+                </motion.span>
+              </motion.h1>
+            </div>
+
+            {/* Subheading */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="text-base md:text-lg max-w-xl mx-auto mb-8" style={{ color: theme.foregroundMuted }}
+            >
+              World-class swim coaching at Centre for Sports Excellence.
+              Led by Dronacharya Award winner Coach Nihar Ameen.
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
+              <motion.a
+                href="#contact"
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: `0 0 50px ${theme.primary}60`,
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 font-bold rounded-full text-lg transition-all relative overflow-hidden group text-center"
+                style={{
+                  color: theme.buttonText,
+                  background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`,
+                  boxShadow: `0 0 30px ${theme.primary}40`,
                 }}
               >
-                Excellence
-              </motion.span>
-            </motion.h1>
-          </div>
-
-          {/* Subheading */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-lg md:text-xl max-w-2xl mx-auto mb-10" style={{ color: theme.foregroundMuted }}
-          >
-            World-class swim coaching at Centre for Sports Excellence.
-            Led by Dronacharya Award winner Coach Nihar Ameen.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <motion.a
-              href="#contact"
-              whileHover={{
-                scale: 1.05,
-                boxShadow: `0 0 50px ${theme.primary}60`,
-              }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 font-bold rounded-full text-lg transition-all relative overflow-hidden group text-center"
-              style={{
-                color: theme.buttonText,
-                background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`,
-                boxShadow: `0 0 30px ${theme.primary}40`,
-              }}
-            >
-              <span className="relative z-10">Start Your Journey</span>
-              <motion.div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                style={{ background: `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primary})` }}
-              />
-            </motion.a>
-            <motion.a
-              href="#facilities"
-              whileHover={{ scale: 1.05, borderColor: theme.primary }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 font-semibold rounded-full text-lg transition-all backdrop-blur-sm text-center"
-              style={{ border: `2px solid ${theme.primary}`, color: theme.foreground, background: `${theme.card}90` }}
-            >
-              View Programs
-            </motion.a>
+                <span className="relative z-10">Start Your Journey</span>
+                <motion.div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                  style={{ background: `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primary})` }}
+                />
+              </motion.a>
+              <motion.a
+                href="#facilities"
+                whileHover={{ scale: 1.05, borderColor: theme.primary }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 font-semibold rounded-full text-lg transition-all backdrop-blur-sm text-center"
+                style={{ border: `2px solid ${theme.primary}`, color: theme.foreground, background: `${theme.card}90` }}
+              >
+                View Programs
+              </motion.a>
+            </motion.div>
           </motion.div>
-        </motion.div>
 
-        {/* Stats */}
+          {/* RIGHT Panel - 2025 National Record Holders */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="hidden lg:block"
+          >
+            <div
+              className="rounded-3xl p-6 backdrop-blur-sm"
+              style={{ background: `${theme.foreground}f0`, boxShadow: `0 20px 60px ${theme.primary}30` }}
+            >
+              <h3 className="text-lg font-bold mb-4 text-center" style={{ color: theme.primary }}>
+                2025 National Record Holders
+              </h3>
+              <div className="space-y-3">
+                {[
+                  { name: "Srihari Nataraj", event: "100m Backstroke", time: "53.77s", image: "/media/srihari-nataraj.jpg" },
+                  { name: "Dhinidhi Desinghu", event: "100m Freestyle", time: "56.29s", image: "/media/dhinidhi-desinghu.jpg" },
+                ].map((swimmer, idx) => (
+                  <div key={idx} className="flex items-center gap-3 p-2 rounded-xl" style={{ background: `${theme.primary}10` }}>
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+                      <Image src={swimmer.image} alt={swimmer.name} fill className="object-cover" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold truncate" style={{ color: theme.primaryDark }}>{swimmer.name}</p>
+                      <p className="text-xs" style={{ color: `${theme.primary}cc` }}>{swimmer.event}</p>
+                      <p className="text-xs font-bold" style={{ color: theme.primary }}>{swimmer.time}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Stats - with highlighted colors */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
-          className="mt-20 mb-16 grid grid-cols-2 md:grid-cols-4 gap-6"
+          className="mt-8 mb-16 grid grid-cols-2 md:grid-cols-4 gap-4"
         >
           {[
             { value: "30", suffix: "+", label: "Years Experience" },
@@ -379,30 +465,26 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.4 + index * 0.15, type: "spring", stiffness: 100 }}
-              whileHover={{ y: -5, boxShadow: `0 10px 40px ${theme.primary}20` }}
-              className="text-center px-6 py-5 rounded-2xl backdrop-blur-sm"
+              whileHover={{ y: -5, boxShadow: `0 10px 40px ${theme.primary}40` }}
+              className="text-center px-4 py-4 rounded-2xl"
               style={{
-                background: `linear-gradient(135deg, ${theme.card}60, ${theme.card}40)`,
-                border: `1px solid ${theme.border || theme.primary}40`,
+                background: `${theme.foreground}e8`,
+                boxShadow: `0 8px 32px ${theme.primary}20`,
               }}
             >
               <motion.div
-                className="text-3xl md:text-4xl font-bold mb-2"
-                style={{
-                  background: `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primary})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
+                className="text-2xl md:text-3xl font-bold mb-1"
+                style={{ color: theme.primary }}
               >
                 <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={2000} />
               </motion.div>
-              <div className="text-xs mt-2 uppercase tracking-widest" style={{ color: theme.foregroundMuted }}>
+              <div className="text-xs uppercase tracking-wider font-medium" style={{ color: theme.primaryDark }}>
                 {stat.label}
               </div>
             </motion.div>
           ))}
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }
