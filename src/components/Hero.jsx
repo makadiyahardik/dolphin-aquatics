@@ -317,23 +317,6 @@ export default function Hero() {
                   transition={{ duration: 2, repeat: Infinity }}
                 />
                 <span className="text-xs font-medium" style={{ color: theme.primary }}>
-                  India&apos;s #1 Swimming Team Since 2010
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Highlighted "India's #1 Swimming Team" Box */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="mb-6"
-            >
-              <div
-                className="inline-block px-8 py-3 rounded-xl"
-                style={{ background: `${theme.foreground}f5`, boxShadow: `0 10px 40px ${theme.primary}25` }}
-              >
-                <span className="text-xl md:text-2xl font-bold" style={{ color: theme.primary }}>
                   India&apos;s #1 Swimming Team
                 </span>
               </div>
@@ -426,19 +409,20 @@ export default function Hero() {
               <h3 className="text-lg font-bold mb-4 text-center" style={{ color: theme.primary }}>
                 2025 National Record Holders
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {[
                   { name: "Srihari Nataraj", event: "100m Backstroke", time: "53.77s", image: "/media/srihari-nataraj.jpg" },
+                  { name: "Rohit Benediction", event: "200m Butterfly", time: "TBD", image: "/media/rohit-benediction.jpg" },
                   { name: "Dhinidhi Desinghu", event: "100m Freestyle", time: "56.29s", image: "/media/dhinidhi-desinghu.jpg" },
+                  { name: "Rujula Nataraj", event: "200m Freestyle", time: "TBD", image: "/media/rujula-nataraj.jpg" },
                 ].map((swimmer, idx) => (
-                  <div key={idx} className="flex items-center gap-3 p-2 rounded-xl" style={{ background: `${theme.primary}10` }}>
-                    <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+                  <div key={idx} className="flex items-center gap-2 p-2 rounded-xl" style={{ background: `${theme.primary}10` }}>
+                    <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
                       <Image src={swimmer.image} alt={swimmer.name} fill className="object-cover" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold truncate" style={{ color: theme.primaryDark }}>{swimmer.name}</p>
-                      <p className="text-xs" style={{ color: `${theme.primary}cc` }}>{swimmer.event}</p>
-                      <p className="text-xs font-bold" style={{ color: theme.primary }}>{swimmer.time}</p>
+                      <p className="text-xs font-semibold truncate" style={{ color: theme.primaryDark }}>{swimmer.name}</p>
+                      <p className="text-[10px]" style={{ color: `${theme.primary}cc` }}>{swimmer.event} • {swimmer.time}</p>
                     </div>
                   </div>
                 ))}

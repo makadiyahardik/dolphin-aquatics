@@ -2,6 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Important Rules
+
+- **DO NOT push code to remote** until the user explicitly asks you to push
+- Always commit changes locally, but wait for user approval before running `git push`
+
 ## Commands
 
 ```bash

@@ -78,18 +78,17 @@ export default function Coach() {
                 </div>
               </div>
               <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={isInView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.6, delay: 0.6 }}
-                className="absolute -bottom-6 -right-6 w-36 h-36 rounded-full overflow-hidden shadow-2xl"
-                style={{ border: `4px solid ${theme.foreground}`, boxShadow: `0 0 40px ${theme.primary}50` }}>
-                <div className="relative w-full h-full">
+                className="absolute -bottom-6 -right-6 w-36 h-36 rounded-2xl overflow-hidden shadow-2xl"
+                style={{ border: `4px solid ${theme.primary}`, boxShadow: `0 0 40px ${theme.primary}50`, background: '#1a1a2e' }}>
+                <div className="relative w-full h-full p-2">
                   <Image
-                    src="/media/optimized/image17.webp"
-                    alt="Dronacharya Award"
+                    src="/media/dronacharya-award.jpg"
+                    alt="Dronacharya Award Trophy"
                     fill
-                    className="object-cover"
-                    style={{ objectPosition: '50% 20%' }}
+                    className="object-contain"
                   />
-                  <div className="absolute inset-0 flex items-end justify-center pb-2" style={{ background: `linear-gradient(to top, ${theme.primaryDark}ee, transparent 60%)` }}>
-                    <span className="text-[10px] font-bold text-center leading-tight px-2" style={{ color: theme.buttonText }}>DRONACHARYA<br/>AWARD 2015</span>
+                  <div className="absolute bottom-0 left-0 right-0 py-1 text-center" style={{ background: `linear-gradient(to top, ${theme.primaryDark}, transparent)` }}>
+                    <span className="text-[9px] font-bold" style={{ color: theme.buttonText }}>DRONACHARYA 2015</span>
                   </div>
                 </div>
               </motion.div>

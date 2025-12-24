@@ -92,24 +92,33 @@ export default function Facilities() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.7 }} className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {programs.map((program, index) => (
-            <motion.button key={index} onClick={() => setActiveProgram(index)} whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.98 }}
-              className="relative p-6 rounded-2xl transition-all duration-300 overflow-hidden"
-              style={{
-                border: `2px solid ${activeProgram === index ? theme.foreground : theme.primaryDark}`,
-                background: activeProgram === index
-                  ? `linear-gradient(135deg, ${theme.primaryDark}, ${theme.primary})`
-                  : `${theme.foreground}f5`,
-                boxShadow: activeProgram === index ? `0 10px 30px ${theme.primary}40` : `0 4px 20px ${theme.primary}20`
-              }}>
-              <div className="w-4 h-4 rounded-full mx-auto mb-3" style={{
-                background: activeProgram === index ? theme.foreground : `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primaryDark})`,
-                boxShadow: activeProgram === index ? `0 0 10px ${theme.foreground}` : `0 0 8px ${theme.primary}50`
-              }} />
-              <h4 className="font-bold mb-1 text-lg" style={{ color: activeProgram === index ? theme.foreground : theme.primaryDark }}>{program.name}</h4>
-              <p className="text-sm font-medium" style={{ color: activeProgram === index ? `${theme.foreground}cc` : theme.primary }}>{program.level}</p>
-            </motion.button>
-          ))}
+          {programs.map((program, index) => {
+            const programColors = [
+              { bg: '#10B981', light: '#34D399', dark: '#059669' }, // Green - Beginners
+              { bg: '#3B82F6', light: '#60A5FA', dark: '#2563EB' }, // Blue - Intermediate
+              { bg: '#8B5CF6', light: '#A78BFA', dark: '#7C3AED' }, // Purple - Advanced
+              { bg: '#F59E0B', light: '#FBBF24', dark: '#D97706' }, // Gold - Professional
+            ];
+            const color = programColors[index];
+            return (
+              <motion.button key={index} onClick={() => setActiveProgram(index)} whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.98 }}
+                className="relative p-6 rounded-2xl transition-all duration-300 overflow-hidden"
+                style={{
+                  border: `3px solid ${activeProgram === index ? '#FFFFFF' : color.bg}`,
+                  background: activeProgram === index
+                    ? `linear-gradient(135deg, ${color.dark}, ${color.bg})`
+                    : '#FFFFFF',
+                  boxShadow: activeProgram === index ? `0 10px 30px ${color.bg}60` : `0 4px 20px ${color.bg}30`
+                }}>
+                <div className="w-5 h-5 rounded-full mx-auto mb-3" style={{
+                  background: activeProgram === index ? '#FFFFFF' : `linear-gradient(135deg, ${color.light}, ${color.dark})`,
+                  boxShadow: `0 0 12px ${color.bg}80`
+                }} />
+                <h4 className="font-bold mb-1 text-lg" style={{ color: activeProgram === index ? '#FFFFFF' : color.dark }}>{program.name}</h4>
+                <p className="text-sm font-medium" style={{ color: activeProgram === index ? 'rgba(255,255,255,0.9)' : color.bg }}>{program.level}</p>
+              </motion.button>
+            );
+          })}
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.9 }}

@@ -44,7 +44,7 @@ export default function Footer() {
   };
 
   return (
-    <footer id="contact" className="relative pt-24 pb-12 overflow-hidden" style={{ background: `linear-gradient(180deg, ${theme.background}, ${theme.primaryDark})` }}>
+    <footer id="contact" className="relative pt-24 pb-12 overflow-hidden" style={{ background: `linear-gradient(180deg, ${theme.primary}, #021015)` }}>
       <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${theme.primary}80, transparent)` }} />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
