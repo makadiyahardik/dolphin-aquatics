@@ -85,7 +85,7 @@ export default function Footer() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               className="w-full max-w-md p-8 rounded-3xl relative"
-              style={{ background: theme.card, border: `1px solid ${theme.backgroundAlt}` }}
+              style={{ background: theme.card, border: `1px solid ${theme.border || theme.backgroundAlt}` }}
             >
               <button
                 onClick={() => setShowContactForm(false)}
@@ -182,7 +182,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             className="p-6 rounded-2xl transition-all hover:scale-[1.02]"
-            style={{ background: theme.card, border: `1px solid ${theme.backgroundAlt}` }}
+            style={{ background: theme.card, border: `1px solid ${theme.border || theme.backgroundAlt}` }}
           >
             <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `${theme.primary}20` }}>
               <svg className="w-6 h-6" style={{ color: theme.primary }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -197,7 +197,7 @@ export default function Footer() {
           <a
             href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
             className="p-6 rounded-2xl transition-all hover:scale-[1.02]"
-            style={{ background: theme.card, border: `1px solid ${theme.backgroundAlt}` }}
+            style={{ background: theme.card, border: `1px solid ${theme.border || theme.backgroundAlt}` }}
           >
             <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `${theme.primary}20` }}>
               <svg className="w-6 h-6" style={{ color: theme.primary }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -211,7 +211,7 @@ export default function Footer() {
           <a
             href={`mailto:${contactInfo.email}`}
             className="p-6 rounded-2xl transition-all hover:scale-[1.02]"
-            style={{ background: theme.card, border: `1px solid ${theme.backgroundAlt}` }}
+            style={{ background: theme.card, border: `1px solid ${theme.border || theme.backgroundAlt}` }}
           >
             <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `${theme.primary}20` }}>
               <svg className="w-6 h-6" style={{ color: theme.primary }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -256,7 +256,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="pt-8" style={{ borderTop: `1px solid ${theme.backgroundAlt}` }}>
+        <div className="pt-8" style={{ borderTop: `1px solid ${theme.border || theme.backgroundAlt}` }}>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm" style={{ color: theme.foregroundMuted }}>© {new Date().getFullYear()} Dolphin Aquatics. All rights reserved.</p>
             <div className="flex gap-6">

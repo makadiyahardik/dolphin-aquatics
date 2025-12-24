@@ -383,7 +383,7 @@ export default function Hero() {
               className="text-center px-6 py-5 rounded-2xl backdrop-blur-sm"
               style={{
                 background: `linear-gradient(135deg, ${theme.card}60, ${theme.card}40)`,
-                border: `1px solid ${theme.primary}25`,
+                border: `1px solid ${theme.border || theme.primary}40`,
               }}
             >
               <motion.div

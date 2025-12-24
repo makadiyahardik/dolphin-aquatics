@@ -51,7 +51,7 @@ export default function Facilities() {
             <motion.div key={index} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
               whileHover={{ y: -8, scale: 1.02 }} className="group relative">
               <div className="relative aspect-square rounded-3xl flex flex-col transition-all duration-500 overflow-hidden"
-                style={{ border: `1px solid ${theme.backgroundAlt}` }}>
+                style={{ border: `1px solid ${theme.border || theme.backgroundAlt}` }}>
                 {/* Background Image */}
                 <Image
                   src={facility.image}
@@ -93,7 +93,7 @@ export default function Facilities() {
           {programs.map((program, index) => (
             <motion.button key={index} onClick={() => setActiveProgram(index)} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
               className="relative p-6 rounded-2xl transition-all duration-300"
-              style={{ border: `1px solid ${activeProgram === index ? theme.primary : theme.backgroundAlt}`, background: activeProgram === index ? theme.card : `${theme.backgroundAlt}80` }}>
+              style={{ border: `1px solid ${activeProgram === index ? theme.primary : (theme.border || theme.backgroundAlt)}`, background: activeProgram === index ? theme.card : `${theme.backgroundAlt}80` }}>
               <div className="w-3 h-3 rounded-full mx-auto mb-3" style={{ background: `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primaryDark})` }} />
               <h4 className="font-semibold mb-1" style={{ color: theme.foreground }}>{program.name}</h4>
               <p className="text-xs" style={{ color: theme.foregroundMuted }}>{program.level}</p>
@@ -102,7 +102,7 @@ export default function Facilities() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.9 }}
-          className="mt-20 p-8 rounded-3xl" style={{ background: theme.card, border: `1px solid ${theme.backgroundAlt}` }}>
+          className="mt-20 p-8 rounded-3xl" style={{ background: theme.card, border: `1px solid ${theme.border || theme.backgroundAlt}` }}>
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-center md:text-left">
               <h3 className="text-2xl font-bold mb-2 font-[family-name:var(--font-playfair)]" style={{ color: theme.foreground }}>Dolphin Aquatics Academy</h3>

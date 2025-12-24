@@ -214,7 +214,7 @@ export default function About() {
               className="group relative p-6 rounded-2xl transition-all duration-300"
               style={{
                 background: `linear-gradient(135deg, ${theme.card}80, ${theme.backgroundAlt}80)`,
-                border: `1px solid ${theme.backgroundAlt}`,
+                border: `1px solid ${theme.border || theme.backgroundAlt}`,
               }}
             >
               <motion.div
@@ -243,7 +243,7 @@ export default function About() {
             className="inline-flex items-center gap-4 px-8 py-4 rounded-full"
             style={{
               background: theme.card,
-              border: `1px solid ${theme.backgroundAlt}`,
+              border: `1px solid ${theme.border || theme.backgroundAlt}`,
             }}
           >
             <svg style={{ color: theme.primary }} className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">

@@ -46,7 +46,7 @@ export default function Champions() {
             <motion.div key={index} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
               onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)} className="group relative">
               <motion.div animate={{ scale: hoveredIndex === index ? 1.05 : 1 }} transition={{ duration: 0.3 }}
-                className="relative aspect-square rounded-2xl overflow-hidden" style={{ border: `1px solid ${theme.backgroundAlt}` }}>
+                className="relative aspect-square rounded-2xl overflow-hidden" style={{ border: `1px solid ${theme.border || theme.backgroundAlt}` }}>
                 <Image
                   src={champion.image}
                   alt={champion.name}

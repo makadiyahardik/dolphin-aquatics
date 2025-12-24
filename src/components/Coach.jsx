@@ -62,7 +62,7 @@ export default function Coach() {
                 <div className="p-6" style={{ background: theme.card }}>
                   <h3 className="text-2xl font-bold mb-1 font-[family-name:var(--font-playfair)]" style={{ color: theme.foreground }}>Nihar Ameen</h3>
                   <p style={{ color: theme.primary }} className="font-medium text-sm mb-4">Founder & Program Director</p>
-                  <div style={{ borderTop: `1px solid ${theme.backgroundAlt}` }} className="pt-4">
+                  <div style={{ borderTop: `1px solid ${theme.border || theme.backgroundAlt}` }} className="pt-4">
                     <h4 className="text-sm uppercase tracking-widest mb-4" style={{ color: theme.primary }}>Credentials</h4>
                     <div className="space-y-3">
                       {credentials.map((credential, index) => (
@@ -108,7 +108,7 @@ export default function Coach() {
               </div>
             </div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.8 }}
-              className="mt-12 p-6 rounded-2xl" style={{ background: theme.card, border: `1px solid ${theme.backgroundAlt}` }}>
+              className="mt-12 p-6 rounded-2xl" style={{ background: theme.card, border: `1px solid ${theme.border || theme.backgroundAlt}` }}>
               <p className="italic" style={{ color: theme.foregroundMuted }}>&quot;Coach Nihar Ameen has produced India&apos;s best swimmers who have won medals at the Asian Games, Commonwealth Games, Asian Indoor Games, Asian Swimming Championships and Asian Para Games.&quot;</p>
             </motion.div>
           </motion.div>

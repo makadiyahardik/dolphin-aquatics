@@ -79,6 +79,22 @@ const themes = {
     isLight: false,
     layout: "default",
   },
+  "6": {
+    // Azure Sky Refined - Based on v4 with excellent readability
+    name: "Azure Sky Refined",
+    primary: "#083040",
+    primaryLight: "#0D5068",
+    primaryDark: "#041820",
+    background: "#5BAACC",
+    backgroundAlt: "#4A99BB",
+    card: "#3580A0",
+    foreground: "#FFFFFF",
+    foregroundMuted: "#FFF8F0",
+    buttonText: "#FFFFFF",
+    border: "#2A6580",
+    isLight: false,
+    layout: "default",
+  },
 };
 
 const ThemeContext = createContext(themes["1"]);
@@ -107,6 +123,7 @@ export default function ThemeProvider({ children }) {
     document.documentElement.style.setProperty("--card", selectedTheme.card);
     document.documentElement.style.setProperty("--foreground", selectedTheme.foreground);
     document.documentElement.style.setProperty("--foreground-muted", selectedTheme.foregroundMuted);
+    document.documentElement.style.setProperty("--border", selectedTheme.border || selectedTheme.backgroundAlt);
     document.body.style.backgroundColor = selectedTheme.background;
     document.body.style.color = selectedTheme.foreground;
   }, [searchParams]);
