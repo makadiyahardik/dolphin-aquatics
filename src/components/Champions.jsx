@@ -6,15 +6,15 @@ import Image from "next/image";
 import { useTheme } from "./ThemeProvider";
 
 const champions = [
-  { name: "Nisha Millet", achievement: "Olympian", event: "Sydney 2000", highlight: "Double Olympian", initials: "NM", image: "/media/nisha-millet.jpg" },
-  { name: "Hakimuddin Habibulla", achievement: "International Swimmer", event: "Multiple Events", highlight: "Team Coach", initials: "HH", image: "/media/hakimuddin-habibulla.jpg" },
-  { name: "Shikha Tandon", achievement: "Arjuna Award Winner", event: "Multiple Events", highlight: "Olympian", initials: "ST", image: "/media/shikha-tandon.jpg" },
-  { name: "Rehan Poncha", achievement: "International Medalist", event: "Multiple Events", highlight: "Asian Games", initials: "RP", image: "/media/rehan-poncha.jpg" },
-  { name: "Virdhawal Khade", achievement: "Asian Games Bronze", event: "Men's 50m Butterfly", highlight: "First medal since 1986", initials: "VK", image: "/media/virdhawal-khade.jpg" },
-  { name: "Sandeep Sejwal", achievement: "Asian Games Bronze", event: "Men's 50m Breaststroke", highlight: "Incheon 2014", initials: "SS", image: "/media/sandeep-sejwal.jpg" },
-  { name: "Maana Patel", achievement: "Olympian", event: "Backstroke Events", highlight: "Tokyo 2020", initials: "MP", image: "/media/maana-patel.jpg" },
-  { name: "Srihari Nataraj", achievement: "National Record Holder", event: "Backstroke Events", highlight: "Olympian", initials: "SN", image: "/media/srihari-nataraj.jpg" },
-  { name: "Dhinidhi Desinghu", achievement: "Olympian", event: "Paris 2024", highlight: "Youngest Swimmer", initials: "DD", image: "/media/dhinidhi-desinghu.jpg" },
+  { name: "Nisha Millet", achievement: "Arjuna Award Winner", event: "Sydney 2000", highlight: "14 Gold Medals", initials: "NM", image: "/media/nisha-millet.jpg" },
+  { name: "Hakimuddin Habibulla", achievement: "International Swimmer", event: "Sydney 2000", highlight: "Team Coach", initials: "HH", image: "/media/hakimuddin-habibulla.jpg" },
+  { name: "Shikha Tandon", achievement: "Arjuna Award Winner", event: "146 National Medals", highlight: "36 Int'l Medals", initials: "ST", image: "/media/shikha-tandon.jpg" },
+  { name: "Rehan Poncha", achievement: "Arjuna Award Winner", event: "Beijing 2008 Olympian", highlight: "6x National Champ", initials: "RP", image: "/media/rehan-poncha.jpg" },
+  { name: "Virdhawal Khade", achievement: "Arjuna Award Winner", event: "50m Butterfly", highlight: "Asian Games Bronze", initials: "VK", image: "/media/virdhawal-khade.jpg" },
+  { name: "Sandeep Sejwal", achievement: "Arjuna Award Winner", event: "Beijing 2008 Olympian", highlight: "Breaststroke", initials: "SS", image: "/media/sandeep-sejwal.jpg" },
+  { name: "Maana Patel", achievement: "Tokyo 2020 Olympian", event: "100m Backstroke", highlight: "First Indian Female", initials: "MP", image: "/media/maana-patel.jpg" },
+  { name: "Srihari Nataraj", achievement: "Two-time Olympian", event: "Tokyo 2020 & Paris 2024", highlight: "14 National Records", initials: "SN", image: "/media/srihari-nataraj.jpg" },
+  { name: "Dhinidhi Desinghu", achievement: "Paris 2024 Olympian", event: "Freestyle Events", highlight: "Youngest at Olympics", initials: "DD", image: "/media/dhinidhi-desinghu.jpg" },
 ];
 
 export default function Champions() {

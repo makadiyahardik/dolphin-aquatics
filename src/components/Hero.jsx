@@ -411,7 +411,7 @@ export default function Hero() {
               </h3>
               <div className="space-y-2">
                 {[
-                  { name: "Srihari Nataraj", event: "100m Backstroke", time: "53.77s", image: "/media/srihari-nataraj.jpg" },
+                  { name: "Srihari Nataraj", event: "100m Freestyle", time: "49.46s", image: "/media/srihari-nataraj.jpg" },
                   { name: "Rohit Benediction", event: "200m Butterfly", time: "TBD", image: "/media/rohit-benediction.jpg" },
                   { name: "Dhinidhi Desinghu", event: "100m Freestyle", time: "56.29s", image: "/media/dhinidhi-desinghu.jpg" },
                   { name: "Rujula Nataraj", event: "200m Freestyle", time: "TBD", image: "/media/rujula-nataraj.jpg" },
