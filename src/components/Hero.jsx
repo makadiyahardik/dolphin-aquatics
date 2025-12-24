@@ -316,7 +316,7 @@ export default function Hero() {
                   animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
-                <span className="text-xs font-medium" style={{ color: theme.primary }}>
+                <span className="text-lg md:text-xl lg:text-2xl font-bold" style={{ color: theme.primary }}>
                   India&apos;s #1 Swimming Team
                 </span>
               </div>
