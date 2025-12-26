@@ -36,9 +36,10 @@ export default function Navigation() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
-          background: isScrolled ? `${theme.background}e6` : "transparent",
-          backdropFilter: isScrolled ? "blur(20px)" : "none",
-          borderBottom: isScrolled ? `1px solid ${theme.primary}33` : "none",
+          background: isScrolled ? `${theme.headerBackground || theme.card}f5` : "transparent",
+          backdropFilter: isScrolled ? "blur(12px)" : "none",
+          borderBottom: isScrolled ? `1px solid rgba(255, 255, 255, 0.1)` : "none",
+          boxShadow: isScrolled ? `0 4px 30px rgba(0, 0, 0, 0.3)` : "none",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
