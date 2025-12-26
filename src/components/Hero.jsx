@@ -308,15 +308,19 @@ export default function Hero() {
               />
               <div
                 className="relative inline-flex items-center gap-2 px-5 py-3 rounded-full backdrop-blur-sm"
-                style={{ background: theme.background, border: '3px solid #FFFFFF', boxShadow: '0 4px 20px rgba(0,0,0,0.2)' }}
+                style={{
+                  background: theme.headerBackground || theme.primary,
+                  border: '3px solid #FFFFFF',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
+                }}
               >
                 <motion.span
                   className="w-2 h-2 rounded-full"
-                  style={{ background: theme.primary, boxShadow: `0 0 10px ${theme.primary}` }}
+                  style={{ background: '#FFFFFF', boxShadow: '0 0 10px rgba(255,255,255,0.8)' }}
                   animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
-                <span className="text-lg md:text-xl lg:text-2xl font-bold" style={{ color: theme.primary }}>
+                <span className="text-lg md:text-xl lg:text-2xl font-bold" style={{ color: '#FFFFFF' }}>
                   India&apos;s #1 Swimming Team
                 </span>
               </div>
@@ -411,10 +415,10 @@ export default function Hero() {
               </h3>
               <div className="space-y-2">
                 {[
-                  { name: "Srihari Nataraj", event: "100m Freestyle", time: "49.46s", image: "/media/srihari-nataraj.jpg" },
-                  { name: "Rohit Benediction", event: "200m Butterfly", time: "TBD", image: "/media/rohit-benediction.jpg" },
-                  { name: "Dhinidhi Desinghu", event: "100m Freestyle", time: "56.29s", image: "/media/dhinidhi-desinghu.jpg" },
-                  { name: "Rujula Nataraj", event: "200m Freestyle", time: "TBD", image: "/media/rujula-nataraj.jpg" },
+                  { name: "Srihari Nataraj", event: "100m Freestyle", time: "49.46s", image: "/Website-Images/Swimmer Photos/Srihari Nataraj_.jpg" },
+                  { name: "Rohit Benediction", event: "200m Butterfly", time: "TBD", image: "/Website-Images/Swimmer Photos/Rohith Benediction_.jpg" },
+                  { name: "Dhinidhi Desinghu", event: "100m Freestyle", time: "56.29s", image: "/Website-Images/Swimmer Photos/Dhinidhi-Desinghu_.jpg" },
+                  { name: "Rujula Shashidhara", event: "200m Freestyle", time: "TBD", image: "/Website-Images/Swimmer Photos/Rujula Shashidhara.jpg" },
                 ].map((swimmer, idx) => (
                   <div key={idx} className="flex items-center gap-2 p-2 rounded-xl" style={{ background: `${theme.primary}10` }}>
                     <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">

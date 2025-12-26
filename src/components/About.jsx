@@ -111,63 +111,47 @@ export default function About() {
           />
         </motion.div>
 
-        {/* Main content grid */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left side - Image Gallery */}
+        {/* Main content grid - 3 Column Layout */}
+        <div className="grid lg:grid-cols-[280px_1fr_280px] gap-8 items-center">
+          {/* Left side - Image */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
+            className="relative hidden lg:block"
           >
-            <div className="grid grid-cols-2 gap-4">
-              <motion.div
-                className="relative aspect-[3/4] rounded-2xl overflow-hidden"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Image
-                  src="/media/image37.png"
-                  alt="Dolphin Aquatics Team with Trophy"
-                  fill
-                  className="object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${theme.background}80, transparent)` }} />
-              </motion.div>
-              <motion.div
-                className="relative aspect-[3/4] rounded-2xl overflow-hidden mt-8"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Image
-                  src="/media/image32.png"
-                  alt="Olympic Swimming Pool"
-                  fill
-                  className="object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${theme.background}80, transparent)` }} />
-              </motion.div>
-            </div>
+            <motion.div
+              className="relative aspect-[3/4] rounded-2xl overflow-hidden"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Image
+                src="/media/image37.png"
+                alt="Dolphin Aquatics Team with Trophy"
+                fill
+                className="object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${theme.background}80, transparent)` }} />
+            </motion.div>
             {/* Floating badge */}
             <motion.div
               initial={{ scale: 0 }}
               animate={isInView ? { scale: 1 } : {}}
               transition={{ delay: 0.6, type: "spring" }}
-              className="absolute -bottom-4 -right-4 md:right-8 px-6 py-3 rounded-full"
+              className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full"
               style={{ background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`, boxShadow: `0 0 30px ${theme.primary}50` }}
             >
               <span className="font-bold" style={{ color: theme.buttonText }}>Since 1992</span>
             </motion.div>
           </motion.div>
 
-          {/* Right side - Text content (Centre aligned) */}
+          {/* Center - Text content */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-6 text-center lg:text-center"
+            className="space-y-6 text-center"
           >
             <p className="text-xl md:text-2xl leading-relaxed font-light" style={{ color: theme.foreground }}>
               Consistently{" "}
@@ -187,6 +171,29 @@ export default function About() {
               Coaches Association and the National Institute of Sports, ensuring every swimmer
               receives world-class training.
             </p>
+          </motion.div>
+
+          {/* Right side - Image */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative hidden lg:block"
+          >
+            <motion.div
+              className="relative aspect-[3/4] rounded-2xl overflow-hidden"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Image
+                src="/media/image32.png"
+                alt="Olympic Swimming Pool"
+                fill
+                className="object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${theme.background}80, transparent)` }} />
+            </motion.div>
           </motion.div>
         </div>
 
