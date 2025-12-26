@@ -15,7 +15,10 @@
       "Bash(git ls-tree:*)",
       "WebFetch(domain:centreforsports.in)",
       "Bash(dir /b \"C:\\\\Users\\\\Therton_F\\\\Desktop\\\\dolphin-website\\\\public\\\\media\\\\cse-*\")",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "WebSearch",
+      "WebFetch(domain:dev.to)",
+      "Bash(cat:*)"
     ]
   }
 }

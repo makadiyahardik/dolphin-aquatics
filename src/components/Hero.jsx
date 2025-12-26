@@ -250,10 +250,77 @@ export default function Hero() {
       />
 
       {/* Content - 3 Column Layout */}
-      <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-[280px_1fr_280px] gap-6 items-center min-h-[70vh]">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Mobile: Show side panels at top before main content */}
+        <div className="lg:hidden mb-8 mt-4">
+          <div className="grid grid-cols-2 gap-4">
+            {/* Mobile Left Panel - National Games Winners */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
+              <div
+                className="rounded-2xl p-3 sm:p-4 backdrop-blur-sm h-full"
+                style={{ background: `${theme.foreground}f0`, boxShadow: `0 10px 30px ${theme.primary}20` }}
+              >
+                <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-2 sm:mb-3">
+                  <Image
+                    src="/media/srihari-dhinidhi-national-games.jpg"
+                    alt="Srihari Nataraj and Dhinidhi Desinghu - National Games Winners"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <h3 className="text-xs sm:text-sm font-bold mb-0.5" style={{ color: theme.primary }}>
+                  Srihari &amp; Dhinidhi
+                </h3>
+                <p className="text-[10px] sm:text-xs font-medium" style={{ color: theme.primaryDark }}>
+                  National Games 2023
+                </p>
+                <p className="text-[9px] sm:text-[10px] mt-1" style={{ color: `${theme.primary}cc` }}>
+                  Best Male &amp; Female Swimmer
+                </p>
+              </div>
+            </motion.div>
 
-          {/* LEFT Panel - National Games Winners */}
+            {/* Mobile Right Panel - National Record Holders */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              <div
+                className="rounded-2xl p-3 sm:p-4 backdrop-blur-sm h-full"
+                style={{ background: `${theme.foreground}f0`, boxShadow: `0 10px 30px ${theme.primary}20` }}
+              >
+                <h3 className="text-xs sm:text-sm font-bold mb-2 text-center" style={{ color: theme.primary }}>
+                  2025 Record Holders
+                </h3>
+                <div className="space-y-1.5">
+                  {[
+                    { name: "Srihari Nataraj", event: "100m Free", image: "/Website-Images/Swimmer Photos/Srihari Nataraj_.jpg" },
+                    { name: "Dhinidhi Desinghu", event: "100m Free", image: "/Website-Images/Swimmer Photos/Dhinidhi-Desinghu_.jpg" },
+                  ].map((swimmer, idx) => (
+                    <div key={idx} className="flex items-center gap-1.5 p-1.5 rounded-lg" style={{ background: `${theme.primary}10` }}>
+                      <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden flex-shrink-0">
+                        <Image src={swimmer.image} alt={swimmer.name} fill className="object-cover" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[9px] sm:text-[10px] font-semibold truncate" style={{ color: theme.primaryDark }}>{swimmer.name}</p>
+                        <p className="text-[8px] sm:text-[9px]" style={{ color: `${theme.primary}cc` }}>{swimmer.event}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-[280px_1fr_280px] gap-6 items-center min-h-[50vh] lg:min-h-[70vh]">
+
+          {/* LEFT Panel - National Games Winners (Desktop only) */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}

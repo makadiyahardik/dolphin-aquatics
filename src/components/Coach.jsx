@@ -55,7 +55,7 @@ export default function Coach() {
           <div className="mt-4 w-24 h-1 mx-auto" style={{ background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)` }} />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           <motion.div initial={{ opacity: 0, x: -50 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }}>
             <div className="relative">
               <div className="rounded-2xl overflow-hidden" style={{ border: `1px solid ${accentColor}40` }}>
@@ -90,8 +90,8 @@ export default function Coach() {
                 </div>
               </div>
               <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={isInView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.6, delay: 0.6 }}
-                className="absolute -bottom-6 -right-6 w-36 h-36 rounded-2xl overflow-hidden shadow-2xl"
-                style={{ border: `4px solid ${theme.primary}`, boxShadow: `0 0 40px ${theme.primary}50`, background: '#1a1a2e' }}>
+                className="absolute -bottom-4 -right-2 sm:-bottom-6 sm:-right-6 w-24 h-24 sm:w-36 sm:h-36 rounded-xl sm:rounded-2xl overflow-hidden shadow-xl sm:shadow-2xl"
+                style={{ border: `3px solid ${theme.primary}`, boxShadow: `0 0 30px ${theme.primary}50`, background: '#1a1a2e' }}>
                 <div className="relative w-full h-full p-2">
                   <Image
                     src="/media/dronacharya-award.jpg"

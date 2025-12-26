@@ -124,9 +124,44 @@ export default function About() {
           />
         </motion.div>
 
+        {/* Mobile Images - Show at top on mobile */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="lg:hidden grid grid-cols-2 gap-4 mb-10"
+        >
+          <div className="relative aspect-[3/4] rounded-xl overflow-hidden">
+            <Image
+              src="/media/image37.png"
+              alt="Dolphin Aquatics Team with Trophy"
+              fill
+              className="object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${sectionBg}ee, transparent)` }} />
+            <div
+              className="absolute bottom-3 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full whitespace-nowrap"
+              style={{ background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`, boxShadow: `0 0 20px ${theme.primary}50` }}
+            >
+              <span className="text-xs sm:text-sm font-bold" style={{ color: theme.buttonText }}>Since 1992</span>
+            </div>
+          </div>
+          <div className="relative aspect-[3/4] rounded-xl overflow-hidden">
+            <Image
+              src="/media/image32.png"
+              alt="Olympic Swimming Pool"
+              fill
+              className="object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${sectionBg}ee, transparent)` }} />
+          </div>
+        </motion.div>
+
         {/* Main content grid - 3 Column Layout */}
         <div className="grid lg:grid-cols-[280px_1fr_280px] gap-8 items-center">
-          {/* Left side - Image */}
+          {/* Left side - Image (Desktop only) */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -164,21 +199,21 @@ export default function About() {
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-6 text-center"
+            className="space-y-6 text-center px-2 sm:px-0"
           >
-            <p className="text-xl md:text-2xl leading-relaxed font-light" style={{ color: textColor }}>
+            <p className="text-lg sm:text-xl md:text-2xl leading-relaxed font-light" style={{ color: textColor }}>
               Consistently{" "}
               <span style={{ color: accentColor }} className="font-semibold">
                 India&apos;s top swim team since 2010
               </span>
               , under the visionary leadership of Coach Nihar Ameen.
             </p>
-            <p className="leading-relaxed" style={{ color: textMuted }}>
+            <p className="text-sm sm:text-base leading-relaxed" style={{ color: textMuted }}>
               Dolphin Aquatics has established itself as a beacon of excellence in Indian swimming.
               Our world-class swim teaching and coaching programs have produced champions who have
               represented India at the highest levels of international competition.
             </p>
-            <p className="leading-relaxed" style={{ color: textMuted }}>
+            <p className="text-sm sm:text-base leading-relaxed" style={{ color: textMuted }}>
               As the first AUSTSWIM Recognised swim centre in India, we maintain international
               standards of excellence. Our majority of coaches are certified by the American Swim
               Coaches Association and the National Institute of Sports, ensuring every swimmer
@@ -186,7 +221,7 @@ export default function About() {
             </p>
           </motion.div>
 
-          {/* Right side - Image */}
+          {/* Right side - Image (Desktop only) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -215,7 +250,7 @@ export default function About() {
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-20"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5 mt-12 sm:mt-20"
         >
           {achievements.map((achievement, index) => (
             <motion.div

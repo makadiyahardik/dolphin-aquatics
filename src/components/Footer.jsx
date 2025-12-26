@@ -74,12 +74,12 @@ export default function Footer() {
   };
 
   return (
-    <footer id="contact" className="relative pt-24 pb-12 overflow-hidden" style={{ background: `linear-gradient(180deg, ${theme.primary}, #021015)` }}>
+    <footer id="contact" className="relative pt-16 sm:pt-24 pb-8 sm:pb-12 overflow-hidden" style={{ background: `linear-gradient(180deg, ${theme.primary}, #021015)` }}>
       <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${theme.primary}80, transparent)` }} />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="text-center mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-playfair)] mb-4" style={{ color: theme.foreground }}>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="text-center mb-12 sm:mb-20 px-2">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-[family-name:var(--font-playfair)] mb-4" style={{ color: theme.foreground }}>
             Ready to Make <span style={{ background: accentGradient, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Waves</span>?
           </h2>
           <p className="max-w-xl mx-auto mb-8" style={{ color: theme.foregroundMuted }}>Join India&apos;s #1 swimming academy and start your journey towards excellence today.</p>
@@ -120,7 +120,7 @@ export default function Footer() {
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="w-full max-w-md p-8 rounded-3xl relative"
+              className="w-full max-w-md p-5 sm:p-8 rounded-2xl sm:rounded-3xl relative mx-2"
               style={{ background: theme.card, border: `1px solid ${theme.border || theme.backgroundAlt}` }}
             >
               <button
@@ -263,7 +263,7 @@ export default function Footer() {
                   <h3 className="text-2xl font-bold mb-2 font-[family-name:var(--font-playfair)]" style={{ color: theme.foreground }}>Join Dolphin Aquatics</h3>
                   <p className="text-sm mb-6" style={{ color: theme.foregroundMuted }}>Fill out the form and we&apos;ll contact you shortly.</p>
 
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
                     <input
                       type="text"
                       placeholder="Your Name"
@@ -271,7 +271,7 @@ export default function Footer() {
                       disabled={isSubmitting}
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border focus:outline-none transition-colors disabled:opacity-50"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border focus:outline-none transition-colors disabled:opacity-50 text-sm sm:text-base"
                       style={{ borderColor: `${theme.primary}50`, background: `${theme.background}`, color: theme.foreground }}
                     />
                     <input
@@ -281,7 +281,7 @@ export default function Footer() {
                       disabled={isSubmitting}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border focus:outline-none transition-colors disabled:opacity-50"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border focus:outline-none transition-colors disabled:opacity-50 text-sm sm:text-base"
                       style={{ borderColor: `${theme.primary}50`, background: `${theme.background}`, color: theme.foreground }}
                     />
                     <input
@@ -291,7 +291,7 @@ export default function Footer() {
                       disabled={isSubmitting}
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border focus:outline-none transition-colors disabled:opacity-50"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border focus:outline-none transition-colors disabled:opacity-50 text-sm sm:text-base"
                       style={{ borderColor: `${theme.primary}50`, background: `${theme.background}`, color: theme.foreground }}
                     />
                     <textarea
@@ -300,7 +300,7 @@ export default function Footer() {
                       disabled={isSubmitting}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border focus:outline-none transition-colors resize-none disabled:opacity-50"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border focus:outline-none transition-colors resize-none disabled:opacity-50 text-sm sm:text-base"
                       style={{ borderColor: `${theme.primary}50`, background: `${theme.background}`, color: theme.foreground }}
                     />
                     {submitError && (
@@ -311,7 +311,7 @@ export default function Footer() {
                       disabled={isSubmitting}
                       whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                       whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                      className="w-full py-4 font-bold rounded-xl transition-all disabled:opacity-70 flex items-center justify-center gap-2"
+                      className="w-full py-3 sm:py-4 font-bold rounded-lg sm:rounded-xl transition-all disabled:opacity-70 flex items-center justify-center gap-2 text-sm sm:text-base"
                       style={{ color: theme.buttonText, background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})` }}
                     >
                       {isSubmitting ? (
@@ -339,7 +339,7 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="grid md:grid-cols-3 gap-6 mb-16"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16"
         >
           <a
             href={contactInfo.mapUrl}
@@ -396,8 +396,8 @@ export default function Footer() {
           </a>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-          <div className="col-span-2 md:col-span-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-12 sm:mb-16">
+          <div className="sm:col-span-2 md:col-span-1">
             <Link href="#home" className="flex items-center mb-6">
               <div className="relative w-36 h-10">
                 <Image

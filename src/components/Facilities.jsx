@@ -114,7 +114,7 @@ export default function Facilities() {
         {/* Facilities Grid - CSE Inspired */}
         {isWhiteSection ? (
           /* Beautiful card grid for v=6 */
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-16 sm:mb-20">
             {facilities.map((facility, index) => (
               <motion.div
                 key={index}
@@ -199,7 +199,7 @@ export default function Facilities() {
           </div>
         ) : (
           /* Original design for other themes */
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-5 mb-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5 mb-16 sm:mb-20">
             {facilities.map((facility, index) => (
               <motion.div key={index} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
                 whileHover={{ y: -8, scale: 1.02 }} className="group relative">
@@ -231,7 +231,7 @@ export default function Facilities() {
           </h3>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.7 }} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.7 }} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-16 sm:mb-20">
           {programs.map((program, index) => {
             const isActive = activeProgram === index;
             return (

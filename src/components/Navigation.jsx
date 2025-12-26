@@ -48,7 +48,7 @@ export default function Navigation() {
             <Link href="#home" className="flex items-center gap-2">
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="relative w-40 h-12"
+                className="relative w-32 sm:w-40 h-10 sm:h-12"
               >
                 <Image
                   src="/media/image7.png"
@@ -143,7 +143,7 @@ export default function Navigation() {
               onClick={() => setIsMobileMenuOpen(false)}
             />
             <motion.div
-              className="absolute right-0 top-0 h-full w-72 p-8 pt-24"
+              className="absolute right-0 top-0 h-full w-[85vw] max-w-[300px] p-6 sm:p-8 pt-20 sm:pt-24"
               style={{
                 background: theme.background,
                 borderLeft: `1px solid ${theme.primary}33`,
