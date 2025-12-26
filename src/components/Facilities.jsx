@@ -34,77 +34,129 @@ export default function Facilities() {
   const [activeProgram, setActiveProgram] = useState(0);
   const theme = useTheme();
 
+  // For v=6: use WHITE background with dark text
+  const isWhiteSection = theme.useAlternatingBg;
+  const sectionBg = isWhiteSection ? theme.sectionWhite : theme.background;
+  const textColor = isWhiteSection ? theme.darkText : theme.foreground;
+  const textMuted = isWhiteSection ? theme.darkTextMuted : theme.foregroundMuted;
+  const accentColor = theme.primary;
+
   return (
-    <section id="facilities" className="relative py-32 overflow-hidden" style={{ background: theme.background }}>
-      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at center, ${theme.primary}08, transparent 70%)` }} />
+    <section id="facilities" className="relative py-32 overflow-hidden" style={{ background: sectionBg }}>
+      {!theme.useAlternatingBg && (
+        <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at center, ${theme.primary}08, transparent 70%)` }} />
+      )}
 
       <div ref={ref} className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="text-center mb-20">
-          <span style={{ color: theme.primary }} className="text-sm font-semibold tracking-widest uppercase">World-Class Infrastructure</span>
-          <h2 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold font-[family-name:var(--font-playfair)]">
+          <span style={{ color: accentColor }} className="text-sm font-semibold tracking-widest uppercase">World-Class Infrastructure</span>
+          <h2 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold font-[family-name:var(--font-playfair)]" style={{ color: textColor }}>
             Our <span style={{ background: `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primaryDark})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Facilities</span>
           </h2>
-          <div className="mt-4 w-24 h-1 mx-auto" style={{ background: `linear-gradient(90deg, transparent, ${theme.primary}, transparent)` }} />
-          <p className="mt-6 max-w-2xl mx-auto" style={{ color: theme.foregroundMuted }}>Train at the prestigious Centre for Sports Excellence with state-of-the-art amenities designed for champions.</p>
+          <div className="mt-4 w-24 h-1 mx-auto" style={{ background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)` }} />
+          <p className="mt-6 max-w-2xl mx-auto" style={{ color: textMuted }}>Train at the prestigious Centre for Sports Excellence with state-of-the-art amenities designed for champions.</p>
         </motion.div>
 
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-5 mb-20">
           {facilities.map((facility, index) => (
             <motion.div key={index} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
               whileHover={{ y: -8, scale: 1.02 }} className="group relative">
-              <div className="relative aspect-square rounded-3xl flex flex-col transition-all duration-500 overflow-hidden"
-                style={{ border: `1px solid ${theme.border || theme.backgroundAlt}` }}>
-                {/* Background Image */}
-                <Image
-                  src={facility.image}
-                  alt={facility.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${theme.background}, ${theme.background}${theme.isLight ? 'ee' : '95'}, ${theme.background}${theme.isLight ? 'cc' : '60'})` }} />
-
-                <div className="relative flex flex-col h-full p-6">
-                  <div className="mb-4">
-                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-colors" style={{ background: `${theme.primary}20`, color: theme.primary, backdropFilter: 'blur(8px)' }}>
+              {isWhiteSection ? (
+                /* Clean white card design for v=6 */
+                <div className="relative rounded-3xl overflow-hidden shadow-lg transition-all duration-500 group-hover:shadow-2xl"
+                  style={{ background: '#FFFFFF', border: `1px solid ${theme.backgroundAlt}30` }}>
+                  {/* Image at top */}
+                  <div className="relative h-32 overflow-hidden">
+                    <Image
+                      src={facility.image}
+                      alt={facility.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0" style={{ background: `linear-gradient(to top, #FFFFFF, transparent 60%)` }} />
+                    {/* Icon badge */}
+                    <div className="absolute top-3 left-3 w-10 h-10 rounded-xl flex items-center justify-center"
+                      style={{ background: theme.sectionWater, color: '#FFFFFF' }}>
                       {icons[facility.icon]}
                     </div>
                   </div>
-                  <div className="flex-1 flex flex-col mt-auto">
-                    <h3 className="text-lg font-semibold mb-2" style={{ color: theme.foreground }}>{facility.title}</h3>
-                    <p className="text-xs mb-4 flex-1" style={{ color: theme.foregroundMuted }}>{facility.description}</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {facility.features.map((feature, fIndex) => (
-                        <span key={fIndex} className="px-2 py-0.5 text-[10px] rounded-full font-medium" style={{ background: theme.backgroundAlt, color: theme.foreground, border: `1px solid ${theme.card}` }}>{feature}</span>
-                      ))}
+                  {/* Content */}
+                  <div className="p-5 pt-2">
+                    <h3 className="text-base font-bold mb-2" style={{ color: theme.primary }}>{facility.title}</h3>
+                    <p className="text-xs mb-3 line-clamp-2" style={{ color: theme.darkTextMuted }}>{facility.description}</p>
+                    <span className="inline-block px-3 py-1 text-[10px] rounded-full font-semibold"
+                      style={{ background: `${theme.sectionWater}15`, color: theme.primary, border: `1px solid ${theme.sectionWater}40` }}>
+                      {facility.features[0]}
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                /* Original design for other themes */
+                <div className="relative aspect-square rounded-3xl flex flex-col transition-all duration-500 overflow-hidden"
+                  style={{ border: `1px solid ${theme.border || theme.backgroundAlt}` }}>
+                  <Image
+                    src={facility.image}
+                    alt={facility.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${sectionBg}, ${sectionBg}${theme.isLight ? 'ee' : '95'}, ${sectionBg}${theme.isLight ? 'cc' : '60'})` }} />
+                  <div className="relative flex flex-col h-full p-6">
+                    <div className="mb-4">
+                      <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-colors" style={{ background: `${theme.primary}20`, color: theme.primary, backdropFilter: 'blur(8px)' }}>
+                        {icons[facility.icon]}
+                      </div>
+                    </div>
+                    <div className="flex-1 flex flex-col mt-auto">
+                      <h3 className="text-lg font-semibold mb-2" style={{ color: theme.foreground }}>{facility.title}</h3>
+                      <p className="text-xs mb-4 flex-1" style={{ color: theme.foregroundMuted }}>{facility.description}</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {facility.features.slice(0, 1).map((feature, fIndex) => (
+                          <span key={fIndex} className="px-2 py-1 text-[10px] rounded-full font-medium" style={{
+                            background: theme.backgroundAlt,
+                            color: theme.foreground,
+                            border: `1px solid ${theme.card}`
+                          }}>{feature}</span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
             </motion.div>
           ))}
         </div>
 
         <motion.div initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.6 }} className="text-center mb-12">
-          <h3 className="text-2xl md:text-3xl font-bold font-[family-name:var(--font-playfair)]">
+          <h3 className="text-2xl md:text-3xl font-bold font-[family-name:var(--font-playfair)]" style={{ color: textColor }}>
             Training <span style={{ background: `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primaryDark})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Programs</span>
           </h3>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.7 }} className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {programs.map((program, index) => {
-            const programColors = [
-              { bg: '#10B981', light: '#34D399', dark: '#059669' }, // Green - Beginners
-              { bg: '#3B82F6', light: '#60A5FA', dark: '#2563EB' }, // Blue - Intermediate
-              { bg: '#8B5CF6', light: '#A78BFA', dark: '#7C3AED' }, // Purple - Advanced
-              { bg: '#F59E0B', light: '#FBBF24', dark: '#D97706' }, // Gold - Professional
-            ];
+            // For v=6: use single consistent color (water blue)
+            const programColors = isWhiteSection
+              ? [
+                  { bg: theme.sectionWater, light: theme.backgroundAlt, dark: theme.primary },
+                  { bg: theme.sectionWater, light: theme.backgroundAlt, dark: theme.primary },
+                  { bg: theme.sectionWater, light: theme.backgroundAlt, dark: theme.primary },
+                  { bg: theme.sectionWater, light: theme.backgroundAlt, dark: theme.primary },
+                ]
+              : [
+                  { bg: '#10B981', light: '#34D399', dark: '#059669' }, // Green - Beginners
+                  { bg: '#3B82F6', light: '#60A5FA', dark: '#2563EB' }, // Blue - Intermediate
+                  { bg: '#8B5CF6', light: '#A78BFA', dark: '#7C3AED' }, // Purple - Advanced
+                  { bg: '#F59E0B', light: '#FBBF24', dark: '#D97706' }, // Gold - Professional
+                ];
             const color = programColors[index];
             return (
               <motion.button key={index} onClick={() => setActiveProgram(index)} whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.98 }}
                 className="relative p-6 rounded-2xl transition-all duration-300 overflow-hidden"
                 style={{
-                  border: `3px solid ${activeProgram === index ? '#FFFFFF' : color.bg}`,
+                  border: `3px solid ${activeProgram === index ? (isWhiteSection ? theme.primary : '#FFFFFF') : color.bg}`,
                   background: activeProgram === index
                     ? `linear-gradient(135deg, ${color.dark}, ${color.bg})`
                     : '#FFFFFF',
@@ -122,11 +174,11 @@ export default function Facilities() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.9 }}
-          className="mt-20 p-8 rounded-3xl" style={{ background: theme.card, border: `1px solid ${theme.border || theme.backgroundAlt}` }}>
+          className="mt-20 p-8 rounded-3xl" style={{ background: isWhiteSection ? theme.sectionWater : theme.card, border: `1px solid ${theme.border || theme.backgroundAlt}` }}>
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-center md:text-left">
               <h3 className="text-2xl font-bold mb-2 font-[family-name:var(--font-playfair)]" style={{ color: theme.foreground }}>Dolphin Aquatics Academy</h3>
-              <p style={{ color: theme.primary }} className="font-medium">@ Centre for Sports Excellence</p>
+              <p style={{ color: isWhiteSection ? theme.foreground : theme.primary }} className="font-medium">@ Centre for Sports Excellence</p>
               <p className="text-sm mt-2" style={{ color: theme.foregroundMuted }}>Bengaluru, Karnataka, India</p>
             </div>
             <motion.a

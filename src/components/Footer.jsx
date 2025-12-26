@@ -31,6 +31,11 @@ export default function Footer() {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
+  // For v=6: use brighter accent colors on dark footer
+  const accentGradient = theme.useAlternatingBg
+    ? `linear-gradient(135deg, ${theme.sectionWater}, ${theme.backgroundAlt})`
+    : `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primaryDark})`;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Here you would typically send the form data to a backend
@@ -49,8 +54,8 @@ export default function Footer() {
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="text-center mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-playfair)] mb-4">
-            Ready to Make <span style={{ background: `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primaryDark})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Waves</span>?
+          <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-playfair)] mb-4" style={{ color: theme.foreground }}>
+            Ready to Make <span style={{ background: accentGradient, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Waves</span>?
           </h2>
           <p className="max-w-xl mx-auto mb-8" style={{ color: theme.foregroundMuted }}>Join India&apos;s #1 swimming academy and start your journey towards excellence today.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -59,7 +64,13 @@ export default function Footer() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 font-bold rounded-full transition-all"
-              style={{ color: theme.buttonText, background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`, boxShadow: `0 4px 30px ${theme.primary}40` }}>
+              style={{
+                color: theme.useAlternatingBg ? theme.primary : theme.buttonText,
+                background: theme.useAlternatingBg
+                  ? `linear-gradient(135deg, ${theme.sectionWater}, ${theme.backgroundAlt})`
+                  : `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`,
+                boxShadow: theme.useAlternatingBg ? `0 4px 30px ${theme.sectionWater}40` : `0 4px 30px ${theme.primary}40`
+              }}>
               Enroll Now
             </motion.button>
             <motion.a
@@ -67,7 +78,7 @@ export default function Footer() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 font-semibold rounded-full transition-all text-center"
-              style={{ border: `2px solid ${theme.primary}`, color: theme.foreground }}>
+              style={{ border: `2px solid ${theme.useAlternatingBg ? theme.sectionWater : theme.primary}`, color: theme.foreground }}>
               Call Us Now
             </motion.a>
           </div>
