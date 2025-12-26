@@ -62,12 +62,17 @@ export default function Champions() {
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
 
-  // Scroll to active card
+  // Scroll to active card (horizontal only, no page scroll)
   useEffect(() => {
     if (scrollRef.current) {
-      const card = scrollRef.current.children[activeIndex];
+      const container = scrollRef.current;
+      const card = container.children[activeIndex];
       if (card) {
-        card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        const cardLeft = card.offsetLeft;
+        const cardWidth = card.offsetWidth;
+        const containerWidth = container.offsetWidth;
+        const scrollPosition = cardLeft - (containerWidth / 2) + (cardWidth / 2);
+        container.scrollTo({ left: scrollPosition, behavior: 'smooth' });
       }
     }
   }, [activeIndex]);
