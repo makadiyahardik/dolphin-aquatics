@@ -25,8 +25,8 @@ const socialLinks = [
   { name: "Twitter", icon: <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg> },
 ];
 
-// Google Apps Script URL - Replace with your deployed script URL
-const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_URL_HERE";
+// Google Apps Script URL for form submissions (from environment variable)
+const GOOGLE_SCRIPT_URL = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL || "";
 
 export default function Footer() {
   const theme = useTheme();
@@ -134,19 +134,129 @@ export default function Footer() {
               </button>
 
               {formSubmitted ? (
-                <div className="text-center py-8">
+                <div className="text-center py-6 relative overflow-hidden">
+                  {/* Animated background particles */}
+                  <div className="absolute inset-0 overflow-hidden">
+                    {[...Array(12)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="absolute w-2 h-2 rounded-full"
+                        style={{
+                          background: i % 3 === 0 ? theme.primary : i % 3 === 1 ? theme.primaryLight : theme.sectionWater || theme.primaryDark,
+                          left: `${10 + (i * 7)}%`,
+                        }}
+                        initial={{ y: 100, opacity: 0, scale: 0 }}
+                        animate={{
+                          y: [-20, -100, -180],
+                          opacity: [0, 1, 0],
+                          scale: [0, 1.5, 0],
+                        }}
+                        transition={{
+                          duration: 2,
+                          delay: i * 0.1,
+                          repeat: Infinity,
+                          repeatDelay: 1
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Success checkmark with ripple effect */}
+                  <div className="relative inline-block mb-6">
+                    <motion.div
+                      className="absolute inset-0 rounded-full"
+                      style={{ background: theme.primary }}
+                      initial={{ scale: 0, opacity: 0.5 }}
+                      animate={{ scale: [1, 2.5], opacity: [0.4, 0] }}
+                      transition={{ duration: 1, repeat: Infinity, repeatDelay: 0.5 }}
+                    />
+                    <motion.div
+                      className="absolute inset-0 rounded-full"
+                      style={{ background: theme.primary }}
+                      initial={{ scale: 0, opacity: 0.3 }}
+                      animate={{ scale: [1, 2], opacity: [0.3, 0] }}
+                      transition={{ duration: 1, delay: 0.2, repeat: Infinity, repeatDelay: 0.5 }}
+                    />
+                    <motion.div
+                      initial={{ scale: 0, rotate: -180 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                      className="relative w-20 h-20 rounded-full flex items-center justify-center"
+                      style={{ background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`, boxShadow: `0 10px 40px ${theme.primary}50` }}
+                    >
+                      <motion.svg
+                        className="w-10 h-10 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: 1 }}
+                        transition={{ delay: 0.3, duration: 0.5 }}
+                      >
+                        <motion.path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={3}
+                          d="M5 13l4 4L19 7"
+                          initial={{ pathLength: 0 }}
+                          animate={{ pathLength: 1 }}
+                          transition={{ delay: 0.4, duration: 0.4 }}
+                        />
+                      </motion.svg>
+                    </motion.div>
+                  </div>
+
+                  {/* Success text with stagger animation */}
                   <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
-                    style={{ background: `${theme.primary}20` }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
                   >
-                    <svg className="w-8 h-8" style={{ color: theme.primary }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
+                    <motion.h3
+                      className="text-2xl font-bold mb-2 font-[family-name:var(--font-playfair)]"
+                      style={{ color: theme.foreground }}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6 }}
+                    >
+                      You&apos;re In!
+                    </motion.h3>
+                    <motion.p
+                      className="text-lg mb-1"
+                      style={{ background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryLight})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.7 }}
+                    >
+                      Welcome to Dolphin Aquatics
+                    </motion.p>
+                    <motion.p
+                      className="text-sm"
+                      style={{ color: theme.foregroundMuted }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.8 }}
+                    >
+                      Our team will contact you within 24 hours
+                    </motion.p>
                   </motion.div>
-                  <h3 className="text-xl font-bold mb-2" style={{ color: theme.foreground }}>Thank You!</h3>
-                  <p style={{ color: theme.foregroundMuted }}>We&apos;ll get back to you soon.</p>
+
+                  {/* Animated swimming icon */}
+                  <motion.div
+                    className="mt-6 flex justify-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1 }}
+                  >
+                    <motion.div
+                      animate={{ x: [-20, 20, -20] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      <svg className="w-8 h-8" style={{ color: theme.primary }} fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M2 18c.9.9 2.1 1.4 3.4 1.4s2.5-.5 3.4-1.4c.9-.9 2.1-1.4 3.4-1.4s2.5.5 3.4 1.4c.9.9 2.1 1.4 3.4 1.4s2.5-.5 3.4-1.4l1.6 1.6c-1.4 1.4-3.1 2.1-5 2.1s-3.6-.7-5-2.1c-1.4 1.4-3.1 2.1-5 2.1s-3.6-.7-5-2.1L2 18zm0-4c.9.9 2.1 1.4 3.4 1.4s2.5-.5 3.4-1.4c.9-.9 2.1-1.4 3.4-1.4s2.5.5 3.4 1.4c.9.9 2.1 1.4 3.4 1.4s2.5-.5 3.4-1.4l1.6 1.6c-1.4 1.4-3.1 2.1-5 2.1s-3.6-.7-5-2.1c-1.4 1.4-3.1 2.1-5 2.1s-3.6-.7-5-2.1L2 14zm16-8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-9.7 4.8L6.5 9H2v2h3.5l1.3 1.3L5 15.1l1.5 1.5 2.5-4 2.5 2v3h2v-4.5l-2.2-2.3 1-3c.9 1 2.1 1.7 3.5 2v-2c-1.2-.3-2.2-1-2.8-1.9L12 4.3c-.4-.5-1-.8-1.6-.8-.2 0-.4 0-.6.1L6 5v4h2V6.2l1.8-.7-1.5 4.3z"/>
+                      </svg>
+                    </motion.div>
+                  </motion.div>
                 </div>
               ) : (
                 <>
