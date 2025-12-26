@@ -25,27 +25,52 @@ const socialLinks = [
   { name: "Twitter", icon: <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg> },
 ];
 
+// Google Apps Script URL - Replace with your deployed script URL
+const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_URL_HERE";
+
 export default function Footer() {
   const theme = useTheme();
   const [showContactForm, setShowContactForm] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   // For v=6: use brighter accent colors on dark footer
   const accentGradient = theme.useAlternatingBg
     ? `linear-gradient(135deg, ${theme.sectionWater}, ${theme.backgroundAlt})`
     : `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primaryDark})`;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically send the form data to a backend
-    console.log("Form submitted:", formData);
-    setFormSubmitted(true);
-    setTimeout(() => {
-      setShowContactForm(false);
-      setFormSubmitted(false);
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      // Send data to Google Sheets via Apps Script
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors", // Required for Google Apps Script
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      // Since no-cors doesn't return response, we assume success
+      setFormSubmitted(true);
       setFormData({ name: "", email: "", phone: "", message: "" });
-    }, 2000);
+
+      setTimeout(() => {
+        setShowContactForm(false);
+        setFormSubmitted(false);
+      }, 3000);
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -133,45 +158,63 @@ export default function Footer() {
                       type="text"
                       placeholder="Your Name"
                       required
+                      disabled={isSubmitting}
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border focus:outline-none transition-colors disabled:opacity-50"
                       style={{ borderColor: `${theme.primary}50`, background: `${theme.background}`, color: theme.foreground }}
                     />
                     <input
                       type="email"
                       placeholder="Email Address"
                       required
+                      disabled={isSubmitting}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border focus:outline-none transition-colors disabled:opacity-50"
                       style={{ borderColor: `${theme.primary}50`, background: `${theme.background}`, color: theme.foreground }}
                     />
                     <input
                       type="tel"
                       placeholder="Phone Number"
                       required
+                      disabled={isSubmitting}
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border focus:outline-none transition-colors disabled:opacity-50"
                       style={{ borderColor: `${theme.primary}50`, background: `${theme.background}`, color: theme.foreground }}
                     />
                     <textarea
                       placeholder="Tell us about your swimming goals..."
                       rows={3}
+                      disabled={isSubmitting}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border focus:outline-none transition-colors resize-none"
+                      className="w-full px-4 py-3 rounded-xl border focus:outline-none transition-colors resize-none disabled:opacity-50"
                       style={{ borderColor: `${theme.primary}50`, background: `${theme.background}`, color: theme.foreground }}
                     />
+                    {submitError && (
+                      <p className="text-red-500 text-sm text-center">{submitError}</p>
+                    )}
                     <motion.button
                       type="submit"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="w-full py-4 font-bold rounded-xl transition-all"
+                      disabled={isSubmitting}
+                      whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                      whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                      className="w-full py-4 font-bold rounded-xl transition-all disabled:opacity-70 flex items-center justify-center gap-2"
                       style={{ color: theme.buttonText, background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})` }}
                     >
-                      Submit Enquiry
+                      {isSubmitting ? (
+                        <>
+                          <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                          </svg>
+                          Submitting...
+                        </>
+                      ) : (
+                        "Submit Enquiry"
+                      )}
                     </motion.button>
                   </form>
                 </>
