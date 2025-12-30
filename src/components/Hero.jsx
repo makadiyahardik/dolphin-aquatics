@@ -483,7 +483,7 @@ export default function Hero() {
               <div className="space-y-2">
                 {[
                   { name: "Srihari Nataraj", event: "100m Freestyle", time: "49.46s", image: "/Website-Images/Swimmer Photos/Srihari Nataraj_.jpg" },
-                  { name: "Rohit Benediction", event: "200m Butterfly", time: "TBD", image: "/Website-Images/Swimmer Photos/Rohith Benediction_.jpg" },
+                  { name: "Rohit Benedicton", event: "200m Butterfly", time: "TBD", image: "/Website-Images/Swimmer Photos/Rohith Benediction_.jpg" },
                   { name: "Dhinidhi Desinghu", event: "100m Freestyle", time: "56.29s", image: "/Website-Images/Swimmer Photos/Dhinidhi-Desinghu_.jpg" },
                   { name: "Rujula Shashidhara", event: "200m Freestyle", time: "TBD", image: "/Website-Images/Swimmer Photos/Rujula Shashidhara.jpg" },
                 ].map((swimmer, idx) => (

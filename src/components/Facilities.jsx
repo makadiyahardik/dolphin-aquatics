@@ -21,7 +21,7 @@ const facilities = [
     description: "20 metre, 5-lane semi-heated indoor pool designed for learn-to-swim programs and rehabilitation. Perfect environment for beginners and recovery training.",
     specs: ["20m x 5 Lanes", "Semi-Heated", "Learn to Swim", "50 Seat Gallery"],
     icon: "pool2",
-    image: "/media/cse-pool-indoor.jpg",
+    image: "/Website-Images/Pool Images/Screenshot 2025-12-30 190957.png",
     highlight: "Training Focus"
   },
   {
@@ -30,17 +30,17 @@ const facilities = [
     description: "State-of-the-art gymnasium with modern equipment for comprehensive athletic development, dryland training, and swimmer-specific conditioning programs.",
     specs: ["Modern Equipment", "Dryland Training", "Cardio Zone", "Personal Training"],
     icon: "gym",
-    image: "/media/cse-fitness-1.jpg",
+    image: "/Website-Images/Fitness Centre Images/jpg.34738.png",
     highlight: "Elite Training"
   },
   {
-    title: "Sports Science",
-    subtitle: "Performance Analysis",
-    description: "Advanced sports science facilities for biomechanical analysis, performance tracking, and data-driven training optimization for competitive swimmers.",
-    specs: ["Video Analysis", "Performance Data", "Technique Review", "Progress Tracking"],
-    icon: "health",
-    image: "/media/cse-fitness-2.png",
-    highlight: "Data Driven"
+    title: "Night Training",
+    subtitle: "Extended Hours Facility",
+    description: "World-class floodlit Olympic pool for extended training sessions. Perfect lighting for evening practice, allowing flexible schedules for competitive swimmers.",
+    specs: ["Floodlit Pool", "Evening Sessions", "Extended Hours", "Competition Ready"],
+    icon: "pool2",
+    image: "/Website-Images/Pool Images/WhatsApp Image 2025-12-18 at 11.48.16 AM.jpeg",
+    highlight: "24/7 Access"
   },
   {
     title: "Athletic Track",
@@ -48,7 +48,7 @@ const facilities = [
     description: "100 metre, 10-lane running track with inclined ramps and plyometric steps for resistance training, explosive power development, and endurance building.",
     specs: ["100m x 10 Lanes", "Inclined Ramps", "Plyometric Steps", "Speed Training"],
     icon: "track",
-    image: "/media/cse-pool-outdoor.jpg",
+    image: "/media/image32.png",
     highlight: "Dryland"
   },
   {
@@ -57,7 +57,7 @@ const facilities = [
     description: "Led by Dronacharya Awardee Coach Nihar Ameen with ASCA Level 5 certified coaches. First AUSTSWIM recognised centre in India with 30+ years of excellence.",
     specs: ["Dronacharya Awardee", "ASCA Certified", "AUSTSWIM Centre", "30+ Years"],
     icon: "team",
-    image: "/media/cse-pool-indoor.jpg",
+    image: "/media/dronacharya-award.jpg",
     highlight: "World Class"
   },
 ];

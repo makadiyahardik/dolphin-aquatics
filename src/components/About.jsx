@@ -139,7 +139,6 @@ export default function About() {
               className="object-cover"
               loading="lazy"
             />
-            <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${sectionBg}ee, transparent)` }} />
             <div
               className="absolute bottom-3 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full whitespace-nowrap"
               style={{ background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`, boxShadow: `0 0 20px ${theme.primary}50` }}
@@ -155,7 +154,6 @@ export default function About() {
               className="object-cover"
               loading="lazy"
             />
-            <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${sectionBg}ee, transparent)` }} />
           </div>
         </motion.div>
 
@@ -180,7 +178,6 @@ export default function About() {
                 className="object-cover"
                 loading="lazy"
               />
-              <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${sectionBg}ee, transparent)` }} />
             </motion.div>
             {/* Floating badge */}
             <motion.div
@@ -206,7 +203,9 @@ export default function About() {
               <span style={{ color: accentColor }} className="font-semibold">
                 India&apos;s top swim team since 2010
               </span>
-              , under the visionary leadership of Coach Nihar Ameen.
+              ,<br />
+              under the visionary leadership of Coach<br />
+              <span className="font-bold" style={{ color: accentColor }}>Nihar Ameen</span>.
             </p>
             <p className="text-sm sm:text-base leading-relaxed" style={{ color: textMuted }}>
               Dolphin Aquatics has established itself as a beacon of excellence in Indian swimming.
@@ -240,7 +239,6 @@ export default function About() {
                 className="object-cover"
                 loading="lazy"
               />
-              <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${sectionBg}ee, transparent)` }} />
             </motion.div>
           </motion.div>
         </div>

@@ -6,17 +6,15 @@ import Image from "next/image";
 import { useTheme } from "./ThemeProvider";
 
 const champions = [
-  { name: "Srihari Nataraj", achievement: "Two-time Olympian", event: "Tokyo 2020 & Paris 2024", highlight: "14 National Records", image: "/media/srihari-nataraj-new.jpg", olympics: "2024", medals: 14, bio: "India's most decorated swimmer with 14 national records. Represented India at both Tokyo 2020 and Paris 2024 Olympics." },
-  { name: "Dhinidhi Desinghu", achievement: "Paris 2024 Olympian", event: "Freestyle Events", highlight: "Youngest Olympian", image: "/media/dhinidhi-desinghu-new.jpg", olympics: "2024", medals: 2, bio: "The youngest Indian swimmer to compete at the Olympics, making history at Paris 2024 at just 14 years old." },
   { name: "Nisha Millet", achievement: "Arjuna Award Winner", event: "Sydney 2000 Olympian", highlight: "14 Gold Medals", image: "/media/nisha-millet-new.jpg", olympics: "2000", medals: 14, bio: "Pioneer of Indian swimming, Sydney 2000 Olympian and Arjuna Award recipient with 14 gold medals." },
-  { name: "Maana Patel", achievement: "Tokyo 2020 Olympian", event: "100m Backstroke", highlight: "First Indian Female", image: "/media/maana-patel-new.jpg", olympics: "2020", medals: 3, bio: "First Indian female swimmer to qualify for Olympics through universality quota. Backstroke specialist." },
+  { name: "Hakimuddin Habibulla", achievement: "International Swimmer", event: "Sydney 2000", highlight: "Team Coach", image: "/media/hakimuddin-habibulla-new.jpg", olympics: "2000", medals: 3, bio: "Sydney 2000 Olympian, now serving as team coach at Dolphin Aquatics." },
+  { name: "Shikha Tandon", achievement: "Arjuna Award Winner", event: "146 National Medals", highlight: "36 Int'l Medals", image: "/media/shikha-tandon-new.jpg", olympics: null, medals: 146, bio: "India's most decorated swimmer with 146 national medals and 36 international medals." },
   { name: "Rehan Poncha", achievement: "Arjuna Award Winner", event: "Beijing 2008 Olympian", highlight: "6x National Champ", image: "/media/rehan-poncha-new.jpg", olympics: "2008", medals: 6, bio: "Beijing 2008 Olympian and 6-time national champion. Arjuna Award winner for excellence in swimming." },
   { name: "Virdhawal Khade", achievement: "Arjuna Award Winner", event: "50m Butterfly", highlight: "Asian Games Bronze", image: "/media/virdhawal-khade-new.jpg", olympics: null, medals: 1, bio: "Asian Games bronze medalist and Arjuna Awardee. Specialist in butterfly and freestyle events." },
-  { name: "Shikha Tandon", achievement: "Arjuna Award Winner", event: "146 National Medals", highlight: "36 Int'l Medals", image: "/media/shikha-tandon-new.jpg", olympics: null, medals: 146, bio: "India's most decorated swimmer with 146 national medals and 36 international medals." },
   { name: "Sandeep Sejwal", achievement: "Arjuna Award Winner", event: "Beijing 2008 Olympian", highlight: "Breaststroke", image: "/media/sandeep-sejwal-new.jpg", olympics: "2008", medals: 5, bio: "Beijing 2008 Olympian specializing in breaststroke. Multiple Asian Games medalist." },
-  { name: "Rohith Benediction", achievement: "National Champion", event: "Multiple Events", highlight: "Rising Star", image: "/media/rohith-benediction.jpg", olympics: null, medals: 8, bio: "Rising star of Indian swimming with multiple national championship titles." },
-  { name: "Rujula Shashidhara", achievement: "National Medalist", event: "Freestyle & Backstroke", highlight: "State Champion", image: "/media/rujula-shashidhara.jpg", olympics: null, medals: 5, bio: "State champion and national medalist in freestyle and backstroke events." },
-  { name: "Hakimuddin Habibulla", achievement: "International Swimmer", event: "Sydney 2000", highlight: "Team Coach", image: "/media/hakimuddin-habibulla-new.jpg", olympics: "2000", medals: 3, bio: "Sydney 2000 Olympian, now serving as team coach at Dolphin Aquatics." },
+  { name: "Maana Patel", achievement: "Tokyo 2020 Olympian", event: "100m Backstroke", highlight: "First Indian Female", image: "/media/maana-patel-new.jpg", olympics: "2020", medals: 3, bio: "First Indian female swimmer to qualify for Olympics through universality quota. Backstroke specialist." },
+  { name: "Srihari Nataraj", achievement: "Two-time Olympian", event: "Tokyo 2020 & Paris 2024", highlight: "14 National Records", image: "/media/srihari-nataraj-new.jpg", olympics: "2024", medals: 14, bio: "India's most decorated swimmer with 14 national records. Represented India at both Tokyo 2020 and Paris 2024 Olympics." },
+  { name: "Dhinidhi Desinghu", achievement: "Paris 2024 Olympian", event: "Freestyle Events", highlight: "Youngest Olympian", image: "/media/dhinidhi-desinghu-new.jpg", olympics: "2024", medals: 2, bio: "The youngest Indian swimmer to compete at the Olympics, making history at Paris 2024 at just 14 years old." },
 ];
 
 // Animated counter component
@@ -180,7 +178,7 @@ export default function Champions() {
                       src={activeChampion.image}
                       alt={activeChampion.name}
                       fill
-                      className="object-cover"
+                      className="object-cover object-top"
                       priority
                     />
                     <div
@@ -227,9 +225,9 @@ export default function Champions() {
                     <motion.span
                       className="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-4"
                       style={{
-                        background: `${theme.primary}20`,
-                        color: theme.primary,
-                        border: `1px solid ${theme.primary}40`
+                        background: `${theme.primary}40`,
+                        color: theme.foreground,
+                        border: `1px solid ${theme.primary}60`
                       }}
                     >
                       {activeChampion.highlight}
@@ -244,11 +242,7 @@ export default function Champions() {
 
                     <p
                       className="text-lg md:text-xl font-semibold mb-4"
-                      style={{
-                        background: `linear-gradient(90deg, ${theme.primary}, ${theme.primaryLight})`,
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent"
-                      }}
+                      style={{ color: theme.primaryLight }}
                     >
                       {activeChampion.achievement}
                     </p>
@@ -380,7 +374,7 @@ export default function Champions() {
                     src={champion.image}
                     alt={champion.name}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     loading="lazy"
                   />
 
