@@ -3,7 +3,8 @@
 import { motion, useInView } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import { useTheme } from "./ThemeProvider";
+import { useSearchParams } from "next/navigation";
+import { useTheme, heroVariations } from "./ThemeProvider";
 
 // Animated Counter Component
 function AnimatedCounter({ value, suffix = "", duration = 2000 }) {
@@ -53,6 +54,11 @@ export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const theme = useTheme();
   const containerRef = useRef(null);
+  const searchParams = useSearchParams();
+
+  // Get hero variation from URL param (default: 0 = use original theme)
+  const heroVariant = parseInt(searchParams.get("hero") || "0");
+  const variation = heroVariations[heroVariant] || null;
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -74,180 +80,380 @@ export default function Hero() {
     duration: Math.random() * 6 + 8,
   }));
 
+  // Determine text color based on variation
+  const isLightBg = variation?.lightTop;
+  // For dark backgrounds (diagonal-right, ocean-gradient, ocean-depth), force white text
+  const isDarkVariation = variation?.waveStyle === "diagonal-right" || variation?.waveStyle === "ocean-gradient" || variation?.waveStyle === "ocean-depth";
+  const textColor = isDarkVariation ? "#FFFFFF" : (variation?.headingColor || (isLightBg ? theme.darkText : theme.foreground));
+  const textMutedColor = isDarkVariation ? "#CAF0F8" : (variation?.subheadingColor || (isLightBg ? theme.darkTextMuted : theme.foregroundMuted));
+
+  // Use variation colors for consistent theming across Hero section
+  const accentPrimary = variation?.waveColor3 || variation?.waveColor2 || theme.primary; // Deep color
+  const accentSecondary = variation?.waveColor2 || theme.primaryLight; // Medium color
+  const accentLight = variation?.waveColor1 || theme.primaryLight; // Light color
+
   return (
     <section
       ref={containerRef}
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24"
-      style={{ background: `linear-gradient(180deg, ${theme.background} 0%, ${theme.backgroundAlt} 50%, ${theme.background} 100%)` }}
+      style={{
+        background: variation
+          ? variation.background
+          : `linear-gradient(180deg, ${theme.background} 0%, ${theme.backgroundAlt} 50%, ${theme.background} 100%)`
+      }}
     >
-      {/* Background Image with underwater feel */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/media/optimized/image35.webp"
-          alt="Swimmer performing butterfly stroke"
-          fill
-          className={`object-cover ${theme.isLight ? 'opacity-15' : 'opacity-25'}`}
-          priority
-        />
-        <div className="absolute inset-0" style={{
-          background: `linear-gradient(180deg, ${theme.background}95 0%, ${theme.background}70 30%, ${theme.background}80 70%, ${theme.background} 100%)`
-        }} />
-      </div>
+      {/* Wave Style: diagonal-right (V1) - Full screen vertical beams - alternating pattern */}
+      {variation?.waveStyle === "diagonal-right" && (
+        <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
+          {/* Alternating Vertical Stripes - consistent widths */}
+          <div className="absolute inset-0" style={{
+            background: `
+              repeating-linear-gradient(90deg,
+                #023E8A 0%,
+                #023E8A 8.33%,
+                #0077B6 8.33%,
+                #0077B6 16.66%
+              )
+            `,
+          }} />
+        </div>
+      )}
 
-      
-      {/* Underwater Light Rays */}
-      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute top-0 light-ray"
+      {/* Wave Style: ocean-gradient (V2) - Rich layered ocean gradient */}
+      {variation?.waveStyle === "ocean-gradient" && (
+        <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
+          <svg className="absolute w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="none">
+            {/* Base gradient */}
+            <defs>
+              <linearGradient id="ocean-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#023E8A" />
+                <stop offset="50%" stopColor="#0077B6" />
+                <stop offset="100%" stopColor="#00B4D8" />
+              </linearGradient>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#ocean-grad)" />
+            {/* Subtle wave accent at bottom */}
+            <path
+              d="M0,700 Q200,650 400,680 Q600,710 800,670 Q1000,630 1200,680 Q1400,730 1440,700 L1440,900 L0,900 Z"
+              fill={variation.waveColor3}
+              opacity="0.4"
+            />
+            <path
+              d="M0,780 Q300,740 600,770 Q900,800 1200,760 Q1400,730 1440,760 L1440,900 L0,900 Z"
+              fill={variation.waveColor3}
+              opacity="0.3"
+            />
+          </svg>
+        </div>
+      )}
+
+      {/* Wave Style: diagonal-left (V3) - Mirror, waves flowing to left */}
+      {variation?.waveStyle === "diagonal-left" && (
+        <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
+          <svg className="absolute w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="none">
+            {/* White area - larger, covers content */}
+            <path
+              d="M0,0 L1440,0 L1440,620 Q1200,660 1040,600 Q840,540 540,560 Q240,580 0,520 Z"
+              fill="#FFFFFF"
+            />
+            {/* Wave 1 - Teal */}
+            <path
+              d="M0,520 Q240,580 540,560 Q840,540 1040,600 Q1200,660 1440,620
+                 L1440,740 Q1200,780 1040,720 Q840,660 540,680 Q240,700 0,650 Z"
+              fill={variation.waveColor1}
+            />
+            {/* Wave 2 - Medium blue */}
+            <path
+              d="M0,650 Q240,700 540,680 Q840,660 1040,720 Q1200,780 1440,740
+                 L1440,850 Q1200,880 1040,830 Q840,780 540,800 Q240,820 0,780 Z"
+              fill={variation.waveColor2}
+            />
+            {/* Wave 3 - Dark navy */}
+            <path
+              d="M0,780 Q240,820 540,800 Q840,780 1040,830 Q1200,880 1440,850
+                 L1440,900 L0,900 Z"
+              fill={variation.waveColor3}
+            />
+          </svg>
+        </div>
+      )}
+
+      {/* Wave Style: layered-horizontal (V4) - Multiple elegant horizontal waves */}
+      {variation?.waveStyle === "layered-horizontal" && (
+        <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
+          <svg className="absolute w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="none">
+            {/* White top area - larger */}
+            <path
+              d="M0,0 L1440,0 L1440,580
+                 Q1320,610 1200,590 Q1080,570 960,600 Q840,630 720,610
+                 Q600,590 480,620 Q360,650 240,630 Q120,610 0,640 Z"
+              fill="#FFFFFF"
+            />
+            {/* Wave 1 - Light cyan */}
+            <path
+              d="M0,640 Q120,610 240,630 Q360,650 480,620 Q600,590 720,610
+                 Q840,630 960,600 Q1080,570 1200,590 Q1320,610 1440,580
+                 L1440,700 Q1320,720 1200,700 Q1080,680 960,710 Q840,740 720,720
+                 Q600,700 480,730 Q360,760 240,740 Q120,720 0,750 Z"
+              fill={variation.waveColor1}
+            />
+            {/* Wave 2 - Bright cyan */}
+            <path
+              d="M0,750 Q120,720 240,740 Q360,760 480,730 Q600,700 720,720
+                 Q840,740 960,710 Q1080,680 1200,700 Q1320,720 1440,700
+                 L1440,790 Q1320,810 1200,790 Q1080,770 960,800 Q840,830 720,810
+                 Q600,790 480,820 Q360,850 240,830 Q120,810 0,840 Z"
+              fill={variation.waveColor2}
+            />
+            {/* Wave 3 - Medium blue */}
+            <path
+              d="M0,840 Q120,810 240,830 Q360,850 480,820 Q600,790 720,810
+                 Q840,830 960,800 Q1080,770 1200,790 Q1320,810 1440,790
+                 L1440,870 Q1320,885 1200,870 Q1080,855 960,875 Q840,895 720,880
+                 Q600,865 480,885 Q360,905 240,890 Q120,875 0,895 Z"
+              fill={variation.waveColor3}
+            />
+            {/* Wave 4 - Deep navy */}
+            <path
+              d="M0,895 Q120,875 240,890 Q360,905 480,885 Q600,865 720,880
+                 Q840,895 960,875 Q1080,855 1200,870 Q1320,885 1440,870
+                 L1440,900 L0,900 Z"
+              fill={variation.waveColor4}
+            />
+          </svg>
+        </div>
+      )}
+
+      {/* Wave Style: ocean-depth (V5) - Dramatic dark with glowing wave accents */}
+      {variation?.waveStyle === "ocean-depth" && (
+        <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
+          <svg className="absolute w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="none">
+            {/* Dark gradient base */}
+            <defs>
+              <linearGradient id="depth-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#03045E" />
+                <stop offset="50%" stopColor="#023E8A" />
+                <stop offset="100%" stopColor="#0077B6" />
+              </linearGradient>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#depth-grad)" />
+            {/* Glowing wave accent 1 */}
+            <path
+              d="M0,500 Q200,450 400,480 Q600,510 800,470 Q1000,430 1200,470 Q1400,510 1440,480
+                 L1440,550 Q1400,580 1200,540 Q1000,500 800,540 Q600,580 400,550 Q200,520 0,560 Z"
+              fill={variation.waveColor1}
+              opacity="0.3"
+            />
+            {/* Glowing wave accent 2 */}
+            <path
+              d="M0,620 Q300,580 600,610 Q900,640 1200,600 Q1400,570 1440,600
+                 L1440,680 Q1400,710 1200,680 Q900,720 600,690 Q300,660 0,700 Z"
+              fill={variation.waveColor2}
+              opacity="0.4"
+            />
+            {/* Bottom glow */}
+            <path
+              d="M0,750 Q360,710 720,740 Q1080,770 1440,730 L1440,900 L0,900 Z"
+              fill={variation.waveColor3}
+              opacity="0.25"
+            />
+          </svg>
+          {/* Glow orbs */}
+          <div
+            className="absolute w-[500px] h-[500px] rounded-full"
             style={{
-              left: `${15 + i * 18}%`,
-              width: '8%',
-              height: '100%',
-              background: `linear-gradient(180deg, ${theme.primary}30 0%, ${theme.primary}10 30%, transparent 70%)`,
-              filter: 'blur(20px)',
-              transformOrigin: 'top center',
-              animationDelay: `${i * 0.8}s`,
+              left: '10%',
+              top: '20%',
+              background: `radial-gradient(circle, ${variation.waveColor2}20 0%, transparent 70%)`,
+              filter: 'blur(40px)',
             }}
           />
-        ))}
-      </div>
-
-      {/* Animated Bubbles */}
-      <div className="absolute inset-0 z-[2] overflow-hidden pointer-events-none">
-        {bubbles.map((bubble) => (
-          <motion.div
-            key={bubble.id}
-            className="absolute rounded-full"
+          <div
+            className="absolute w-[400px] h-[400px] rounded-full"
             style={{
-              width: bubble.size,
-              height: bubble.size,
-              left: `${bubble.left}%`,
-              bottom: '-5%',
-              background: `radial-gradient(circle at 30% 30%, ${theme.primaryLight}60, ${theme.primary}30)`,
-              border: `1px solid ${theme.primaryLight}40`,
-              boxShadow: `inset -2px -2px 4px ${theme.primary}20, 0 0 10px ${theme.primary}20`,
-            }}
-            animate={{
-              y: [0, -window.innerHeight * 1.2],
-              x: [0, Math.sin(bubble.id) * 30, 0],
-              scale: [1, 1.1, 0.9, 1],
-            }}
-            transition={{
-              duration: bubble.duration,
-              repeat: Infinity,
-              delay: bubble.delay,
-              ease: "easeInOut",
+              right: '15%',
+              bottom: '25%',
+              background: `radial-gradient(circle, ${variation.waveColor3}25 0%, transparent 70%)`,
+              filter: 'blur(50px)',
             }}
           />
-        ))}
-      </div>
+        </div>
+      )}
 
-      {/* Swimming Pool Lane Lines */}
-      <div className="absolute inset-0 z-[1] pointer-events-none opacity-10">
-        {[...Array(6)].map((_, i) => (
+      {/* Background Image - ONLY show for default theme (no variation) */}
+      {!variation && (
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/media/optimized/image35.webp"
+            alt="Swimmer performing butterfly stroke"
+            fill
+            className={`object-cover ${theme.isLight ? 'opacity-15' : 'opacity-25'}`}
+            priority
+          />
+          <div className="absolute inset-0" style={{
+            background: `linear-gradient(180deg, ${theme.background}95 0%, ${theme.background}70 30%, ${theme.background}80 70%, ${theme.background} 100%)`
+          }} />
+        </div>
+      )}
+
+      {/* Water effects - only show when NO variation is active (default theme) */}
+      {!variation && (
+        <>
+          {/* Underwater Light Rays */}
+          <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute top-0 light-ray"
+                style={{
+                  left: `${15 + i * 18}%`,
+                  width: '8%',
+                  height: '100%',
+                  background: `linear-gradient(180deg, ${theme.primary}30 0%, ${theme.primary}10 30%, transparent 70%)`,
+                  filter: 'blur(20px)',
+                  transformOrigin: 'top center',
+                  animationDelay: `${i * 0.8}s`,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Animated Bubbles */}
+          <div className="absolute inset-0 z-[2] overflow-hidden pointer-events-none">
+            {bubbles.map((bubble) => (
+              <motion.div
+                key={bubble.id}
+                className="absolute rounded-full"
+                style={{
+                  width: bubble.size,
+                  height: bubble.size,
+                  left: `${bubble.left}%`,
+                  bottom: '-5%',
+                  background: `radial-gradient(circle at 30% 30%, ${theme.primaryLight}60, ${theme.primary}30)`,
+                  border: `1px solid ${theme.primaryLight}40`,
+                  boxShadow: `inset -2px -2px 4px ${theme.primary}20, 0 0 10px ${theme.primary}20`,
+                }}
+                animate={{
+                  y: [0, -window.innerHeight * 1.2],
+                  x: [0, Math.sin(bubble.id) * 30, 0],
+                  scale: [1, 1.1, 0.9, 1],
+                }}
+                transition={{
+                  duration: bubble.duration,
+                  repeat: Infinity,
+                  delay: bubble.delay,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Swimming Pool Lane Lines */}
+          <div className="absolute inset-0 z-[1] pointer-events-none opacity-10">
+            {[...Array(6)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute h-full w-px"
+                style={{
+                  left: `${16 + i * 14}%`,
+                  background: `linear-gradient(180deg, transparent, ${theme.primary}, ${theme.primary}, transparent)`,
+                }}
+                animate={{
+                  opacity: [0.3, 0.6, 0.3],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  delay: i * 0.3,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Water Surface Effect at Top */}
+          <div className="absolute top-0 left-0 right-0 h-32 z-[3] pointer-events-none overflow-hidden">
+            <svg className="absolute top-0 w-full h-32" viewBox="0 0 1440 100" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="surface-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor={theme.background} />
+                  <stop offset="100%" stopColor="transparent" />
+                </linearGradient>
+              </defs>
+              <motion.path
+                fill="url(#surface-gradient)"
+                d="M0,50 Q360,20 720,50 T1440,50 V0 H0 Z"
+                animate={{
+                  d: [
+                    "M0,50 Q360,20 720,50 T1440,50 V0 H0 Z",
+                    "M0,50 Q360,80 720,50 T1440,50 V0 H0 Z",
+                    "M0,50 Q360,20 720,50 T1440,50 V0 H0 Z",
+                  ],
+                }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </svg>
+          </div>
+
+          {/* Animated Waves at Bottom */}
+          <div className="absolute bottom-0 left-0 right-0 h-64 z-[3] pointer-events-none overflow-hidden">
+            <svg className="absolute bottom-0 w-[200%] h-full wave" viewBox="0 0 1440 320" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="wave-gradient-1" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor={theme.primary} stopOpacity="0.4" />
+                  <stop offset="100%" stopColor={theme.background} stopOpacity="1" />
+                </linearGradient>
+              </defs>
+              <path
+                fill="url(#wave-gradient-1)"
+                d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,138.7C672,128,768,160,864,181.3C960,203,1056,213,1152,192C1248,171,1344,117,1392,90.7L1440,64L1440,320L0,320Z"
+              />
+            </svg>
+            <svg className="absolute bottom-0 w-[200%] h-3/4 wave" style={{ animationDelay: "-5s" }} viewBox="0 0 1440 320" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="wave-gradient-2" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor={theme.primaryLight} stopOpacity="0.2" />
+                  <stop offset="100%" stopColor={theme.background} stopOpacity="1" />
+                </linearGradient>
+              </defs>
+              <path
+                fill="url(#wave-gradient-2)"
+                d="M0,256L48,234.7C96,213,192,171,288,176C384,181,480,235,576,234.7C672,235,768,181,864,165.3C960,149,1056,171,1152,197.3C1248,224,1344,256,1392,272L1440,288L1440,320L0,320Z"
+              />
+            </svg>
+          </div>
+
+          {/* Sparkle Effects (reduced for performance) */}
+          <div className="absolute inset-0 z-[4] pointer-events-none">
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-1 rounded-full sparkle"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  background: theme.primaryLight,
+                  boxShadow: `0 0 6px ${theme.primaryLight}`,
+                  animationDelay: `${Math.random() * 3}s`,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Interactive Underwater Glow */}
           <motion.div
-            key={i}
-            className="absolute h-full w-px"
+            className="absolute w-[800px] h-[800px] rounded-full pointer-events-none z-[2]"
             style={{
-              left: `${16 + i * 14}%`,
-              background: `linear-gradient(180deg, transparent, ${theme.primary}, ${theme.primary}, transparent)`,
-            }}
-            animate={{
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              delay: i * 0.3,
+              background: `radial-gradient(circle, ${theme.primary}25 0%, ${theme.primaryDark}10 40%, transparent 70%)`,
+              left: "50%",
+              top: "50%",
+              x: mousePosition.x - 400,
+              y: mousePosition.y - 400,
+              filter: "blur(40px)",
             }}
           />
-        ))}
-      </div>
-
-      {/* Water Surface Effect at Top */}
-      <div className="absolute top-0 left-0 right-0 h-32 z-[3] pointer-events-none overflow-hidden">
-        <svg className="absolute top-0 w-full h-32" viewBox="0 0 1440 100" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="surface-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor={theme.background} />
-              <stop offset="100%" stopColor="transparent" />
-            </linearGradient>
-          </defs>
-          <motion.path
-            fill="url(#surface-gradient)"
-            d="M0,50 Q360,20 720,50 T1440,50 V0 H0 Z"
-            animate={{
-              d: [
-                "M0,50 Q360,20 720,50 T1440,50 V0 H0 Z",
-                "M0,50 Q360,80 720,50 T1440,50 V0 H0 Z",
-                "M0,50 Q360,20 720,50 T1440,50 V0 H0 Z",
-              ],
-            }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </svg>
-      </div>
-
-      {/* Animated Waves at Bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 z-[3] pointer-events-none overflow-hidden">
-        <svg className="absolute bottom-0 w-[200%] h-full wave" viewBox="0 0 1440 320" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="wave-gradient-1" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor={theme.primary} stopOpacity="0.4" />
-              <stop offset="100%" stopColor={theme.background} stopOpacity="1" />
-            </linearGradient>
-          </defs>
-          <path
-            fill="url(#wave-gradient-1)"
-            d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,138.7C672,128,768,160,864,181.3C960,203,1056,213,1152,192C1248,171,1344,117,1392,90.7L1440,64L1440,320L0,320Z"
-          />
-        </svg>
-        <svg className="absolute bottom-0 w-[200%] h-3/4 wave" style={{ animationDelay: "-5s" }} viewBox="0 0 1440 320" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="wave-gradient-2" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor={theme.primaryLight} stopOpacity="0.2" />
-              <stop offset="100%" stopColor={theme.background} stopOpacity="1" />
-            </linearGradient>
-          </defs>
-          <path
-            fill="url(#wave-gradient-2)"
-            d="M0,256L48,234.7C96,213,192,171,288,176C384,181,480,235,576,234.7C672,235,768,181,864,165.3C960,149,1056,171,1152,197.3C1248,224,1344,256,1392,272L1440,288L1440,320L0,320Z"
-          />
-        </svg>
-      </div>
-
-      {/* Sparkle Effects (reduced for performance) */}
-      <div className="absolute inset-0 z-[4] pointer-events-none">
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 rounded-full sparkle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              background: theme.primaryLight,
-              boxShadow: `0 0 6px ${theme.primaryLight}`,
-              animationDelay: `${Math.random() * 3}s`,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Interactive Underwater Glow */}
-      <motion.div
-        className="absolute w-[800px] h-[800px] rounded-full pointer-events-none z-[2]"
-        style={{
-          background: `radial-gradient(circle, ${theme.primary}25 0%, ${theme.primaryDark}10 40%, transparent 70%)`,
-          left: "50%",
-          top: "50%",
-          x: mousePosition.x - 400,
-          y: mousePosition.y - 400,
-          filter: "blur(40px)",
-        }}
-      />
+        </>
+      )}
 
       {/* Content - 3 Column Layout */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -262,7 +468,7 @@ export default function Hero() {
             >
               <div
                 className="rounded-2xl p-3 sm:p-4 backdrop-blur-sm h-full"
-                style={{ background: `${theme.foreground}f0`, boxShadow: `0 10px 30px ${theme.primary}20` }}
+                style={{ background: `${theme.foreground}f0`, boxShadow: `0 10px 30px ${accentPrimary}20` }}
               >
                 <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-2 sm:mb-3">
                   <Image
@@ -272,13 +478,13 @@ export default function Hero() {
                     className="object-cover"
                   />
                 </div>
-                <h3 className="text-xs sm:text-sm font-bold mb-0.5" style={{ color: theme.primary }}>
+                <h3 className="text-xs sm:text-sm font-bold mb-0.5" style={{ color: accentPrimary }}>
                   Srihari &amp; Dhinidhi
                 </h3>
-                <p className="text-[10px] sm:text-xs font-medium" style={{ color: theme.primaryDark }}>
+                <p className="text-[10px] sm:text-xs font-medium" style={{ color: accentSecondary }}>
                   National Games 2023
                 </p>
-                <p className="text-[9px] sm:text-[10px] mt-1" style={{ color: `${theme.primary}cc` }}>
+                <p className="text-[9px] sm:text-[10px] mt-1" style={{ color: `${accentSecondary}cc` }}>
                   Best Male &amp; Female Swimmer
                 </p>
               </div>
@@ -292,9 +498,9 @@ export default function Hero() {
             >
               <div
                 className="rounded-2xl p-3 sm:p-4 backdrop-blur-sm h-full"
-                style={{ background: `${theme.foreground}f0`, boxShadow: `0 10px 30px ${theme.primary}20` }}
+                style={{ background: `${theme.foreground}f0`, boxShadow: `0 10px 30px ${accentPrimary}20` }}
               >
-                <h3 className="text-xs sm:text-sm font-bold mb-2 text-center" style={{ color: theme.primary }}>
+                <h3 className="text-xs sm:text-sm font-bold mb-2 text-center" style={{ color: accentPrimary }}>
                   2025 Record Holders
                 </h3>
                 <div className="space-y-1.5">
@@ -302,13 +508,13 @@ export default function Hero() {
                     { name: "Srihari Nataraj", event: "100m Free", image: "/Website-Images/Swimmer Photos/Srihari Nataraj_.jpg" },
                     { name: "Dhinidhi Desinghu", event: "100m Free", image: "/Website-Images/Swimmer Photos/Dhinidhi-Desinghu_.jpg" },
                   ].map((swimmer, idx) => (
-                    <div key={idx} className="flex items-center gap-1.5 p-1.5 rounded-lg" style={{ background: `${theme.primary}10` }}>
+                    <div key={idx} className="flex items-center gap-1.5 p-1.5 rounded-lg" style={{ background: `${accentLight}15` }}>
                       <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden flex-shrink-0">
                         <Image src={swimmer.image} alt={swimmer.name} fill className="object-cover" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[9px] sm:text-[10px] font-semibold truncate" style={{ color: theme.primaryDark }}>{swimmer.name}</p>
-                        <p className="text-[8px] sm:text-[9px]" style={{ color: `${theme.primary}cc` }}>{swimmer.event}</p>
+                        <p className="text-[9px] sm:text-[10px] font-semibold truncate" style={{ color: accentPrimary }}>{swimmer.name}</p>
+                        <p className="text-[8px] sm:text-[9px]" style={{ color: `${accentSecondary}cc` }}>{swimmer.event}</p>
                       </div>
                     </div>
                   ))}
@@ -329,7 +535,7 @@ export default function Hero() {
           >
             <div
               className="rounded-3xl p-6 backdrop-blur-sm"
-              style={{ background: `${theme.foreground}f0`, boxShadow: `0 20px 60px ${theme.primary}30` }}
+              style={{ background: `${theme.foreground}f0`, boxShadow: `0 20px 60px ${accentPrimary}30` }}
             >
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4">
                 <Image
@@ -339,13 +545,13 @@ export default function Hero() {
                   className="object-cover"
                 />
               </div>
-              <h3 className="text-lg font-bold mb-1" style={{ color: theme.primary }}>
+              <h3 className="text-lg font-bold mb-1" style={{ color: accentPrimary }}>
                 Srihari &amp; Dhinidhi
               </h3>
-              <p className="text-sm font-medium" style={{ color: theme.primaryDark }}>
+              <p className="text-sm font-medium" style={{ color: accentSecondary }}>
                 National Games 2023
               </p>
-              <p className="text-xs mt-2" style={{ color: `${theme.primary}cc` }}>
+              <p className="text-xs mt-2" style={{ color: `${accentSecondary}cc` }}>
                 Best Male &amp; Female Swimmer
               </p>
             </div>
@@ -368,7 +574,7 @@ export default function Hero() {
               <div
                 className="absolute -inset-[2px] rounded-full opacity-75 blur-[1px]"
                 style={{
-                  background: `linear-gradient(90deg, ${theme.primary}, ${theme.primaryLight}, ${theme.primaryDark}, ${theme.primary})`,
+                  background: `linear-gradient(90deg, ${accentPrimary}, ${accentLight}, ${accentSecondary}, ${accentPrimary})`,
                   backgroundSize: '300% 100%',
                   animation: 'gradient-rotate 3s linear infinite',
                 }}
@@ -376,7 +582,7 @@ export default function Hero() {
               <div
                 className="relative inline-flex items-center gap-2 px-5 py-3 rounded-full backdrop-blur-sm"
                 style={{
-                  background: theme.headerBackground || theme.primary,
+                  background: accentPrimary,
                   border: '3px solid #FFFFFF',
                   boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
                 }}
@@ -401,14 +607,17 @@ export default function Hero() {
                 transition={{ delay: 0.4, duration: 0.8, ease: [0.6, 0.01, 0.05, 0.95] }}
                 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 font-[family-name:var(--font-playfair)]"
               >
-                <span className="block drop-shadow-lg" style={{ color: theme.foreground }}>Dive Into</span>
+                <span className="block drop-shadow-lg" style={{ color: textColor }}>Dive Into</span>
                 <motion.span
                   className="block"
-                  style={{
-                    background: `linear-gradient(135deg, ${theme.primaryLight} 0%, ${theme.primary} 50%, ${theme.primaryDark} 100%)`,
+                  style={isDarkVariation ? {
+                    color: "#FFFFFF",
+                    textShadow: "0 0 30px rgba(255,255,255,0.8), 0 2px 4px rgba(0,0,0,0.3)",
+                  } : {
+                    background: variation?.textGradient || `linear-gradient(135deg, ${theme.primaryLight} 0%, ${theme.primary} 50%, ${theme.primaryDark} 100%)`,
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
-                    filter: `drop-shadow(0 0 30px ${theme.primary}50)`,
+                    filter: `drop-shadow(0 0 30px ${variation?.waveColor1 || theme.primary}50)`,
                   }}
                 >
                   Excellence
@@ -421,7 +630,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-base md:text-lg max-w-xl mx-auto mb-8" style={{ color: theme.foregroundMuted }}
+              className="text-base md:text-lg max-w-xl mx-auto mb-8" style={{ color: textMutedColor }}
             >
               World-class swim coaching at Centre for Sports Excellence.
               Led by Dronacharya Award winner Coach Nihar Ameen.
@@ -438,28 +647,42 @@ export default function Hero() {
                 href="#contact"
                 whileHover={{
                   scale: 1.05,
-                  boxShadow: `0 0 50px ${theme.primary}60`,
+                  boxShadow: isDarkVariation ? '0 0 40px rgba(255,255,255,0.4)' : `0 0 50px ${variation?.waveColor1 || theme.primary}60`,
                 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-4 font-bold rounded-full text-lg transition-all relative overflow-hidden group text-center"
                 style={{
-                  color: theme.buttonText,
-                  background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`,
-                  boxShadow: `0 0 30px ${theme.primary}40`,
+                  color: isDarkVariation ? "#023E8A" : "#FFFFFF",
+                  background: isDarkVariation
+                    ? "#FFFFFF"
+                    : (variation ? `linear-gradient(135deg, ${variation.waveColor1}, #023E8A)` : `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`),
+                  boxShadow: isDarkVariation ? '0 0 30px rgba(255,255,255,0.3)' : `0 0 30px ${variation?.waveColor1 || theme.primary}40`,
                 }}
               >
                 <span className="relative z-10">Start Your Journey</span>
                 <motion.div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                  style={{ background: `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primary})` }}
+                  style={{
+                    background: isDarkVariation
+                      ? "#CAF0F8"
+                      : (variation ? `linear-gradient(135deg, ${variation.waveColor2}, ${variation.waveColor1})` : `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primary})`)
+                  }}
                 />
               </motion.a>
               <motion.a
                 href="#facilities"
-                whileHover={{ scale: 1.05, borderColor: theme.primary }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 font-semibold rounded-full text-lg transition-all backdrop-blur-sm text-center"
-                style={{ border: `2px solid ${theme.primary}`, color: theme.foreground, background: `${theme.card}90` }}
+                className="px-8 py-4 font-semibold rounded-full text-lg transition-all text-center"
+                style={{
+                  border: isDarkVariation
+                    ? '3px solid #FFFFFF'
+                    : `2px solid ${isLightBg ? (variation?.waveColor3 || theme.primary) : theme.primary}`,
+                  color: '#FFFFFF',
+                  background: isDarkVariation
+                    ? '#062535'
+                    : (isLightBg ? (variation?.waveColor3 || variation?.waveColor2 || theme.primary) : `${theme.card}90`)
+                }}
               >
                 View Programs
               </motion.a>
@@ -475,9 +698,9 @@ export default function Hero() {
           >
             <div
               className="rounded-3xl p-6 backdrop-blur-sm"
-              style={{ background: `${theme.foreground}f0`, boxShadow: `0 20px 60px ${theme.primary}30` }}
+              style={{ background: `${theme.foreground}f0`, boxShadow: `0 20px 60px ${accentPrimary}30` }}
             >
-              <h3 className="text-lg font-bold mb-4 text-center" style={{ color: theme.primary }}>
+              <h3 className="text-lg font-bold mb-4 text-center" style={{ color: accentPrimary }}>
                 2025 National Record Holders
               </h3>
               <div className="space-y-2">
@@ -487,13 +710,13 @@ export default function Hero() {
                   { name: "Dhinidhi Desinghu", event: "100m Freestyle", time: "56.29s", image: "/Website-Images/Swimmer Photos/Dhinidhi-Desinghu_.jpg" },
                   { name: "Rujula Shashidhara", event: "200m Freestyle", time: "TBD", image: "/Website-Images/Swimmer Photos/Rujula Shashidhara.jpg" },
                 ].map((swimmer, idx) => (
-                  <div key={idx} className="flex items-center gap-2 p-2 rounded-xl" style={{ background: `${theme.primary}10` }}>
+                  <div key={idx} className="flex items-center gap-2 p-2 rounded-xl" style={{ background: `${accentLight}15` }}>
                     <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
                       <Image src={swimmer.image} alt={swimmer.name} fill className="object-cover" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-semibold truncate" style={{ color: theme.primaryDark }}>{swimmer.name}</p>
-                      <p className="text-[10px]" style={{ color: `${theme.primary}cc` }}>{swimmer.event} • {swimmer.time}</p>
+                      <p className="text-xs font-semibold truncate" style={{ color: accentPrimary }}>{swimmer.name}</p>
+                      <p className="text-[10px]" style={{ color: `${accentSecondary}cc` }}>{swimmer.event} • {swimmer.time}</p>
                     </div>
                   </div>
                 ))}
@@ -520,20 +743,20 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.4 + index * 0.15, type: "spring", stiffness: 100 }}
-              whileHover={{ y: -5, boxShadow: `0 10px 40px ${theme.primary}40` }}
+              whileHover={{ y: -5, boxShadow: `0 10px 40px ${accentPrimary}40` }}
               className="text-center px-4 py-4 rounded-2xl"
               style={{
                 background: `${theme.foreground}e8`,
-                boxShadow: `0 8px 32px ${theme.primary}20`,
+                boxShadow: `0 8px 32px ${accentPrimary}20`,
               }}
             >
               <motion.div
                 className="text-2xl md:text-3xl font-bold mb-1"
-                style={{ color: theme.primary }}
+                style={{ color: accentPrimary }}
               >
                 <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={2000} />
               </motion.div>
-              <div className="text-xs uppercase tracking-wider font-medium" style={{ color: theme.primaryDark }}>
+              <div className="text-xs uppercase tracking-wider font-medium" style={{ color: accentSecondary }}>
                 {stat.label}
               </div>
             </motion.div>
