@@ -87,10 +87,10 @@ export default function Hero() {
   const textColor = isDarkVariation ? "#FFFFFF" : (variation?.headingColor || (isLightBg ? theme.darkText : theme.foreground));
   const textMutedColor = isDarkVariation ? "#CAF0F8" : (variation?.subheadingColor || (isLightBg ? theme.darkTextMuted : theme.foregroundMuted));
 
-  // Use variation colors for consistent theming across Hero section
-  const accentPrimary = variation?.waveColor3 || variation?.waveColor2 || theme.primary; // Deep color
-  const accentSecondary = variation?.waveColor2 || theme.primaryLight; // Medium color
-  const accentLight = variation?.waveColor1 || theme.primaryLight; // Light color
+  // Card colors - use consistent dark colors for white card backgrounds
+  const cardTextPrimary = "#023E8A"; // Deep navy for headings
+  const cardTextSecondary = "#0466A8"; // Darker blue for subtext (better contrast)
+  const cardAccentBg = "#E8F4F8"; // Very light gray-cyan for swimmer rows
 
   return (
     <section
@@ -468,7 +468,7 @@ export default function Hero() {
             >
               <div
                 className="rounded-2xl p-3 sm:p-4 backdrop-blur-sm h-full"
-                style={{ background: `${theme.foreground}f0`, boxShadow: `0 10px 30px ${accentPrimary}20` }}
+                style={{ background: `${theme.foreground}f0`, boxShadow: `0 10px 30px ${cardTextPrimary}20` }}
               >
                 <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-2 sm:mb-3">
                   <Image
@@ -478,13 +478,13 @@ export default function Hero() {
                     className="object-cover"
                   />
                 </div>
-                <h3 className="text-xs sm:text-sm font-bold mb-0.5" style={{ color: accentPrimary }}>
+                <h3 className="text-xs sm:text-sm font-bold mb-0.5" style={{ color: cardTextPrimary }}>
                   Srihari &amp; Dhinidhi
                 </h3>
-                <p className="text-[10px] sm:text-xs font-medium" style={{ color: accentSecondary }}>
+                <p className="text-[10px] sm:text-xs font-medium" style={{ color: cardTextSecondary }}>
                   National Games 2023
                 </p>
-                <p className="text-[9px] sm:text-[10px] mt-1" style={{ color: `${accentSecondary}cc` }}>
+                <p className="text-[9px] sm:text-[10px] mt-1" style={{ color: cardTextSecondary }}>
                   Best Male &amp; Female Swimmer
                 </p>
               </div>
@@ -498,9 +498,9 @@ export default function Hero() {
             >
               <div
                 className="rounded-2xl p-3 sm:p-4 backdrop-blur-sm h-full"
-                style={{ background: `${theme.foreground}f0`, boxShadow: `0 10px 30px ${accentPrimary}20` }}
+                style={{ background: `${theme.foreground}f0`, boxShadow: `0 10px 30px ${cardTextPrimary}20` }}
               >
-                <h3 className="text-xs sm:text-sm font-bold mb-2 text-center" style={{ color: accentPrimary }}>
+                <h3 className="text-xs sm:text-sm font-bold mb-2 text-center" style={{ color: cardTextPrimary }}>
                   2025 Record Holders
                 </h3>
                 <div className="space-y-1.5">
@@ -508,13 +508,13 @@ export default function Hero() {
                     { name: "Srihari Nataraj", event: "100m Free", image: "/Website-Images/Swimmer Photos/Srihari Nataraj_.jpg" },
                     { name: "Dhinidhi Desinghu", event: "100m Free", image: "/Website-Images/Swimmer Photos/Dhinidhi-Desinghu_.jpg" },
                   ].map((swimmer, idx) => (
-                    <div key={idx} className="flex items-center gap-1.5 p-1.5 rounded-lg" style={{ background: `${accentLight}15` }}>
+                    <div key={idx} className="flex items-center gap-1.5 p-1.5 rounded-lg" style={{ background: cardAccentBg }}>
                       <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden flex-shrink-0">
                         <Image src={swimmer.image} alt={swimmer.name} fill className="object-cover" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[9px] sm:text-[10px] font-semibold truncate" style={{ color: accentPrimary }}>{swimmer.name}</p>
-                        <p className="text-[8px] sm:text-[9px]" style={{ color: `${accentSecondary}cc` }}>{swimmer.event}</p>
+                        <p className="text-[9px] sm:text-[10px] font-semibold truncate" style={{ color: cardTextPrimary }}>{swimmer.name}</p>
+                        <p className="text-[8px] sm:text-[9px]" style={{ color: cardTextSecondary }}>{swimmer.event}</p>
                       </div>
                     </div>
                   ))}
@@ -535,7 +535,7 @@ export default function Hero() {
           >
             <div
               className="rounded-3xl p-6 backdrop-blur-sm"
-              style={{ background: `${theme.foreground}f0`, boxShadow: `0 20px 60px ${accentPrimary}30` }}
+              style={{ background: `${theme.foreground}f0`, boxShadow: `0 20px 60px ${cardTextPrimary}30` }}
             >
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4">
                 <Image
@@ -545,13 +545,13 @@ export default function Hero() {
                   className="object-cover"
                 />
               </div>
-              <h3 className="text-lg font-bold mb-1" style={{ color: accentPrimary }}>
+              <h3 className="text-lg font-bold mb-1" style={{ color: cardTextPrimary }}>
                 Srihari &amp; Dhinidhi
               </h3>
-              <p className="text-sm font-medium" style={{ color: accentSecondary }}>
+              <p className="text-sm font-medium" style={{ color: cardTextSecondary }}>
                 National Games 2023
               </p>
-              <p className="text-xs mt-2" style={{ color: `${accentSecondary}cc` }}>
+              <p className="text-xs mt-2" style={{ color: cardTextSecondary }}>
                 Best Male &amp; Female Swimmer
               </p>
             </div>
@@ -574,7 +574,7 @@ export default function Hero() {
               <div
                 className="absolute -inset-[2px] rounded-full opacity-75 blur-[1px]"
                 style={{
-                  background: `linear-gradient(90deg, ${accentPrimary}, ${accentLight}, ${accentSecondary}, ${accentPrimary})`,
+                  background: `linear-gradient(90deg, #023E8A, #00B4D8, #0077B6, #023E8A)`,
                   backgroundSize: '300% 100%',
                   animation: 'gradient-rotate 3s linear infinite',
                 }}
@@ -582,7 +582,7 @@ export default function Hero() {
               <div
                 className="relative inline-flex items-center gap-2 px-5 py-3 rounded-full backdrop-blur-sm"
                 style={{
-                  background: accentPrimary,
+                  background: '#023E8A',
                   border: '3px solid #FFFFFF',
                   boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
                 }}
@@ -698,9 +698,9 @@ export default function Hero() {
           >
             <div
               className="rounded-3xl p-6 backdrop-blur-sm"
-              style={{ background: `${theme.foreground}f0`, boxShadow: `0 20px 60px ${accentPrimary}30` }}
+              style={{ background: `${theme.foreground}f0`, boxShadow: `0 20px 60px ${cardTextPrimary}30` }}
             >
-              <h3 className="text-lg font-bold mb-4 text-center" style={{ color: accentPrimary }}>
+              <h3 className="text-lg font-bold mb-4 text-center" style={{ color: cardTextPrimary }}>
                 2025 National Record Holders
               </h3>
               <div className="space-y-2">
@@ -710,13 +710,13 @@ export default function Hero() {
                   { name: "Dhinidhi Desinghu", event: "100m Freestyle", time: "56.29s", image: "/Website-Images/Swimmer Photos/Dhinidhi-Desinghu_.jpg" },
                   { name: "Rujula Shashidhara", event: "200m Freestyle", time: "TBD", image: "/Website-Images/Swimmer Photos/Rujula Shashidhara.jpg" },
                 ].map((swimmer, idx) => (
-                  <div key={idx} className="flex items-center gap-2 p-2 rounded-xl" style={{ background: `${accentLight}15` }}>
+                  <div key={idx} className="flex items-center gap-2 p-2 rounded-xl" style={{ background: cardAccentBg }}>
                     <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
                       <Image src={swimmer.image} alt={swimmer.name} fill className="object-cover" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-semibold truncate" style={{ color: accentPrimary }}>{swimmer.name}</p>
-                      <p className="text-[10px]" style={{ color: `${accentSecondary}cc` }}>{swimmer.event} • {swimmer.time}</p>
+                      <p className="text-xs font-semibold truncate" style={{ color: cardTextPrimary }}>{swimmer.name}</p>
+                      <p className="text-[10px]" style={{ color: cardTextSecondary }}>{swimmer.event} • {swimmer.time}</p>
                     </div>
                   </div>
                 ))}
@@ -743,20 +743,20 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.4 + index * 0.15, type: "spring", stiffness: 100 }}
-              whileHover={{ y: -5, boxShadow: `0 10px 40px ${accentPrimary}40` }}
+              whileHover={{ y: -5, boxShadow: `0 10px 40px ${cardTextPrimary}40` }}
               className="text-center px-4 py-4 rounded-2xl"
               style={{
                 background: `${theme.foreground}e8`,
-                boxShadow: `0 8px 32px ${accentPrimary}20`,
+                boxShadow: `0 8px 32px ${cardTextPrimary}20`,
               }}
             >
               <motion.div
                 className="text-2xl md:text-3xl font-bold mb-1"
-                style={{ color: accentPrimary }}
+                style={{ color: cardTextPrimary }}
               >
                 <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={2000} />
               </motion.div>
-              <div className="text-xs uppercase tracking-wider font-medium" style={{ color: accentSecondary }}>
+              <div className="text-xs uppercase tracking-wider font-medium" style={{ color: cardTextSecondary }}>
                 {stat.label}
               </div>
             </motion.div>
