@@ -58,18 +58,19 @@ export const heroVariations = {
     headingColor: "#FFFFFF", // White for "Dive Into"
     subheadingColor: "#CAF0F8", // Very light cyan for description
   },
-  // Variation 3: Diagonal Wave Left - Mirror of v1, wave from left
+  // Variation 3: 3D Holographic Beams - Futuristic depth effect
   3: {
-    name: "Diagonal Wave Left",
-    background: "#FFFFFF",
-    waveStyle: "diagonal-left",
-    waveColor1: "#0096C7", // Teal
+    name: "3D Holographic Beams",
+    background: "#020818",
+    waveStyle: "3d-beams",
+    waveColor1: "#00B4D8", // Bright cyan
     waveColor2: "#0077B6", // Medium blue
-    waveColor3: "#03045E", // Dark navy
-    lightTop: true,
-    textGradient: "linear-gradient(135deg, #03045E 0%, #0077B6 50%, #0096C7 100%)",
-    headingColor: "#03045E",
-    subheadingColor: "#0077B6",
+    waveColor3: "#023E8A", // Deep blue
+    waveColor4: "#03045E", // Dark navy
+    lightTop: false,
+    textGradient: "linear-gradient(135deg, #00B4D8 0%, #48CAE4 50%, #FFFFFF 100%)",
+    headingColor: "#FFFFFF",
+    subheadingColor: "#90E0EF",
   },
   // Variation 4: Layered Waves - Multiple horizontal waves
   4: {

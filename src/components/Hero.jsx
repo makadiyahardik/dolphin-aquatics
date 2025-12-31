@@ -82,8 +82,8 @@ export default function Hero() {
 
   // Determine text color based on variation
   const isLightBg = variation?.lightTop;
-  // For dark backgrounds (diagonal-right, ocean-gradient, ocean-depth), force white text
-  const isDarkVariation = variation?.waveStyle === "diagonal-right" || variation?.waveStyle === "ocean-gradient" || variation?.waveStyle === "ocean-depth";
+  // For dark backgrounds (diagonal-right, ocean-gradient, ocean-depth, 3d-beams), force white text
+  const isDarkVariation = variation?.waveStyle === "diagonal-right" || variation?.waveStyle === "ocean-gradient" || variation?.waveStyle === "ocean-depth" || variation?.waveStyle === "3d-beams";
   const textColor = isDarkVariation ? "#FFFFFF" : (variation?.headingColor || (isLightBg ? theme.darkText : theme.foreground));
   const textMutedColor = isDarkVariation ? "#CAF0F8" : (variation?.subheadingColor || (isLightBg ? theme.darkTextMuted : theme.foregroundMuted));
 
@@ -117,6 +117,103 @@ export default function Hero() {
               )
             `,
           }} />
+        </div>
+      )}
+
+      {/* Wave Style: 3d-beams (V3) - 3D cylindrical beams like curtain folds */}
+      {variation?.waveStyle === "3d-beams" && (
+        <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
+          {/* SVG with 3D cylindrical beams */}
+          <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+            <defs>
+              {/* Create gradients for each beam to simulate 3D cylinder effect */}
+              {[...Array(12)].map((_, i) => (
+                <linearGradient key={`beam-grad-${i}`} id={`beam3d-${i}`} x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#023E8A" />
+                  <stop offset="15%" stopColor="#0466C8" />
+                  <stop offset="35%" stopColor="#0096C7" />
+                  <stop offset="50%" stopColor="#48CAE4" />
+                  <stop offset="65%" stopColor="#0096C7" />
+                  <stop offset="85%" stopColor="#0466C8" />
+                  <stop offset="100%" stopColor="#023E8A" />
+                </linearGradient>
+              ))}
+              {/* Highlight gradient for depth */}
+              <linearGradient id="beam-highlight" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="transparent" />
+                <stop offset="40%" stopColor="rgba(255,255,255,0.1)" />
+                <stop offset="50%" stopColor="rgba(255,255,255,0.2)" />
+                <stop offset="60%" stopColor="rgba(255,255,255,0.1)" />
+                <stop offset="100%" stopColor="transparent" />
+              </linearGradient>
+              {/* Ambient glow filter */}
+              <filter id="glow3d" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="8" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            {/* Render 12 3D cylindrical beams */}
+            {[...Array(12)].map((_, i) => {
+              const beamWidth = 100 / 12;
+              const x = i * beamWidth;
+              return (
+                <g key={`beam-group-${i}`}>
+                  {/* Main beam with 3D gradient */}
+                  <rect
+                    x={`${x}%`}
+                    y="0"
+                    width={`${beamWidth}%`}
+                    height="100%"
+                    fill={`url(#beam3d-${i})`}
+                  />
+                  {/* Highlight overlay for extra depth */}
+                  <rect
+                    x={`${x}%`}
+                    y="0"
+                    width={`${beamWidth}%`}
+                    height="100%"
+                    fill="url(#beam-highlight)"
+                    opacity="0.5"
+                  />
+                </g>
+              );
+            })}
+          </svg>
+
+          {/* Subtle animated light sweep for extra wow */}
+          <motion.div
+            className="absolute inset-y-0 w-[300px]"
+            style={{
+              background: `linear-gradient(90deg,
+                transparent 0%,
+                rgba(255,255,255,0.03) 30%,
+                rgba(255,255,255,0.08) 50%,
+                rgba(255,255,255,0.03) 70%,
+                transparent 100%
+              )`,
+            }}
+            animate={{
+              x: ['-300px', 'calc(100vw + 300px)'],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+              repeatDelay: 3,
+            }}
+          />
+
+          {/* Top fade for smooth transition with nav */}
+          <div
+            className="absolute top-0 left-0 right-0 h-32"
+            style={{
+              background: 'linear-gradient(180deg, rgba(2,8,24,0.5) 0%, transparent 100%)',
+            }}
+          />
         </div>
       )}
 
