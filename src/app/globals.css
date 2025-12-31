@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  /* Default Dark Theme (v=1) - Midnight Black */
-  --primary: #2E86AB;
-  --primary-light: #5BA4C4;
-  --primary-dark: #1D5A75;
-  --bg: #000000;
-  --bg-alt: #0D0D0D;
-  --card: #141414;
+  /* Azure Sky Refined Theme */
+  --primary: #083040;
+  --primary-light: #0D5068;
+  --primary-dark: #041820;
+  --bg: #5BAACC;
+  --bg-alt: #4A99BB;
+  --card: #3580A0;
   --foreground: #FFFFFF;
-  --foreground-muted: #A0A0A0;
+  --foreground-muted: #FFF8F0;
+  --border: #2A6580;
 }
 
 * {
