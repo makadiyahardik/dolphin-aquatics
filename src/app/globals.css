@@ -549,3 +549,13 @@ body {
   backdrop-filter: blur(2px);
   filter: saturate(1.2) brightness(1.1);
 }
+
+/* Moving border animation - one direction only (0 to 100, then reset) */
+@keyframes border-move {
+  0% {
+    background-position: 200% 50%;
+  }
+  100% {
+    background-position: -100% 50%;
+  }
+}

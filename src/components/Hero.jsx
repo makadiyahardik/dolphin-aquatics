@@ -56,9 +56,9 @@ export default function Hero() {
   const containerRef = useRef(null);
   const searchParams = useSearchParams();
 
-  // Get hero variation from URL param (default: 0 = use original theme)
-  const heroVariant = parseInt(searchParams.get("hero") || "0");
-  const variation = heroVariations[heroVariant] || null;
+  // Get hero variation from URL param (default: 2 = Deep Ocean gradient)
+  const heroVariant = parseInt(searchParams.get("hero") || "2");
+  const variation = heroVariations[heroVariant] || heroVariations[2];
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -85,7 +85,7 @@ export default function Hero() {
   // For dark backgrounds (diagonal-right, ocean-gradient, ocean-depth, 3d-beams), force white text
   const isDarkVariation = variation?.waveStyle === "diagonal-right" || variation?.waveStyle === "ocean-gradient" || variation?.waveStyle === "ocean-depth" || variation?.waveStyle === "3d-beams";
   const textColor = isDarkVariation ? "#FFFFFF" : (variation?.headingColor || (isLightBg ? theme.darkText : theme.foreground));
-  const textMutedColor = isDarkVariation ? "#CAF0F8" : (variation?.subheadingColor || (isLightBg ? theme.darkTextMuted : theme.foregroundMuted));
+  const textMutedColor = isDarkVariation ? "#E0F7FF" : (variation?.subheadingColor || (isLightBg ? theme.darkTextMuted : theme.foregroundMuted));
 
   // Card colors - use consistent dark colors for white card backgrounds
   const cardTextPrimary = "#023E8A"; // Deep navy for headings
@@ -554,71 +554,119 @@ export default function Hero() {
 
       {/* Content - 3 Column Layout */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Mobile: Show side panels at top before main content */}
-        <div className="lg:hidden mb-8 mt-4">
-          <div className="grid grid-cols-2 gap-4">
-            {/* Mobile Left Panel - National Games Winners */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-            >
-              <div
-                className="rounded-2xl p-3 sm:p-4 backdrop-blur-sm h-full"
-                style={{ background: `${theme.foreground}f0`, boxShadow: `0 10px 30px ${cardTextPrimary}20` }}
-              >
-                <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-2 sm:mb-3">
-                  <Image
-                    src="/media/srihari-dhinidhi-national-games.jpg"
-                    alt="Srihari Nataraj and Dhinidhi Desinghu - National Games Winners"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <h3 className="text-xs sm:text-sm font-bold mb-0.5" style={{ color: cardTextPrimary }}>
-                  Srihari &amp; Dhinidhi
-                </h3>
-                <p className="text-[10px] sm:text-xs font-medium" style={{ color: cardTextSecondary }}>
-                  National Games 2023
-                </p>
-                <p className="text-[9px] sm:text-[10px] mt-1" style={{ color: cardTextSecondary }}>
-                  Best Male &amp; Female Swimmer
-                </p>
-              </div>
-            </motion.div>
+        {/* Mobile: Featured Record Holders Card - HERO PLACEMENT */}
+        <div className="lg:hidden mb-6 mt-2">
+          {/* FEATURED: 2025 National Record Holders - Full Width Hero Card */}
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.6, type: "spring" }}
+            className="relative"
+          >
+            {/* Rotating Border - travels around all 4 sides */}
+            <div className="absolute -inset-[3px] rounded-2xl overflow-hidden">
+              <motion.div
+                className="absolute w-[200%] h-[200%] top-[-50%] left-[-50%]"
+                style={{
+                  background: `conic-gradient(
+                    from 0deg,
+                    transparent 0deg,
+                    transparent 340deg,
+                    #FFD700 345deg,
+                    #00FF88 350deg,
+                    #00B4D8 355deg,
+                    #FF6B6B 358deg,
+                    transparent 360deg
+                  )`,
+                }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+              />
+            </div>
 
-            {/* Mobile Right Panel - National Record Holders */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
+            {/* Glowing effect - rotating */}
+            <div className="absolute -inset-[3px] rounded-2xl overflow-hidden">
+              <motion.div
+                className="absolute w-[200%] h-[200%] top-[-50%] left-[-50%]"
+                style={{
+                  background: `conic-gradient(
+                    from 0deg,
+                    transparent 0deg,
+                    transparent 330deg,
+                    #FFD700 340deg,
+                    #00FF88 348deg,
+                    #00B4D8 355deg,
+                    #FF6B6B 358deg,
+                    transparent 360deg
+                  )`,
+                  filter: 'blur(12px)',
+                }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+              />
+            </div>
+
+            <div
+              className="relative rounded-2xl p-4 sm:p-5 backdrop-blur-md overflow-hidden"
+              style={{
+                background: `linear-gradient(135deg, ${theme.foreground}fc 0%, ${theme.foreground}f8 100%)`,
+                boxShadow: `0 15px 40px ${cardTextPrimary}30`,
+              }}
             >
-              <div
-                className="rounded-2xl p-3 sm:p-4 backdrop-blur-sm h-full"
-                style={{ background: `${theme.foreground}f0`, boxShadow: `0 10px 30px ${cardTextPrimary}20` }}
-              >
-                <h3 className="text-xs sm:text-sm font-bold mb-2 text-center" style={{ color: cardTextPrimary }}>
-                  2025 Record Holders
+
+              {/* Header with trophy icon */}
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <motion.div
+                  animate={{ rotate: [0, -10, 10, -10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                >
+                  <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                  </svg>
+                </motion.div>
+                <h3 className="text-sm sm:text-base font-bold" style={{ color: cardTextPrimary }}>
+                  2025 National Record Holders
                 </h3>
-                <div className="space-y-1.5">
-                  {[
-                    { name: "Srihari Nataraj", event: "100m Free", image: "/Website-Images/Swimmer Photos/Srihari Nataraj_.jpg" },
-                    { name: "Dhinidhi Desinghu", event: "100m Free", image: "/Website-Images/Swimmer Photos/Dhinidhi-Desinghu_.jpg" },
-                  ].map((swimmer, idx) => (
-                    <div key={idx} className="flex items-center gap-1.5 p-1.5 rounded-lg" style={{ background: cardAccentBg }}>
-                      <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden flex-shrink-0">
-                        <Image src={swimmer.image} alt={swimmer.name} fill className="object-cover" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-[9px] sm:text-[10px] font-semibold truncate" style={{ color: cardTextPrimary }}>{swimmer.name}</p>
-                        <p className="text-[8px] sm:text-[9px]" style={{ color: cardTextSecondary }}>{swimmer.event}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <motion.div
+                  animate={{ rotate: [0, 10, -10, 10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                >
+                  <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                  </svg>
+                </motion.div>
               </div>
-            </motion.div>
-          </div>
+
+              {/* 4 Swimmers in 2x2 Grid */}
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                {[
+                  { name: "Srihari Nataraj", event: "100m Freestyle", time: "49.46s", image: "/Website-Images/Swimmer Photos/Srihari Nataraj_.jpg" },
+                  { name: "Dhinidhi Desinghu", event: "200m Freestyle", time: "2:02.97s", image: "/Website-Images/Swimmer Photos/Dhinidhi-Desinghu_.jpg" },
+                  { name: "Rohit Benedicton", event: "50m Butterfly", time: "23.89s", image: "/Website-Images/Swimmer Photos/Rohith Benediction_.jpg" },
+                  { name: "Rujula Shashidhara", event: "50m Freestyle", time: "26.34s", image: "/Website-Images/Swimmer Photos/Rujula Shashidhara.jpg" },
+                ].map((swimmer, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 + idx * 0.1, duration: 0.5 }}
+                    className="flex items-center gap-2 p-2 rounded-xl"
+                    style={{ background: cardAccentBg }}
+                  >
+                    <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-cyan-400/30">
+                      <Image src={swimmer.image} alt={swimmer.name} fill className="object-cover" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[10px] sm:text-xs font-bold truncate" style={{ color: cardTextPrimary }}>{swimmer.name}</p>
+                      <p className="text-[9px] sm:text-[10px]" style={{ color: cardTextSecondary }}>{swimmer.event}</p>
+                      <p className="text-[9px] sm:text-[10px] font-semibold" style={{ color: '#00B4D8' }}>{swimmer.time}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
         </div>
 
         <div className="grid lg:grid-cols-[280px_1fr_280px] gap-6 items-center min-h-[50vh] lg:min-h-[70vh]">
@@ -784,6 +832,36 @@ export default function Hero() {
                 View Programs
               </motion.a>
             </motion.div>
+
+            {/* Mobile Only: National Games Winners - Below Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.5 }}
+              className="lg:hidden mt-6"
+            >
+              <div
+                className="rounded-xl p-3 backdrop-blur-sm flex items-center gap-3 max-w-md mx-auto"
+                style={{ background: `${theme.foreground}e8`, boxShadow: `0 8px 20px ${cardTextPrimary}15` }}
+              >
+                <div className="relative w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden flex-shrink-0">
+                  <Image
+                    src="/media/srihari-dhinidhi-national-games.jpg"
+                    alt="Srihari Nataraj and Dhinidhi Desinghu - National Games Winners"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xs sm:text-sm font-bold" style={{ color: cardTextPrimary }}>
+                    National Games 2023 Champions
+                  </h3>
+                  <p className="text-[10px] sm:text-xs" style={{ color: cardTextSecondary }}>
+                    Srihari &amp; Dhinidhi - Best Male &amp; Female
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* RIGHT Panel - 2025 National Record Holders */}
@@ -791,11 +869,54 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="hidden lg:block"
+            className="hidden lg:block relative"
           >
+            {/* Rotating Border - Desktop - travels around all 4 sides */}
+            <div className="absolute -inset-[3px] rounded-3xl overflow-hidden">
+              <motion.div
+                className="absolute w-[200%] h-[200%] top-[-50%] left-[-50%]"
+                style={{
+                  background: `conic-gradient(
+                    from 0deg,
+                    transparent 0deg,
+                    transparent 340deg,
+                    #FFD700 345deg,
+                    #00FF88 350deg,
+                    #00B4D8 355deg,
+                    #FF6B6B 358deg,
+                    transparent 360deg
+                  )`,
+                }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+              />
+            </div>
+
+            {/* Glowing effect - Desktop rotating */}
+            <div className="absolute -inset-[3px] rounded-3xl overflow-hidden">
+              <motion.div
+                className="absolute w-[200%] h-[200%] top-[-50%] left-[-50%]"
+                style={{
+                  background: `conic-gradient(
+                    from 0deg,
+                    transparent 0deg,
+                    transparent 330deg,
+                    #FFD700 340deg,
+                    #00FF88 348deg,
+                    #00B4D8 355deg,
+                    #FF6B6B 358deg,
+                    transparent 360deg
+                  )`,
+                  filter: 'blur(12px)',
+                }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+              />
+            </div>
+
             <div
-              className="rounded-3xl p-6 backdrop-blur-sm"
-              style={{ background: `${theme.foreground}f0`, boxShadow: `0 20px 60px ${cardTextPrimary}30` }}
+              className="relative rounded-3xl p-6 backdrop-blur-sm"
+              style={{ background: `${theme.foreground}fc`, boxShadow: `0 20px 60px ${cardTextPrimary}30` }}
             >
               <h3 className="text-lg font-bold mb-4 text-center" style={{ color: cardTextPrimary }}>
                 2025 National Record Holders
@@ -803,9 +924,9 @@ export default function Hero() {
               <div className="space-y-2">
                 {[
                   { name: "Srihari Nataraj", event: "100m Freestyle", time: "49.46s", image: "/Website-Images/Swimmer Photos/Srihari Nataraj_.jpg" },
-                  { name: "Rohit Benedicton", event: "200m Butterfly", time: "TBD", image: "/Website-Images/Swimmer Photos/Rohith Benediction_.jpg" },
-                  { name: "Dhinidhi Desinghu", event: "100m Freestyle", time: "56.29s", image: "/Website-Images/Swimmer Photos/Dhinidhi-Desinghu_.jpg" },
-                  { name: "Rujula Shashidhara", event: "200m Freestyle", time: "TBD", image: "/Website-Images/Swimmer Photos/Rujula Shashidhara.jpg" },
+                  { name: "Rohit Benedicton", event: "50m Butterfly", time: "23.89s", image: "/Website-Images/Swimmer Photos/Rohith Benediction_.jpg" },
+                  { name: "Dhinidhi Desinghu", event: "200m Freestyle", time: "2:02.97s", image: "/Website-Images/Swimmer Photos/Dhinidhi-Desinghu_.jpg" },
+                  { name: "Rujula Shashidhara", event: "50m Freestyle", time: "26.34s", image: "/Website-Images/Swimmer Photos/Rujula Shashidhara.jpg" },
                 ].map((swimmer, idx) => (
                   <div key={idx} className="flex items-center gap-2 p-2 rounded-xl" style={{ background: cardAccentBg }}>
                     <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">

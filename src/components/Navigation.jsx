@@ -86,9 +86,13 @@ export default function Navigation() {
                 whileTap={{ scale: 0.95 }}
                 className="px-6 py-2.5 font-bold text-base rounded-full transition-all"
                 style={{
-                  color: theme.buttonText,
-                  background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`,
-                  boxShadow: `0 4px 20px ${theme.primary}40`,
+                  color: isScrolled ? '#062535' : theme.buttonText,
+                  background: isScrolled
+                    ? `linear-gradient(135deg, #48CAE4, #00B4D8)`
+                    : `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`,
+                  boxShadow: isScrolled
+                    ? `0 4px 20px rgba(0, 180, 216, 0.5)`
+                    : `0 4px 20px ${theme.primary}40`,
                 }}
               >
                 Join Now

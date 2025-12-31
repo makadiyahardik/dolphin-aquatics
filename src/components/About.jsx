@@ -257,20 +257,27 @@ export default function About() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.7 + index * 0.1 }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative p-6 rounded-2xl transition-all duration-300"
+              className="group relative p-6 rounded-2xl transition-all duration-300 overflow-hidden"
               style={{
                 background: isWhiteSection
-                  ? theme.sectionWater
-                  : `linear-gradient(135deg, ${theme.card}80, ${theme.backgroundAlt}80)`,
-                border: `1px solid ${isWhiteSection ? theme.backgroundAlt : (theme.border || theme.backgroundAlt)}`,
+                  ? `linear-gradient(145deg, #6DCAEB 0%, #4AADE8 25%, #2E8BC4 60%, #1A6A9A 100%)`
+                  : `linear-gradient(145deg, ${theme.card}90 0%, ${theme.backgroundAlt}80 100%)`,
+                boxShadow: `0 10px 40px rgba(0,0,0,0.2), inset 0 2px 0 rgba(255,255,255,0.25)`,
               }}
             >
+              {/* Inner highlight for 3D effect */}
+              <div
+                className="absolute top-0 left-0 right-0 h-1/2 rounded-t-2xl pointer-events-none"
+                style={{
+                  background: 'linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%)',
+                }}
+              />
               <motion.div
                 className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ background: `${theme.primary}10` }}
+                style={{ background: `rgba(255,255,255,0.08)` }}
               />
               <div className="relative">
-                <div style={{ color: isWhiteSection ? theme.foreground : theme.primary }} className="mb-4">
+                <div style={{ color: theme.foreground }} className="mb-4 opacity-90">
                   {achievement.icon}
                 </div>
                 <h3 className="text-lg font-semibold mb-2" style={{ color: theme.foreground }}>{achievement.title}</h3>
@@ -288,30 +295,19 @@ export default function About() {
           className="mt-20 text-center"
         >
           <div
-            className="inline-flex items-center gap-4 px-8 py-4 rounded-full"
+            className="inline-flex items-center gap-3 px-6 py-3 rounded-full"
             style={{
-              background: isWhiteSection ? theme.sectionWater : theme.card,
-              border: `1px solid ${theme.border || theme.backgroundAlt}`,
+              background: `linear-gradient(135deg, ${theme.primary} 0%, ${theme.primaryDark} 100%)`,
+              boxShadow: `0 4px 20px ${theme.primary}40`,
             }}
           >
-            <svg style={{ color: isWhiteSection ? theme.foreground : theme.primary }} className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
             </svg>
-            <span className="text-lg font-medium" style={{ color: theme.foreground }}>
-              In Pursuit of{" "}
-              <span
-                style={{
-                  background: isWhiteSection
-                    ? `linear-gradient(135deg, ${theme.foreground}, ${theme.foregroundMuted})`
-                    : `linear-gradient(135deg, ${theme.primaryLight}, ${theme.primaryDark})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Excellence
-              </span>
+            <span className="text-base font-bold" style={{ color: '#FFFFFF' }}>
+              In Pursuit of Excellence
             </span>
-            <svg style={{ color: isWhiteSection ? theme.foreground : theme.primary }} className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
             </svg>
           </div>

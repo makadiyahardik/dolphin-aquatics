@@ -77,11 +77,54 @@ export default function Champions() {
 
   const activeChampion = champions[activeIndex];
 
+  // Brand colors: Aqua/Cyan palette for consistency
+  const brandGradient = `linear-gradient(145deg, ${theme.primaryLight || '#90E0EF'} 0%, ${theme.primary || '#00B4D8'} 40%, ${theme.primaryDark || '#0077B6'} 100%)`;
+  const brandGlow = `${theme.primary || '#00B4D8'}50`;
+
   const stats = [
-    { label: "Olympians", value: 7 },
-    { label: "Arjuna Awardees", value: 5 },
-    { label: "National Records", value: 50, suffix: "+" },
-    { label: "International Medals", value: 100, suffix: "+" },
+    {
+      label: "Olympians",
+      value: 7,
+      icon: (
+        <svg className="w-6 h-6 md:w-8 md:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <circle cx="6" cy="8" r="3"/>
+          <circle cx="12" cy="8" r="3"/>
+          <circle cx="18" cy="8" r="3"/>
+          <circle cx="9" cy="14" r="3"/>
+          <circle cx="15" cy="14" r="3"/>
+        </svg>
+      ),
+    },
+    {
+      label: "Arjuna Awardees",
+      value: 5,
+      icon: (
+        <svg className="w-6 h-6 md:w-8 md:h-8" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+        </svg>
+      ),
+    },
+    {
+      label: "National Records",
+      value: 50,
+      suffix: "+",
+      icon: (
+        <svg className="w-6 h-6 md:w-8 md:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+        </svg>
+      ),
+    },
+    {
+      label: "International Medals",
+      value: 100,
+      suffix: "+",
+      icon: (
+        <svg className="w-6 h-6 md:w-8 md:h-8" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2a3 3 0 00-3 3v1H6a1 1 0 00-1 1v2a5 5 0 004 4.9V17H7a1 1 0 100 2h10a1 1 0 100-2h-2v-3.1a5 5 0 004-4.9V7a1 1 0 00-1-1h-3V5a3 3 0 00-3-3zm0 2a1 1 0 011 1v1h-2V5a1 1 0 011-1z"/>
+          <circle cx="12" cy="21" r="2" fill="currentColor"/>
+        </svg>
+      ),
+    },
   ];
 
   return (
@@ -109,10 +152,19 @@ export default function Champions() {
               initial={{ scale: 0 }}
               animate={isInView ? { scale: 1 } : {}}
               transition={{ type: "spring", delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
-              style={{ background: `${theme.primary}15`, border: `1px solid ${theme.primary}30` }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full mb-6"
+              style={{
+                background: `linear-gradient(135deg, ${theme.primary} 0%, ${theme.primaryDark} 100%)`,
+                boxShadow: `0 4px 20px ${theme.primary}40`,
+              }}
             >
-              <span style={{ color: theme.primary }} className="text-sm font-semibold tracking-widest uppercase">Our Pride</span>
+              <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              <span className="text-sm font-bold tracking-widest uppercase" style={{ color: '#FFFFFF' }}>Our Pride</span>
+              <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
             </motion.div>
 
             <h2 className="text-4xl md:text-6xl font-bold font-[family-name:var(--font-playfair)]" style={{ color: theme.foreground }}>
@@ -130,19 +182,53 @@ export default function Champions() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-6 mb-12 sm:mb-16 max-w-3xl mx-auto"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 mb-12 sm:mb-16 max-w-4xl mx-auto"
           >
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
-                whileHover={{ scale: 1.05 }}
-                className="text-center p-3 md:p-4 rounded-2xl"
-                style={{ background: isWaterSection ? `${theme.sectionDark}60` : `${theme.card}60`, backdropFilter: 'blur(10px)' }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                whileHover={{ scale: 1.05, y: -4 }}
+                className="group relative text-center p-4 md:p-6 rounded-2xl overflow-hidden cursor-pointer"
+                style={{
+                  background: brandGradient,
+                  boxShadow: `0 10px 40px ${brandGlow}, inset 0 2px 0 rgba(255,255,255,0.25)`,
+                }}
               >
-                <div className="text-2xl md:text-4xl font-bold" style={{ color: theme.foreground }}>
-                  <AnimatedCounter value={stat.value} />{stat.suffix || ''}
+                {/* Inner highlight for 3D effect */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-1/2 rounded-t-2xl pointer-events-none"
+                  style={{
+                    background: 'linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 100%)',
+                  }}
+                />
+                {/* Hover glow overlay */}
+                <motion.div
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: 'rgba(255,255,255,0.1)' }}
+                />
+                {/* Content */}
+                <div className="relative z-10">
+                  {/* Icon */}
+                  <div className="flex justify-center mb-2 md:mb-3 text-white/80 group-hover:scale-110 transition-transform duration-300">
+                    {stat.icon}
+                  </div>
+                  {/* Number */}
+                  <div className="text-3xl md:text-5xl font-bold text-white drop-shadow-lg">
+                    <AnimatedCounter value={stat.value} />{stat.suffix || ''}
+                  </div>
+                  {/* Label */}
+                  <div className="text-[10px] md:text-xs font-semibold mt-1 md:mt-2 text-white/85 tracking-wider uppercase">
+                    {stat.label}
+                  </div>
                 </div>
-                <div className="text-[10px] md:text-xs font-medium mt-1" style={{ color: theme.foregroundMuted }}>{stat.label}</div>
+                {/* Bottom shine */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-px"
+                  style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)' }}
+                />
               </motion.div>
             ))}
           </motion.div>
@@ -180,12 +266,6 @@ export default function Champions() {
                       fill
                       className="object-cover object-top"
                       priority
-                    />
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        background: `linear-gradient(90deg, transparent 50%, ${isWaterSection ? theme.sectionDark : theme.card} 100%), linear-gradient(to top, ${isWaterSection ? theme.sectionDark : theme.card}80, transparent 50%)`
-                      }}
                     />
                   </motion.div>
                 </AnimatePresence>
@@ -242,7 +322,7 @@ export default function Champions() {
 
                     <p
                       className="text-lg md:text-xl font-semibold mb-4"
-                      style={{ color: theme.primaryLight }}
+                      style={{ color: '#F59E0B' }}
                     >
                       {activeChampion.achievement}
                     </p>

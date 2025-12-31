@@ -12,7 +12,7 @@ const facilities = [
     description: "50 metre, 10-lane Olympic-size heated swimming pool built by Myrtha - the world's leading Olympic pool designers. Tournament-ready facility hosting state, national & international competitions.",
     specs: ["50m x 10 Lanes", "Myrtha Built", "Heated Pool", "150 Seat Gallery"],
     icon: "pool",
-    image: "/media/cse-pool-outdoor.jpg",
+    image: "/Website-Images/Pool Images/Screenshot 2025-12-31 222029.png",
     highlight: "Olympic Standard"
   },
   {
@@ -30,7 +30,7 @@ const facilities = [
     description: "State-of-the-art gymnasium with modern equipment for comprehensive athletic development, dryland training, and swimmer-specific conditioning programs.",
     specs: ["Modern Equipment", "Dryland Training", "Cardio Zone", "Personal Training"],
     icon: "gym",
-    image: "/Website-Images/Fitness Centre Images/jpg.34738.png",
+    image: "/Website-Images/Fitness Centre Images/5bdc7e2654ae150547b9526e_1541176870137.jpg",
     highlight: "Elite Training"
   },
   {
@@ -41,15 +41,6 @@ const facilities = [
     icon: "pool2",
     image: "/Website-Images/Pool Images/WhatsApp Image 2025-12-18 at 11.48.16 AM.jpeg",
     highlight: "24/7 Access"
-  },
-  {
-    title: "Athletic Track",
-    subtitle: "100m Running Track",
-    description: "100 metre, 10-lane running track with inclined ramps and plyometric steps for resistance training, explosive power development, and endurance building.",
-    specs: ["100m x 10 Lanes", "Inclined Ramps", "Plyometric Steps", "Speed Training"],
-    icon: "track",
-    image: "/media/image32.png",
-    highlight: "Dryland"
   },
   {
     title: "Expert Coaching",
