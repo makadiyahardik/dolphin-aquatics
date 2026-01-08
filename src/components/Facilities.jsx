@@ -12,7 +12,7 @@ const facilities = [
     description: "50 metre, 10-lane Olympic-size heated swimming pool built by Myrtha - the world's leading Olympic pool designers. Tournament-ready facility hosting state, national & international competitions.",
     specs: ["50m x 10 Lanes", "Myrtha Built", "Heated Pool", "150 Seat Gallery"],
     icon: "pool",
-    image: "/Website-Images/Pool Images/Screenshot 2025-12-31 222029.png",
+    image: "/Website-Images/Pool Images/CSE_outdoor_pool.jpg",
     highlight: "Olympic Standard"
   },
   {

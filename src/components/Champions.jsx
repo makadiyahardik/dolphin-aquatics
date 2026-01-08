@@ -8,9 +8,9 @@ import { useTheme } from "./ThemeProvider";
 const champions = [
   { name: "Nisha Millet", achievement: "Arjuna Award Winner", event: "Sydney 2000 Olympian", highlight: "14 Gold Medals", image: "/media/nisha-millet-new.jpg", olympics: "2000", medals: 14, bio: "Pioneer of Indian swimming, Sydney 2000 Olympian and Arjuna Award recipient with 14 gold medals." },
   { name: "Hakimuddin Habibulla", achievement: "International Swimmer", event: "Sydney 2000", highlight: "Team Coach", image: "/media/hakimuddin-habibulla-new.jpg", olympics: "2000", medals: 3, bio: "Sydney 2000 Olympian, now serving as team coach at Dolphin Aquatics." },
-  { name: "Shikha Tandon", achievement: "Arjuna Award Winner", event: "146 National Medals", highlight: "36 Int'l Medals", image: "/media/shikha-tandon-new.jpg", olympics: null, medals: 146, bio: "India's most decorated swimmer with 146 national medals and 36 international medals." },
+  { name: "Shikha Tandon", achievement: "Arjuna Award Winner", event: "Athens 2004 Olympian", highlight: "36 Int'l Medals", image: "/media/shikha-tandon-new.jpg", olympics: "2004", medals: 146, bio: "India's most decorated swimmer with 146 national medals and 36 international medals. Athens 2004 Olympian." },
   { name: "Rehan Poncha", achievement: "Arjuna Award Winner", event: "Beijing 2008 Olympian", highlight: "6x National Champ", image: "/media/rehan-poncha-new.jpg", olympics: "2008", medals: 6, bio: "Beijing 2008 Olympian and 6-time national champion. Arjuna Award winner for excellence in swimming." },
-  { name: "Virdhawal Khade", achievement: "Arjuna Award Winner", event: "50m Butterfly", highlight: "Asian Games Bronze", image: "/media/virdhawal-khade-new.jpg", olympics: null, medals: 1, bio: "Asian Games bronze medalist and Arjuna Awardee. Specialist in butterfly and freestyle events." },
+  { name: "Virdhawal Khade", achievement: "Arjuna Award Winner", event: "Beijing 2008 Olympian", highlight: "Asian Games Bronze", image: "/media/virdhawal-khade-new.jpg", olympics: "2008", medals: 1, bio: "Beijing 2008 Olympian, Asian Games bronze medalist and Arjuna Awardee. Specialist in butterfly and freestyle events." },
   { name: "Sandeep Sejwal", achievement: "Arjuna Award Winner", event: "Beijing 2008 Olympian", highlight: "Breaststroke", image: "/media/sandeep-sejwal-new.jpg", olympics: "2008", medals: 5, bio: "Beijing 2008 Olympian specializing in breaststroke. Multiple Asian Games medalist." },
   { name: "Maana Patel", achievement: "Tokyo 2020 Olympian", event: "100m Backstroke", highlight: "First Indian Female", image: "/media/maana-patel-new.jpg", olympics: "2020", medals: 3, bio: "First Indian female swimmer to qualify for Olympics through universality quota. Backstroke specialist." },
   { name: "Srihari Nataraj", achievement: "Two-time Olympian", event: "Tokyo 2020 & Paris 2024", highlight: "14 National Records", image: "/media/srihari-nataraj-new.jpg", olympics: "2024", medals: 14, bio: "India's most decorated swimmer with 14 national records. Represented India at both Tokyo 2020 and Paris 2024 Olympics." },
@@ -84,7 +84,7 @@ export default function Champions() {
   const stats = [
     {
       label: "Olympians",
-      value: 7,
+      value: 9,
       icon: (
         <svg className="w-6 h-6 md:w-8 md:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <circle cx="6" cy="8" r="3"/>
